@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@800&family=Josefin+Sans:wght@100&family=Nova+Round&display=swap');
+
+$font-1: 'Nova Round', cursive;
+$font-2: 'Dosis', sans-serif;
+$font-3: 'Josefin Sans', sans-serif;
+
+$color-1: #E03137;
+$color-2: #FFD100;
+$color2-2: rgba(255,209,0, 0.7);
+$color-3: #6495C0;
+$color2-3: rgb(100,149,192, 0.7);
+$color-4: #78AB4D;
+$color2-4: rgb(120,171,77, 0.7);
+$color-5: #7451EB;
+$color2-5: rgb(116,81,235, 0.7);
+$color-6: #FF0000;
+$color2-6: rgb(255,0,0, 0.7);
+$color-7: #99583D;
+$color2-7: rgb(153,88,61, 0.7);
+$white: #FCF6F4;
+$black: #333;
+$blue: #262147;
+$grey: #999;
+//$grey: #ededed;
+$light-grey: #F2F3F4;
+
+$borderRadius: 12px;
+$shadow: 0 1px 3px #333;
+$minHeight: 95vh;
+
+@mixin verticalCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    //margin: 1rem auto;
+    //max-width: 1200px;
+    width: 100%;
+    height: 100%;
+    font-family: $font-1;
+    color: $black;
+    //background: url('../../public/media/wallpaper4.jpeg') no-repeat center/cover;
+}
+
+button{
+    cursor: pointer;
+}
+
+li{
+    list-style-type: none;
+}
+
+a{
+    text-decoration: none;
+    color: $black;
+    cursor: pointer;
+}
+
+a:visited{
+    color: $black;
+}
+
+h2{
+    color: $blue;
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: $font-3;
+}
