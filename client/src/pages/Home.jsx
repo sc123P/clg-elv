@@ -1,6 +1,8 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 
+const AnyReactComponent = ({ text }) => <div>{text}</div>;
+
 const Home = () => {
     return (
         <div className="home">
@@ -45,9 +47,51 @@ const Home = () => {
                             <h2>ACTUALITÉS</h2>
                         </div>
                         <div className="homeNewsBox">
+                            <div className="homeNewsTop">
+                                <div className="homeNewsBoxLeft">
+                                    <img src="/Affiche-ecofashion-show-1-jan-2023 copie.jpg" />
+                                    <p className="homeNewsDate">Janvier 06, 2023</p>
+                                </div>
+                                <div className="homeNewsBoxRight">
+                                    <h3 className="titleNews">Projet éco-fashion show</h3>
+                                    <p className="textNews">
+                                        Montre l’étendue de ta création et ton implication dans le développement durable :
+                                        Crée, couds, colle, élabore un chapeau, un vêtements ou un accessoire, uniquement, avec des matières ou objets recyclés!
+                                        Ta création sera à présenter devant un jury, le jeudi 13 mars 2023 à 12h.
+                                        Toutes celles qui seront...
+                                    </p>
+                                </div>
+                            </div>
 
+                            <div className="homeNewsBottom">
+                                <div className="button">
+                                    <button className="newsButton">Plus d'actualités</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+                    <div className="compasHome">
+                        <img className="bounce2" src="/illustrationcompasELV copie.png" />
+                    </div>
+
+
+
+
+{/*                    // Important! Always set the container height explicitly
+                    <div style={{ height: '100vh', width: '100%' }}>
+                        <GoogleMapReact
+                            bootstrapURLKeys={{ key: process.env.NEXT_PUBLIC_GOOGLE_API }}
+                            defaultCenter={defaultProps.center}
+                            defaultZoom={defaultProps.zoom}
+                        >
+                            <AnyReactComponent
+                            lat={59.955413}
+                            lng={30.337844}
+                            text="My Marker"
+                            />
+                        </GoogleMapReact>
+</div>*/}
                 </div>
 
             </div>
