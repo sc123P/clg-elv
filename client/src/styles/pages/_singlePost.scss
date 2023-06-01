@@ -1,0 +1,30 @@
+.singlePost{
+    height: 100vh;
+    .singlePostContent{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        @include verticalCenter;
+        
+        .postTitle{
+            width: 65%;
+            margin-top: 40px;
+            h3{
+                font-size: 1.8rem;
+            }
+            p{
+                left: 0;
+                margin-top: 5px;
+            }
+        }
+        img{
+                width: 65%;
+                margin-top: 20px;
+            }
+        .postText{
+            width: 65%;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+    }
+}

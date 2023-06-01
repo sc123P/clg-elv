@@ -1,0 +1,98 @@
+.news{
+    height: 200vh;
+    .newsContainer{
+        width: 100%;
+        //height: 100%;
+        height: 334px;
+
+        //NEWS TOP
+        .newsTop{
+            position: relative;
+            width: 100%;
+            height: 100%;
+            //background: url("/trianglebgcopie2.png");
+            background: rgb(224,49,55);
+            background: linear-gradient(-180deg, rgba(224,49,55,1) 20%, rgba(245,217,56,1) 100%);
+            .newsTopText{
+                position: absolute;
+                //z-index: 5;
+                width: 100%;
+                height: 100%;
+                font-size: 1.5rem;
+                text-transform: uppercase;
+                color: $white;
+                @include verticalCenter;
+            }
+            .newsTopBlack{
+                width: 100%;
+                height: 100%;
+                background-color: $black-2;
+                opacity: 15%;
+            }
+            img{
+                opacity: 50%;
+                width: 100%;
+                height: 400px;
+                max-height: 400px;
+                //width: 1440px;
+                //height: 305px;
+                //filter: brightness(50%);
+            }
+        }
+
+        //POSTS
+        .posts{
+            .post{
+                //@include verticalCenter;
+                //display: flex;
+                .postContent{
+                    //display: flex;
+                    //flex-direction: column;
+                    //@include verticalCenter;
+                    display: flex;
+                    justify-content: center;
+                    .postContentMain{
+                        display: flex;
+                        flex-direction: column;
+                        margin-top: 100px;
+                        width: 70%;
+                        
+                        .hr{
+                            display: flex;
+                            margin-bottom: 25px;
+                            .image{
+                                //display: flex;
+                                //flex: 1;
+                                //margin-top: 100px;
+                                //padding-top: 100px;
+                                //@include verticalCenter;
+                                //width: 60%;
+                                //width: 20%;
+                                img{
+                                    display: flex;
+                                    //width: 45%;
+                                    //width: 100%;
+                                    //min-width: 660px;
+                                    width: 400px;
+                                    height: 200px;
+                                }
+                            }
+                            .postText{
+                                display: flex;
+                                flex-direction: column;
+                                margin-left: 30px;
+                                h3{
+                                    font-size: 1.5rem;
+                                    margin-bottom: 10px;
+                                }
+                            }
+                        }
+                        hr{
+                            border: 1px solid $light-grey;   
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
