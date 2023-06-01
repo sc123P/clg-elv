@@ -6,7 +6,7 @@ const AnyReactComponent = ({ text }) => <div>{text}</div>;
 const Home = () => {
     return (
         <div className="home">
-            <Navbar />
+            {/*<Navbar />*/}
             <div className="homeContainer">
                 <div className="homeTop">
                     <div className="homeTopText">
@@ -95,6 +95,7 @@ const Home = () => {
                 </div>
 
             </div>
+
         </div>
     );
 };
