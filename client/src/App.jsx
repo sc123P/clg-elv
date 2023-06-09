@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import News from './pages/News';
 import SinglePost from './pages/SinglePost';
 import Write from './pages/Write';
+import AboutUs from './pages/AboutUs';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <Route exact path="/actualites" element={ <News /> } />
         <Route exact path="/actualites/:id" element={ <SinglePost /> } />
         <Route exact path="/write" element={ <Write /> } />
+        <Route exact path="/nous_connaitre" element={ <AboutUs /> } />
       </Routes>
     </BrowserRouter>
   )
