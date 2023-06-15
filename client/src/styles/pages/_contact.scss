@@ -1,0 +1,65 @@
+.contact{
+    height: 100vh;
+    .contactContainer{
+        width: 100%;
+        height: 334px;
+
+                //CONTACT TOP
+                .contactTop{
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                    background: rgb(224,49,55);
+                    background: linear-gradient(-180deg, rgba(224,49,55,1) 20%, rgba(245,217,56,1) 100%);
+                    .contactTopText{
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        font-size: 1.5rem;
+                        text-transform: uppercase;
+                        color: $white;
+                        @include verticalCenter;
+                    }
+                    .contactTopBlack{
+                        width: 100%;
+                        height: 100%;
+                        background-color: $black-2;
+                        opacity: 15%;
+                    }
+                    img{
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+
+                //CONTACT MAIN
+                .contactMain{
+                    .left{
+                        width: 75%;
+                        //padding: 40px 0 0 240px;
+                        //padding: 40px 0 0 100px;
+                        padding: 40px;
+                        @include verticalCenter;
+                        .icon{
+                            font-size: 32px;
+                            min-width: 32px;
+                            min-height: 32px;
+                            //color: $color-2;
+                        }
+                        
+                        .infos{
+                            margin-top: 30px;
+                            .info{
+                                display: flex;
+                                gap: 20px;
+                            }
+                            .text{
+                                width: 75%;
+                                line-height: 1.6em;
+                                margin-bottom: 40px;
+                            }
+                        }
+                    }
+                }
+            }
+        }

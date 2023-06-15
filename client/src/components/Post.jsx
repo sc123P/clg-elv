@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Post = ({title, desc, img}) => {
+//const Post = ({title, desc, img}) => {
+const Post = () => {
     const posts = [
         {
             id: 1,

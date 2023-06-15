@@ -41,7 +41,8 @@ const Navbar = () => {
 
                 <div className="navOthersLogo">
                     {/*<img src="/LogoAC_MARTINIQUE - Fond transparent.png" />*/}
-                    <img src="/Académie_de_Martinique.svg.png" />
+                    {/*<img src="/Académie_de_Martinique.svg.png" />*/}
+                    <img src="acdemq 2.png" alt="" />
                     <img src="/logo-eco-ecole.png" />
                 </div>
             </div>
