@@ -6,6 +6,10 @@ import News from './pages/News';
 import SinglePost from './pages/SinglePost';
 import Write from './pages/Write';
 import AboutUs from './pages/AboutUs';
+import Contact from './pages/Contact';
+import Projects from './pages/Projects';
+import Events from './pages/Events';
+import Orientation from './pages/Orientation';
 
 function App() {
 
@@ -18,6 +22,10 @@ function App() {
         <Route exact path="/actualites/:id" element={ <SinglePost /> } />
         <Route exact path="/write" element={ <Write /> } />
         <Route exact path="/nous_connaitre" element={ <AboutUs /> } />
+        <Route exact path="/contact" element={ <Contact /> } />
+        <Route exact path="/projets" element={ <Projects /> } />
+        <Route exact path="/evenements" element={ <Events /> } />
+        <Route exact path="/orientation" element={ <Orientation /> } />
       </Routes>
     </BrowserRouter>
   )

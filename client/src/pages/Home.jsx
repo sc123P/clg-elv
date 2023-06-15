@@ -1,5 +1,6 @@
 import React from 'react';
-import Navbar from '../components/Navbar';
+//import Navbar from '../components/Navbar';
+import { Link } from 'react-router-dom';
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
@@ -26,14 +27,30 @@ const Home = () => {
                 <div className="homeMain">
                     <div className="homeButtons">
                         <div className="buttonTop">
-                            <button id="button1">ENT</button>
-                            <button id="button2">MON ORGANISATION</button>
-                            <button id="button3">PROJETS</button>
+                            <a id="button1" href="https://colibri.ac-martinique.fr/auth/saml/wayf?callBack=https%3A%2F%2Fcolibri.ac-martinique.fr%2F#/">ENT</a>
+                            <a id="button2" href="https://www.pearltrees.com/">MON ORGANISATION</a>
+                            <button id="button3">
+                                <Link to={`/projets`} >
+                                    PROJETS
+                                </Link>
+                            </button>
                         </div>
                         <div className="buttonBottom">
-                            <button id="button4">EVENEMENTS</button>
-                            <button id="button5">ACTUALITES</button>
-                            <button id="button6">ORGANISATION</button>
+                            <button id="button4">
+                                <Link to={`/evenements`} >
+                                    EVENEMENTS
+                                </Link>
+                            </button>
+                            <button id="button5">
+                                <Link to={`/actualites`} >
+                                    ACTUALITES
+                                </Link>
+                            </button>
+                            <button id="button6">
+                                <Link to={`/orientation`} >
+                                    ORIENTATION
+                                </Link>
+                            </button>
                         </div>
                             <hr/>
 
@@ -65,7 +82,11 @@ const Home = () => {
 
                             <div className="homeNewsBottom">
                                 <div className="button">
-                                    <button className="newsButton">Plus d'actualités</button>
+                                    <Link to={`/actualites`} className="newsButton" >
+                                        <span >
+                                            Plus d'actualités
+                                        </span>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
