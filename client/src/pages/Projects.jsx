@@ -1,4 +1,6 @@
 import React from 'react';
+import Post from '../components/Post';
+import Pagination from '../components/Pagination';
 
 const Projects = () => {
     return (
@@ -12,6 +14,14 @@ const Projects = () => {
                         <img src="/trianglebgcopie2.png" alt="" />
                     </div>
                 </div>
+
+                <Post />
+                <Post />
+                <Post />
+                <Post />
+                <Post />
+
+                <Pagination />
             </div>
         </div>
     );

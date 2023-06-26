@@ -10,6 +10,7 @@ import Contact from './pages/Contact';
 import Projects from './pages/Projects';
 import Events from './pages/Events';
 import Orientation from './pages/Orientation';
+import Signup from './pages/Signup';
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
         <Route exact path="/projets" element={ <Projects /> } />
         <Route exact path="/evenements" element={ <Events /> } />
         <Route exact path="/orientation" element={ <Orientation /> } />
+        <Route exact path="/enregistrement" element={ <Signup /> } />
       </Routes>
     </BrowserRouter>
   )

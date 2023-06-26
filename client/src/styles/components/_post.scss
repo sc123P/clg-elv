@@ -1,0 +1,54 @@
+//POSTS
+.posts{
+    .post{
+        //@include verticalCenter;
+        //display: flex;
+        .postContent{
+            //display: flex;
+            //flex-direction: column;
+            //@include verticalCenter;
+            display: flex;
+            justify-content: center;
+            .postContentMain{
+                display: flex;
+                flex-direction: column;
+                margin-top: 100px;
+                width: 70%;
+                
+                .hr{
+                    display: flex;
+                    margin-bottom: 25px;
+                    .image{
+                        //display: flex;
+                        //flex: 1;
+                        //margin-top: 100px;
+                        //padding-top: 100px;
+                        //@include verticalCenter;
+                        //width: 60%;
+                        //width: 20%;
+                        img{
+                            display: flex;
+                            //width: 45%;
+                            //width: 100%;
+                            //min-width: 660px;
+                            width: 400px;
+                            height: 200px;
+                        }
+                    }
+                    .postText{
+                        display: flex;
+                        flex-direction: column;
+                        margin-left: 30px;
+                        h3{
+                            font-size: 1.5rem;
+                            margin-bottom: 10px;
+                        }
+                    }
+                }
+                hr{
+                    border: 1px solid $light-grey;   
+                }
+            }
+        }
+    }
+}
