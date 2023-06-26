@@ -31,7 +31,7 @@ const AboutUs = () => {
                             </div>
                         </div>
                         <div className="img2">
-                            <img src="/imgmuséeSE.png" alt="" />
+                            <img src="/imgmuseeSE.png" alt="" />
                             <p className="p">L’ancien collège situé au bourg est aujourd’hui le Musée des Arts et Traditions Populaires</p>
                         </div>
 
