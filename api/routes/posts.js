@@ -1,8 +1,10 @@
 import express from "express";
-//const express = require('express');
-const router = express.Router();
-const postsCtrl = require('../controllers/posts');
+//import postsCtrl from '../controllers/posts.js';
 
-router.get('/', postsCtrl.getPost);
+const router = express.Router();
+
+router.get('/test', (req, res) =>{
+    res.json("Là c'est bueno !!!!")
+});
 
 export default router
