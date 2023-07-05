@@ -17,7 +17,7 @@ app.use((req, res, next) => {
     next();
 });
 
-//app.use('/api/posts', postRoutes);
+app.use(cookieParser());
 app.use('/api/auth', authRoutes);
 app.use('/api/posts', postsRoutes)
 

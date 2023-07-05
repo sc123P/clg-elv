@@ -11,7 +11,6 @@ const Signup = () => {
         password:"",
     });
     const [err, setError] = useState(null);
-    //const navigate = useNavigate();
     const navigate = useNavigate();
 
     const handleChange = e =>{
@@ -22,7 +21,6 @@ const Signup = () => {
         e.preventDefault()
         try{
             await axios.post('/api/auth/signup', inputs);
-            //navigate("/connexion");
             navigate("/connexion");
         }catch(err) {
             setError(err.response.data)
