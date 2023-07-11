@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { BsFillPersonFill } from 'react-icons/bs';
 import { SlLogout } from 'react-icons/sl';
 import { AuthContext } from '../context/authContext';
@@ -36,7 +36,11 @@ const Navbar = () => {
 
     <div className="navbar">
         <div className="navbarContainer">
-                <div className="navbarLogo"><img src="/V2logoELV26.png" /></div>
+                <div className="navbarLogo">
+                    <NavLink to="/">
+                        <img src="/V2logoELV26.png" />
+                    </NavLink>
+                </div>
 
                 <div className="navigation">
                     <ul>
@@ -47,6 +51,7 @@ const Navbar = () => {
                         </li>
 
                         <li>
+
                             <NavLink exact="true" to="/actualites" className="isActive" >
                                 <span>Actualités</span>
                             </NavLink>

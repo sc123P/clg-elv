@@ -1,28 +1,63 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 //import Navbar from '../components/Navbar';
 import { MdEditNote } from 'react-icons/md';
-//import { MdDelete } from 'react-icons/md';
 import { MdOutlineDeleteOutline } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import moment from "moment";
+import axios from 'axios';
+import { AuthContext } from '../context/authContext';
 
 const SinglePost = () => {
+    const [post, setPost] = useState({});
+    //const category_id = useLocation().search
+    const location = useLocation();
+    const navigate = useNavigate();
+    const postId = location.pathname.split("/")[2];
+    const {currentUser} = useContext(AuthContext);
+
+    //const username = currentUser?.username
+
+    useEffect(() =>{
+        const fetchData = async ()=>{
+            try{
+                //const res = await axios.get(`/api/posts${category_id}`);
+                const res = await axios.get(`/api/posts/${postId}`);
+                //console.log(res.data);
+                setPost(res.data);
+            }catch(err){
+                console.log(err);
+            }
+        };
+        fetchData();
+    }, [postId]);
+
+    const handleDelete = async()=>{
+        try{
+            //const res = await axios.get(`/api/posts${category_id}`);
+            const res = await axios.delete(`/api/posts/${postId}`);
+            navigate("/");
+        }catch(err){
+            console.log(err);
+        }
+    }
+
     return (
         <div className="singlePost">
                 {/*<Navbar />*/}
                 <div className="singlePostContent">
                     <div className="postTitle">
-                        <h3>Comment concevoir un jean pour limiter son impact sur l’environnement ?</h3>
-                        <p>Posté le 16 mai 2023</p>
+                        <h3>{post.title}</h3>
+                        <p>Posté {moment(post.date).fromNow()}</p>
                     </div>
-                        <div className="edit">
-                            <Link to={`/write?edit=2`}>
+                        {currentUser?.id === post.uid && (<div className="edit">
+                            <Link to={`/write?edit=2`} state={post}>
                                 <MdEditNote size={24} className="icons" />
                             </Link>
-                            <MdOutlineDeleteOutline size={24} className="icons" />
-                        </div>
-                    <img src="/imageTechno.jpg" alt="" />
+                            <MdOutlineDeleteOutline onClick={handleDelete} size={24} className="icons" />
+                        </div>)}
+                    <img src={post?.postsImg} alt="" />
                     <div className="postText">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati, assumenda explicabo consectetur ipsam iusto sint maiores adipisci aut autem soluta suscipit minima sequi, beatae ipsa consequatur provident fugit sit ratione!
+                        {post.desc}
                     </div> 
                 </div>
             </div>

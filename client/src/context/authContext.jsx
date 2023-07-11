@@ -6,9 +6,18 @@ import axios from "axios";
 export const AuthContext = createContext()
 
 export const AuthContextProvider = ({children}) =>{
+    //const storedUser = localStorage.getItem("user");
+    const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem("user")) || null);
+    //let parsedUser = null;
+    //if (storedUser) {
+    //  parsedUser = JSON.parse(storedUser);
+    //  if (parsedUser && parsedUser.username) {
+    //    setCurrentUser(parsedUser);
+    //  }
+    //}
+
     //const [currentUser, setCurrentUser] = useReducer(AuthReducer, INITIAL_STATE);
-    //const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem("user")) || null);
-    const [currentUser, setCurrentUser] = useState(null);
+    //const [currentUser, setCurrentUser] = useState(null);
 
     const login = async(inputs)=>{
         const res = await axios.post('/api/auth/login', inputs);
