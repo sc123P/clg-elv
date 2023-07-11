@@ -1,16 +1,35 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import axios from 'axios';
 
 //const Post = ({title, desc, img}) => {
 const Post = () => {
-    const posts = [
-        {
-            id: 1,
-            title: "Comment concevoir un jean pour limiter son impact sur l’environnement ?",
-            desc: "Réflexion et solutions proposées par des élèves de 3ème",
-            img: "imageTechno.jpg",
-        },
-    ];
+    const [posts, setPosts] = useState([]);
+    const category_id = useLocation().search
+    //const location = useLocation()
+    //console.log(location)
+
+    useEffect(() =>{
+        const fetchData = async ()=>{
+            try{
+                const res = await axios.get(`/api/posts${category_id}`);
+                //const res = await axios.get(`/api/posts`);
+                setPosts(res.data);
+            }catch(err){
+                console.log(err);
+            }
+        };
+        fetchData();
+    }, [category_id]);
+        //}, []);
+    //const posts = [
+    //    {
+    //        id: 1,
+    //        title: "Comment concevoir un jean pour limiter son impact sur l’environnement ?",
+    //        desc: "Réflexion et solutions proposées par des élèves de 3ème",
+    //        img: "imageTechno.jpg",
+    //    },
+    //];
     return (
         <div className="posts">
         {posts.map(post => (

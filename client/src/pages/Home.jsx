@@ -30,14 +30,14 @@ const Home = () => {
                             <a id="button1" href="https://colibri.ac-martinique.fr/auth/saml/wayf?callBack=https%3A%2F%2Fcolibri.ac-martinique.fr%2F#/">ENT</a>
                             <a id="button2" href="https://www.pearltrees.com/">MON ORGANISATION</a>
                             <button id="button3">
-                                <Link to={`/projets`} >
+                                <Link to={`/projets/?category_id=2`} >
                                     PROJETS
                                 </Link>
                             </button>
                         </div>
                         <div className="buttonBottom">
                             <button id="button4">
-                                <Link to={`/evenements`} >
+                                <Link to={`/evenements/?category_id=3`} >
                                     EVENEMENTS
                                 </Link>
                             </button>
