@@ -16,10 +16,6 @@ const Events = () => {
                 </div>
 
                 <Post />
-                <Post />
-                <Post />
-                <Post />
-                <Post />
 
                 <Pagination />
             </div>

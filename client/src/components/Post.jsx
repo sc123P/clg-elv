@@ -5,7 +5,7 @@ import axios from 'axios';
 //const Post = ({title, desc, img}) => {
 const Post = () => {
     const [posts, setPosts] = useState([]);
-    const category_id = useLocation().search
+    const category_id = useLocation().search;
     //const location = useLocation()
     //console.log(location)
 

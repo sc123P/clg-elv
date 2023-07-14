@@ -67,22 +67,20 @@
                 //position: absolute;
                 //top: 20px;
                 right: 20px;
-                height: 50px;
-                width: 50px;
+                height: 46px;
+                width: 46px;
                 padding: 3px;
-                border-radius: 50%;
+                //border-radius: 50%;
+                border-right: 1px solid $white;
 
                 overflow: hidden;
                 cursor: pointer;
-                background-color: $black;
-                color: $color-1;
+                color: $white;
+                opacity: .3;
                 @include verticalCenter;
                 //.center{
                 //    display: flex;
                 //    align-items: center;
-                //}
-                //svg{
-                //    font-size: 1.5rem;
                 //}
             }
             .dropdown-menu{
@@ -153,6 +151,16 @@
                             }
                             &:nth-child(1){
                                 pointer-events: none;
+                            }
+
+                            .span{
+                                width: 100%;
+                                height: 100%;
+                                color: $blue;
+                                &:hover{
+                                    color: $grey;
+                                    cursor: pointer;
+                                }
                             }
                         }
                     }

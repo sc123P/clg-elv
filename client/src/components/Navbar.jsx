@@ -99,6 +99,15 @@ const Navbar = () => {
                                                     (<> <SlLogout /><span onClick={handleLogout}>Déconnexion</span> </>) 
                                                     : (<> <Link to="/connexion">Login</Link> </>)}
                                             </li>
+
+                                            <li className="itemContent">
+                                                
+                                                <Link to={`/write`}>
+                                                    <span className="span">
+                                                        Rédiger un article
+                                                    </span> 
+                                                </Link>
+                                            </li>
                                             
 
                                         </ul>
