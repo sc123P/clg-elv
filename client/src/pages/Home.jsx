@@ -47,7 +47,7 @@ const Home = () => {
                                 </Link>
                             </button>
                             <button id="button6">
-                                <Link to={`/orientation`} >
+                                <Link to={`/orientation/?category_id=4`} >
                                     ORIENTATION
                                 </Link>
                             </button>

@@ -1,4 +1,6 @@
 import React from 'react';
+import Post from '../components/Post';
+import Pagination from '../components/Pagination';
 
 const Orientation = () => {
     return (
@@ -12,6 +14,10 @@ const Orientation = () => {
                         <img src="/trianglebgcopie2.png" alt="" />
                     </div>
                 </div>
+
+                <Post />
+
+                <Pagination />
             </div>
         </div>
     );

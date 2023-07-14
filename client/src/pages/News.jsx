@@ -20,10 +20,10 @@ const News = () => {
                 </div>
 
                 <Post />
+                {/*<Post />
                 <Post />
                 <Post />
-                <Post />
-                <Post />
+                <Post />*/}
 
                 <Pagination />
 
