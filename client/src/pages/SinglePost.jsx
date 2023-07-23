@@ -22,7 +22,7 @@ const SinglePost = () => {
             try{
                 //const res = await axios.get(`/api/posts${category_id}`);
                 const res = await axios.get(`/api/posts/${postId}`);
-                //console.log(res.data);
+                console.log(res.data);
                 setPost(res.data);
             }catch(err){
                 console.log(err);

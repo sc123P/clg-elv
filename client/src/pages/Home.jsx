@@ -37,7 +37,7 @@ const Home = () => {
                         </div>
                         <div className="buttonBottom">
                             <button id="button4">
-                                <Link to={`/evenements/?category_id=3`} >
+                                <Link to={`/evenements/?category_id=6`} >
                                     EVENEMENTS
                                 </Link>
                             </button>
@@ -47,7 +47,7 @@ const Home = () => {
                                 </Link>
                             </button>
                             <button id="button6">
-                                <Link to={`/orientation/?category_id=4`} >
+                                <Link to={`/orientation/?category_id=7`} >
                                     ORIENTATION
                                 </Link>
                             </button>

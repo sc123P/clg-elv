@@ -5,11 +5,13 @@ import {
     addPost,
     deletePost,
     updatePost,
+    getCategories,
 
 } from "../controllers/posts.js";
 
 const router = express.Router();
 
+router.get('/categories', getCategories);
 router.get('/', getPosts);
 router.get('/:id', getPost);
 router.post('/', addPost);

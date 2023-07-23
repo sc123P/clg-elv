@@ -6,124 +6,154 @@ import axios from 'axios';
 //import { useLocation } from 'react-router';
 import { useLocation } from 'react-router-dom';
 import moment from 'moment';
+import { MultiSelect } from 'react-multi-select-component';
 
 const Write = () => {
-    //const { id } = useParams();
-    //const location = useLocation();
-    //const state = location.state;
-    
-    const state = useLocation().state;
-    const [value, setValue] = useState(state?.title || "");
-    const [title, setTitle] = useState(state?.desc || "");
-    const [file, setFile] = useState(null);
-    //const [category_id, setCategory_id] = useState(state?.category_id || "");
-    const [category_id, setCategory_id] = useState([]);
+  const state = useLocation().state;
+  const [value, setValue] = useState(state?.title || '');
+  const [title, setTitle] = useState(state?.desc || '');
+  const [file, setFile] = useState(null);
+  const [selectedCategories, setSelectedCategories] = useState(state?.category_id || []);
+  const [categories, setCategories] = useState([]);
 
-    const [selectedCategories, setSelectedCategories] = useState([]);
-
-    useEffect(() => {
-        // Mettre à jour les catégories sélectionnées en fonction des sous-catégories
-        const updatedSelectedCategories = selectedCategories.filter(
-          (categoryId) => categoryId === '2' || !['5', '6', '7'].includes(categoryId)
-        );
-      
-        ['5', '6', '7'].forEach((categoryId) => {
-          if (selectedCategories.includes(categoryId)) {
-            updatedSelectedCategories.push(categoryId);
-          }
-        });
-      
-        if (selectedCategories.length !== updatedSelectedCategories.length) {
-          setSelectedCategories(updatedSelectedCategories);
-        }
-      }, [selectedCategories]);
-
-
-    //const [value, setValue] = useState(state ? state.title : "");
-    //const [title, setTitle] = useState(state ? state.desc : "");
-    //const [category_id, setCategory_id] = useState(state ? state.category_id : "");
-
-    console.log(state);
-
-    const upload = async () => {
-        try {
-          if (!file) {
-            return null; // Retourner null si le fichier est nul
-          }
-          const formData = new FormData();
-          for (let i = 0; i < file.length; i++) {
-            formData.append("files", file[i]);
-          }
-          const res = await axios.post("/api/upload", formData);
-          return res.data;
-        } catch (err) {
-          console.log(err);
-          return null; // Retourner null en cas d'erreur
-        }
-      };
-
-    const handleClick = async e=>{
-        e.preventDefault()
-        //const imgUrl = upload()
-        const imgUrl = await upload()
-
-        try{
-            state ? 
-            await axios.put(`/api/posts/${state.id}`, {
-                title, 
-                desc: value, 
-                category_id, 
-                img: file ? imgUrl: ""
-            }) 
-            : //await axios.post(`/api/posts/${state.id}`, {
-                await axios.post("/api/posts", {
-                title, 
-                desc: value, 
-                //category_id,
-                //category_id: category_id.toString(),
-                category_id: selectedCategories.toString(), 
-                img: file ? imgUrl: "",
-                //date: moment(Date.now()).format("HH:mm:ss DD-MM-YYYY")
-                date: moment(Date.now()).format("YYYY-MM_DD HH:mm:ss")
-            });
-        }catch(err){
-            console.log(err)
-        };
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get('/api/posts/categories');
+        const categoriesData = response.data;
+        setCategories(categoriesData);
+        console.log('Categories:', categoriesData);
+      } catch (error) {
+        console.error(error);
+      }
     };
-    //const handleChange = (e) =>{
-    //    setFile(e.target.files)
-    //};
 
-    //const handleChange = (e) => {
-    //    const categoryId = e.target.value;
-    //    if (e.target.checked) {
-    //      setCategory_id((prevCategories) => [...prevCategories, categoryId]);
-    //    } else {
-    //      setCategory_id((prevCategories) =>
-    //        prevCategories.filter((id) => id !== categoryId)
-    //      );
-    //    }
-    //  };
-    //const handleChange = (e) => {
-    //    const categoryId = e.target.value;
-    //    if (e.target.checked) {
-    //      setSelectedCategories((prevCategories) => [...prevCategories, categoryId]);
-    //    } else {
-    //      setSelectedCategories((prevCategories) =>
-    //        prevCategories.filter((id) => id !== categoryId)
-    //      );
-    //    }
-    //  };
-    const handleCheckboxClick = (e) => {
-        const categoryId = e.target.value;
-        if (e.target.checked) {
-          setSelectedCategories((prevCategories) => [...prevCategories, categoryId]);
-        } else {
-          setSelectedCategories((prevCategories) =>
-            prevCategories.filter((id) => id !== categoryId)
-          );
-        }
-      };
+    fetchCategories();
+  }, []);
+
+  useEffect(() => {
+    const updatedSelectedCategories = selectedCategories.filter(
+      (category) =>
+        category === 'Projets' ||
+        !['Projets établissements', 'Projets pédagogiques', 'Projets éducatifs'].includes(category)
+    );
+
+    ['Projets établissements', 'Projets pédagogiques', 'Projets éducatifs'].forEach((category) => {
+      if (selectedCategories.includes(category)) {
+        updatedSelectedCategories.push(category);
+      }
+    });
+
+    if (selectedCategories.length !== updatedSelectedCategories.length) {
+      setSelectedCategories(updatedSelectedCategories);
+    }
+  }, [selectedCategories]);
+
+  if (!categories || categories.length === 0) {
+    return <div>Loading...</div>;
+  }
+
+  const options = categories.map((category) => ({
+    label: category.category,
+    value: category.id,
+  }));
+  console.log('Options:', options);
+
+  const handleCategoryChange = (selectedOptions) => {
+    console.log('Selected options:', selectedOptions);
+    //setSelectedCategories(selectedOptions.map((option) => option.value));
+    setSelectedCategories(selectedOptions);
+  };
+  
+
+  const upload = async () => {
+    try {
+      if (!file) {
+        return null;
+      }
+      const formData = new FormData();
+      for (let i = 0; i < file.length; i++) {
+        formData.append('file', file[i]);
+      }
+
+      const res = await axios.post('/api/posts/upload', formData);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
+  };
+
+  //const handleCheckboxClick = (e) => {
+  //  const isChecked = e.target.checked;
+  //  const categoryId = e.target.value;
+  //  if (isChecked) {
+  //    addCategory(categoryId);
+  //  } else {
+  //    removeCategory(categoryId);
+  //  }
+  //};
+
+  const addCategory = (categoryId) => {
+    setSelectedCategories((prevCategories) => {
+      if (!prevCategories.includes(categoryId)) {
+        return [...prevCategories, categoryId];
+      }
+      return prevCategories;
+    });
+  };
+
+  const removeCategory = (categoryId) => {
+    setSelectedCategories((prevCategories) => prevCategories.filter((cat) => cat !== categoryId));
+  };
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    console.log('Handling click...');
+
+    console.log('Title:', title);
+    console.log('Value:', value);
+    console.log('Selected categories:', selectedCategories);
+    console.log('File:', file);
+
+
+    //const checkboxElements = document.querySelectorAll('input[name="category_id"]:checked');
+    //const selectedCategories = Array.from(checkboxElements).map((element) => element.value);
+
+    //const imgUrl = await upload();
+    //const imgUrl = upload;
+    let imgUrl = '';
+    if (file) {
+      imgUrl = await upload();
+    }
+
+    try {
+      let response;
+      if (state) {
+        response = await axios.put(`/api/posts/${state.id}`, {
+          title,
+          desc: value,
+          category: selectedCategories,
+          //img: file ? imgUrl : '',
+          img: imgUrl,
+        });
+      } else {
+        response = await axios.post('/api/posts', {
+          title,
+          desc: value,
+          //category: selectedCategories,
+          //category: selectedCategories,
+          category: selectedCategories.map((category) => category.value),
+          //img: file ? imgUrl : '',
+          img: imgUrl,
+          date: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss'),
+        });
+      }
+      console.log(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
       
 
     //console.log(value)
@@ -168,41 +198,28 @@ const Write = () => {
 
                         <div className="item">
                             <h3>Catégories</h3>
-                            <div className="cat">
-                                {/*<input type="checkbox" checked={category_id === "1" } id="1" name="category_id" value={1} onChange={e=>setCategory_id(e.target.value)} />*/}
-                                <input type="checkbox" checked={selectedCategories.includes('1')} id="1" name="category_id" value={1} onChange={handleCheckboxClick} />
-                                <label htmlFor="1">Actualités</label>
-                            </div>
-
-                            <div className="cat">
-                                <input type="checkbox" checked={selectedCategories.includes('2')} id="2" name="category_id" value={2} onChange={handleCheckboxClick} />
-                                <label htmlFor="2">Projets</label>
-                            </div>
-
-                            <div className="cat">
-                                <input type="checkbox" checked={selectedCategories.includes('5')} id="5" name="category_id" value={5} onChange={handleCheckboxClick} />
-                                <label htmlFor="5">Projets établissements</label>
-                            </div>
-
-                            <div className="cat">
-                                <input type="checkbox" checked={selectedCategories.includes('6')} id="6" name="category_id" value={6} onChange={handleCheckboxClick} />
-                                <label htmlFor="6">Projets pédagogiques</label>
-                            </div>
-
-                            <div className="cat">
-                                <input type="checkbox" checked={selectedCategories.includes('7')} id="7" name="category_id" value={7} onChange={handleCheckboxClick} />
-                                <label htmlFor="7">Projets éducatifs</label>
-                            </div>
-
-                            <div className="cat">
-                                <input type="checkbox" checked={selectedCategories.includes('3')} id="3" name="category_id" value={3} onChange={handleCheckboxClick} />
-                                <label htmlFor="3">Évenements</label>
-                            </div>
-
-                            <div className="cat">
-                                <input type="checkbox" checked={selectedCategories.includes('4')} id="4" name="category_id" value={4} onChange={handleCheckboxClick} />
-                                <label htmlFor="4">Orientation</label>
-                            </div>
+                              <MultiSelect
+                                options={options}
+                                value={selectedCategories}
+                                onChange={handleCategoryChange}
+                                labelledBy="Sélectionnez une ou plusieurs catégories"
+                              />
+                              {/*{categories.map((category) => (
+                            //    <div className="cat" key={category.id}>
+                            //    <input
+                            //        type="checkbox"
+                            //        checked={selectedCategories.includes(category.id)}
+                            //        //checked={isChecked2}
+                            //        id={category.id}
+                            //        //name={`cat_id_${category.id}`}
+                            //        name={category.id}
+                            //        value={category.id}
+                            //        onChange={handleCheckboxClick}
+                            //    />
+                            //    <label htmlFor={category.id}>{category.category}</label>
+                            //    </div>
+                            //))}
+                            */}
                         </div>
                     </div>
                 </div>
