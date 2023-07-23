@@ -20,22 +20,53 @@ app.use((req, res, next) => {
 
 app.use(cookieParser());
 
+//const storage = multer.diskStorage({
+//    destination: function (req, file, cb) {
+//      cb(null, '../client/public/upload')//
+//    },
+//    filename: function (req, file, cb) {
+//      cb(null, Date.now()+file.originalname)
+//    }
+//  })
+//const upload = multer({ storage })
+
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, '../client/public/upload')
-    },
-    filename: function (req, file, cb) {
-      cb(null, Date.now()+file.originalname)
-    }
-  })
-  
-const upload = multer({ storage })
+  destination: function (req, file, cb) {
+    const uploadDir = path.join(__dirname, "../client/public/upload");
+    cb(null, uploadDir);
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + file.originalname);
+  }
+});
+
+//const upload = multer({ storage });
+
 //const upload = multer({ dest: './uploads/' });
 
-app.post ( '/api/upload' ,  upload.single( 'files' ) ,  function  (req, res)  {
-    const file = req.file;
-    res.status(200).json(file.filename);
-  } )
+//const upload = multer({ storage });
+//app.post('/api/upload', upload.array('file', 12), function (req, res) {
+//  const file = req.files;
+//  if (!req.file) {
+    // Le fichier n'a pas été correctement téléchargé
+//    res.status(400).json({ error: 'Aucun fichier n\'a été téléchargé.' });
+//    return;
+//  }
+  //const file = req.file;
+//  return res.status(200).json(file);
+//});
+
+const upload = multer({ storage }).array('file', 12);
+app.post('/api/posts/upload', upload, function (req, res) {
+  const file = req.files; // Correction ici : Utilisez req.files au lieu de req.file
+  if (!file) {
+    // Le fichier n'a pas été correctement téléchargé
+    res.status(400).json({ error: 'Aucun fichier n\'a été téléchargé.' });
+    return;
+  }
+  return res.status(200).json(file);
+});
+
 
 app.use('/api/auth', authRoutes);
 app.use('/api/posts', postsRoutes);
