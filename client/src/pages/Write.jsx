@@ -16,6 +16,10 @@ const Write = () => {
   const [selectedCategories, setSelectedCategories] = useState(state?.category_id || []);
   const [categories, setCategories] = useState([]);
 
+  //nouveau changement
+  //const [images, setImages] = useState([]);
+  //nouveau changement
+
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -69,18 +73,27 @@ const Write = () => {
   const upload = async () => {
     try {
       if (!file) {
-        return null;
+        //return null;
+        return [];
       }
       const formData = new FormData();
+      const imgUrl = [];
       for (let i = 0; i < file.length; i++) {
         formData.append('file', file[i]);
+        const res = await axios.post('/api/upload', formData);
+        imgUrl.push(res.data);
       }
 
-      const res = await axios.post('/api/posts/upload', formData);
-      return res.data;
+      //const res = await axios.post('/api/posts/upload', formData);
+      //const res = await axios.post('/api/upload', formData);
+
+      //const res = await axios.post('/upload', formData);
+      //return res.data;
+      return imgUrl;
     } catch (err) {
       console.log(err);
-      return null;
+      //return null;
+      return [];
     }
   };
 
@@ -122,8 +135,9 @@ const Write = () => {
 
     //const imgUrl = await upload();
     //const imgUrl = upload;
-    let imgUrl = '';
-    if (file) {
+    //let imgUrl = '';
+    let imgUrl = [];
+    if (file && file.length > 0) {
       imgUrl = await upload();
     }
 
@@ -135,7 +149,8 @@ const Write = () => {
           desc: value,
           category: selectedCategories,
           //img: file ? imgUrl : '',
-          img: imgUrl,
+          //img: imgUrl,
+          img: imgUrl.join(','),
         });
       } else {
         response = await axios.post('/api/posts', {
@@ -145,7 +160,8 @@ const Write = () => {
           //category: selectedCategories,
           category: selectedCategories.map((category) => category.value),
           //img: file ? imgUrl : '',
-          img: imgUrl,
+          //img: imgUrl,
+          img: imgUrl.join(','),
           date: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss'),
         });
       }
@@ -187,6 +203,10 @@ const Write = () => {
                             </span>
 
                             {/*<input style={{display: "none"}} type="file" id="file" name="file" multiple={true} onChange={handleChange} />*/}
+                            {/*<input style={{display: "none"}} type="file" id="file" name="file" multiple={true} onChange={(e) => setFile(e.target.files[0])} />*/}
+                            {/*{images.map((imageUrl, index) => (
+                              <img key={index} src={imageUrl} alt={`Uploaded ${index}`} />
+                            ))}*/}
                             <input style={{display: "none"}} type="file" id="file" name="file" multiple={true} onChange={(e) => setFile(e.target.files[0])} />
                             <label htmlFor="file" className="iconsText">Ajouter une image <AiFillPlusCircle size={24} className="icons" /> </label>
 
