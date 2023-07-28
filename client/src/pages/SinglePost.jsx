@@ -55,7 +55,8 @@ const SinglePost = () => {
                             </Link>
                             <MdOutlineDeleteOutline onClick={handleDelete} size={24} className="icons" />
                         </div>)}
-                    <img src={post?.postsImg} alt="" />
+                    {/*<img src={post?.postsImg} alt="" />*/}
+                    <img src={`../upload/${post?.postsImg}`} alt="" />
                     <div className="postText">
                         {post.desc}
                     </div> 

@@ -3,6 +3,12 @@ import authRoutes from "./routes/auth.js";
 import postsRoutes from "./routes/posts.js";
 import cookieParser from "cookie-parser";
 import multer from "multer";
+
+import path from "path";
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 //import dotenv from "dotenv";
 //const postRoutes = require('./routes/posts');
 const app = express();
@@ -33,6 +39,7 @@ app.use(cookieParser());
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const uploadDir = path.join(__dirname, "../client/public/upload");
+    //const uploadDir = path.join(__dirname, "../api/uploads");
     cb(null, uploadDir);
   },
   filename: function (req, file, cb) {
@@ -56,8 +63,11 @@ const storage = multer.diskStorage({
 //  return res.status(200).json(file);
 //});
 
-const upload = multer({ storage }).array('file', 12);
-app.post('/api/posts/upload', upload, function (req, res) {
+//const upload = multer({ dest: '../client/public/upload/' });
+//const upload = multer({ storage }).array('file', 12);
+const upload = multer({ storage });
+//app.post('/api/posts/upload', upload, function (req, res) {
+  app.post('/api/upload', upload.array('file', 12), function (req, res, next) {
   const file = req.files; // Correction ici : Utilisez req.files au lieu de req.file
   if (!file) {
     // Le fichier n'a pas été correctement téléchargé
@@ -67,7 +77,17 @@ app.post('/api/posts/upload', upload, function (req, res) {
   return res.status(200).json(file);
 });
 
+//app.post('/api/posts/upload', upload.array('file', 12), function (req, res) {
+//  const fileUrls = req.files.map((file) => {
+//    return 'http://localhost:5000/upload/' + file.filename;
+//  });
 
+//  return res.status(200).json(fileUrls);
+//});
+
+
+
+app.use('/api/upload', express.static(path.join(__dirname, "../client/public/upload")));
 app.use('/api/auth', authRoutes);
 app.use('/api/posts', postsRoutes);
 

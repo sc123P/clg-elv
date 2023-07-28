@@ -92,12 +92,40 @@ export function addPost(req, res, next) {
         // S'il y a des catégories sélectionnées
         const insertPostCategoriesQuery =
         "INSERT INTO `elv`.`post_categories`(`post_id`, `category_id`) VALUES (?, ?) ";
+        //"INSERT INTO `elv`.`post_categories`(`post_id`, `category_id`) VALUES ? ";
 
-        for (const category of selectedCategories) {
-          db.query(insertPostCategoriesQuery, [postId, category.value], (err, data) => {
-            if (err) return res.status(500).json(err);
-          });
+        //for (const category of selectedCategories) {
+        //  db.query(insertPostCategoriesQuery, [postId, category.value], (err, data) => {
+        //    if (err) return res.status(500).json(err);
+        //  });
+        //}
+
+        // ...
+
+let counter = 0;
+  for (const category of selectedCategories) {
+    db.query(insertPostCategoriesQuery, [postId, category], (err, data) => {
+      if (err) {
+        // Gérer l'erreur ici si nécessaire
+        if (!responseSent) {
+          responseSent = true;
+          return res.status(500).json(err);
         }
+      } else {
+        counter++;
+        if (counter === selectedCategories.length) {
+          // Toutes les requêtes ont été exécutées avec succès, renvoyer une seule réponse ici
+          if (!responseSent) {
+            responseSent = true;
+            return res.json("Article créé");
+          }
+        }
+      }
+    });
+  }
+
+// ...
+
       
 
         // Créer un tableau de tuples pour insérer les associations post_id et category_id dans un seul INSERT
@@ -105,16 +133,33 @@ export function addPost(req, res, next) {
         //const postCategoriesValues = selectedCategories.map((catId) => [postId, catId]);
 
         //const postCategoriesValues = selectedCategories.map((category_id) => [postId, category_id.value]);
-        const postCategoriesValues = selectedCategories.map((category) => [postId, category.value]);
+
+        //const postCategoriesValues = selectedCategories.map((category) => [postId, category.value]);
+        const postCategoriesValues = selectedCategories.map((category) => [postId, category]);
 
 
         console.log("postCategoriesValues:", postCategoriesValues); // Ajoutez cette ligne pour afficher les valeurs de postCategoriesValues
 
         //db.query(insertPostCategoriesQuery, [postCategoriesValues], (err, data) => {
-          db.query(insertPostCategoriesQuery, postCategoriesValues, (err, data) => {
-          if (err) return res.status(500).json(err);
-          return res.json("Article créé");
-        });
+          //db.query(insertPostCategoriesQuery, postCategoriesValues, (err, data) => {
+          //if (err) return res.status(500).json(err);
+          //return res.json("Article créé");
+        //});
+        let responseSent = false; // Ajoutez cette variable en haut de votre fonction
+
+db.query(insertPostCategoriesQuery, [postCategoriesValues], (err, data) => {
+  if (err) {
+    if (!responseSent) {
+      responseSent = true;
+      return res.status(500).json(err);
+    }
+  } else {
+    if (!responseSent) {
+      responseSent = true;
+      return res.json("Article créé");
+    }
+  }
+});
       } else {
         // Aucune catégorie sélectionnée, l'article sera simplement publié sans catégorie associée
         return res.json("Article créé sans catégorie");

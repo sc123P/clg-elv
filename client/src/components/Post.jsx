@@ -39,7 +39,8 @@ const Post = () => {
                     <Link to={`/actualites/${post.id}`} className="postContentMain">
                         <div className="hr">
                             <div className="image">
-                                <img src={post.img} alt="" />
+                                {/*<img src={post.img} alt="" />*/}
+                                <img src={`../upload/${post.img}`} alt="" />
                             </div>
                             <div className="postText">
                                 <h3>{post.title}</h3>
