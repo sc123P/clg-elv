@@ -1,6 +1,32 @@
 import { db } from "../db.js";
 import jwt from "jsonwebtoken";
-//import multer from "multer";
+import multer from "multer";
+import express from "express";
+
+
+// const app = express();
+// app.use(express.json());
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     // Indiquez ici l'emplacement où vous souhaitez enregistrer les fichiers téléchargés
+//     //cb(null, './uploads/');
+//     cb(null, '../client/public/upload');
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, Date.now() + file.originalname);
+//   }
+// });
+
+// const upload = multer({ storage });
+// app.post('/api/upload', upload.array('files', 12), function (req, res, next) {
+//   const files = req.files; // Correction ici : Utilisez req.files au lieu de req.file
+//   if (!files) {
+//     // Le fichier n'a pas été correctement téléchargé
+//     res.status(400).json({ error: 'Aucun fichier n\'a été téléchargé.' });
+//     return;
+//   }
+//   return res.status(200).json(files);
+// });
 
 export function getCategories(req, res, next) {
   const q = "SELECT * FROM categories";
@@ -57,16 +83,35 @@ export function getPost (req, res, next){
 };
 
 export function addPost(req, res, next) {
+  // const app = express();
+  // app.use(express.json());
+  // const storage = multer.diskStorage({
+  //   destination: function (req, file, cb) {
+  //     // Indiquez ici l'emplacement où vous souhaitez enregistrer les fichiers téléchargés
+  //     cb(null, './uploads/');
+
+  //     //cb(null, '../client/public/upload');
+  //   },
+  //   filename: function (req, file, cb) {
+  //     cb(null, Date.now() + file.originalname);
+  //   }
+  // });
+
+
   const token = req.cookies.access_token;
   if (!token) return res.status(401).json("Veuillez vous authentifier");
 
   jwt.verify(token, "jwtkey", (err, userInfo) => {
     if (err) return res.status(403).json("Token invalide!");
 
+    //const imgPaths = files.map((file) => `../client/public/upload/${file.filename}`);
+    //const imgPaths = files.map((file) => `./uploads/${file.filename}`);
     const postValues = [
       req.body.title,
       req.body.desc,
+      //req.body.img,
       req.body.img,
+      //JSON.stringify(imgPaths),
       req.body.date,
       userInfo.id,
     ];

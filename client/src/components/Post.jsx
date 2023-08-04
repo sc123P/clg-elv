@@ -40,7 +40,7 @@ const Post = () => {
                         <div className="hr">
                             <div className="image">
                                 {/*<img src={post.img} alt="" />*/}
-                                <img src={`../upload/${post.img}`} alt="" />
+                                <img src={`../api/upload/${post.img}`} alt="" />
                             </div>
                             <div className="postText">
                                 <h3>{post.title}</h3>

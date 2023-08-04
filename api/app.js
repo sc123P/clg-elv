@@ -7,6 +7,7 @@ import multer from "multer";
 import path from "path";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 //import dotenv from "dotenv";
@@ -36,16 +37,25 @@ app.use(cookieParser());
 //  })
 //const upload = multer({ storage })
 
+//NOUVEAU CHANGEMENT
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    const uploadDir = path.join(__dirname, "../client/public/upload");
+  destination: function (req, files, cb) {
     //const uploadDir = path.join(__dirname, "../api/uploads");
-    cb(null, uploadDir);
+
+    //const uploadDir = path.join(__dirname, "../client/public/upload");
+    //cb(null, uploadDir);
+    //cb(null, __dirname + '../client/public/upload');
+    //cb(null, __dirname + '../client/public/upload');
+    //cb(null, __dirname + '/upload');
+    cb(null, "../api/upload");
+    //cb(null, __dirname + '../client/public/upload/');
   },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + file.originalname);
-  }
+  filename: function (req, files, cb) {
+    cb(null, Date.now() + files.originalname);
+  },
 });
+//NOUVEAU CHANGEMENT
+
 
 //const upload = multer({ storage });
 
@@ -65,29 +75,28 @@ const storage = multer.diskStorage({
 
 //const upload = multer({ dest: '../client/public/upload/' });
 //const upload = multer({ storage }).array('file', 12);
+
+//NOUVEAU CHANGEMENT
 const upload = multer({ storage });
+//const upload = multer({ dest: 'uploads/' })
+//const upload = multer({ dest: '../client/public/upload/' })
 //app.post('/api/posts/upload', upload, function (req, res) {
-  app.post('/api/upload', upload.array('file', 12), function (req, res, next) {
-  const file = req.files; // Correction ici : Utilisez req.files au lieu de req.file
-  if (!file) {
+  //app.post("/api/upload", upload.array('files', 12), function (req, res, next) {
+    app.post("/api/upload", upload.single('files'), function (req, res) {
+  const files = req.files; // Correction ici : Utilisez req.files au lieu de req.file
+  if (!files) {
     // Le fichier n'a pas été correctement téléchargé
     res.status(400).json({ error: 'Aucun fichier n\'a été téléchargé.' });
     return;
   }
-  return res.status(200).json(file);
+  //return res.status(200).json(files);
+  return res.status(200).json(files.filename);
 });
-
-//app.post('/api/posts/upload', upload.array('file', 12), function (req, res) {
-//  const fileUrls = req.files.map((file) => {
-//    return 'http://localhost:5000/upload/' + file.filename;
-//  });
-
-//  return res.status(200).json(fileUrls);
-//});
+//NOUVEAU CHANGEMENT
 
 
+//app.use('/api/upload', express.static(path.join(__dirname, "../client/public/upload")));
 
-app.use('/api/upload', express.static(path.join(__dirname, "../client/public/upload")));
 app.use('/api/auth', authRoutes);
 app.use('/api/posts', postsRoutes);
 
