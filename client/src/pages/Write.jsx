@@ -12,16 +12,12 @@ const Write = () => {
   const state = useLocation().state;
   const [value, setValue] = useState(state?.title || '');
   const [title, setTitle] = useState(state?.desc || '');
-  const [files, setFiles] = useState(null);
-  //const [files, setFiles] = useState([]);
+  //const [files, setFiles] = useState(null);
+  const [file, setFile] = useState(null);
   const [progress, setProgress] = useState({ started: false, pc: 0 });
   const [msg, setMsg] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState(state?.category_id || []);
   const [categories, setCategories] = useState([]);
-
-  //nouveau changement
-  //const [images, setImages] = useState([]);
-  //nouveau changement
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -68,47 +64,8 @@ const Write = () => {
 
   const handleCategoryChange = (selectedOptions) => {
     console.log('Selected options:', selectedOptions);
-    //setSelectedCategories(selectedOptions.map((option) => option.value));
     setSelectedCategories(selectedOptions);
   };
-  
-
-  //const upload = async () => {
-  //  try {
-  //    if (!file) {
-        //return null;
-  //      return [];
-  //    }
-  //    const formData = new FormData();
-  //    const imgUrl = [];
-  //    for (let i = 0; i < file.length; i++) {
-  //      formData.append('file', file[i]);
-  //      const res = await axios.post('/api/upload', formData);
-  //      imgUrl.push(res.data);
-  //    }
-
-      //const res = await axios.post('/api/posts/upload', formData);
-      //const res = await axios.post('/api/upload', formData);
-
-      //const res = await axios.post('/upload', formData);
-      //return res.data;
-  //    return imgUrl;
-  //  } catch (err) {
-  //    console.log(err);
-      //return null;
-  //    return [];
-  //  }
-  //};
-
-  //const handleCheckboxClick = (e) => {
-  //  const isChecked = e.target.checked;
-  //  const categoryId = e.target.value;
-  //  if (isChecked) {
-  //    addCategory(categoryId);
-  //  } else {
-  //    removeCategory(categoryId);
-  //  }
-  //};
 
   const addCategory = (categoryId) => {
     setSelectedCategories((prevCategories) => {
@@ -126,88 +83,15 @@ const Write = () => {
   
 
   const upload = async () => {
-    try{
-      if(!files){
-        setMsg("Aucun fichier sélectionné");
-        return;
-      }
+    try {
       const formData = new FormData();
-      for (let i = 0; i < files.length; i++) {
-        //formData.append(`files${i+1}`, files);
-        formData.append("files", files);
-        //const res = await axios.post('/api/upload', formData);
-        //imgUrl.push(res.data);
-        const res = await axios.post("/api/upload", formData);
-        return res.data;
-        
-      }
-    } catch(err){
+      formData.append("file", file);
+      const res = await axios.post("/api/upload", formData);
+      return res.data;
+    } catch (err) {
       console.log(err);
     }
-
-    // setMsg("Chargement...");
-    // setProgress(prevState => {
-    //   return {...prevState, started: true}
-    // })
-    //axios.post('/api/upload', formData, {
-      //axios.post('/api/posts/uploads', formData, {
-      // onUploadProgress: (progressEvent) => { setProgress(prevState => {
-      //   return { ...prevState, pc: progressEvent.progress*100 }
-      // }) },
-      // headers: {
-      //   "Custom-Header": "value",
-      // }
-    //})
   };
-  //   .then(res => {
-  //     setMsg("Fichier téléchargé");
-  //     console.log(res.data);
-  //   })
-  //   .catch(err => {
-  //     setMsg("Échec téléchargement");
-  //     console.error(err)});
-  // };
-
-  //UPLOAD CHANGE------------------------------------------------------------------------------------
-  //const handUploadleImage = async () => {
-  //   const upload = async () => {
-  //   if (!files || files.length === 0) {
-  //     setMsg("Aucun fichier sélectionné");
-  //     return;
-  //   }
-
-  //   const fileListArray = Array.from(files);
-  //   const formData = new FormData();
-  //   fileListArray.forEach((files, index) => {
-  //     formData.append(`files${index + 1}`, files);
-  //   });
-
-  //   setMsg("Chargement...");
-  //   setProgress((prevState) => {
-  //     return { ...prevState, started: true };
-  //   });
-
-  //   try {
-  //     const response = await axios.post("/api/upload", formData, {
-  //       onUploadProgress: (progressEvent) => {
-  //         setProgress((prevState) => {
-  //           return { ...prevState, pc: (progressEvent.loaded / progressEvent.total) * 100 };
-  //         });
-  //       },
-  //       headers: {
-  //         "Custom-Header": "value",
-  //       },
-  //     });
-  //     setMsg("Fichier téléchargé");
-  //     console.log(response.data);
-  //   } catch (err) {
-  //     setMsg("Échec du téléchargement");
-  //     console.error(err);
-  //   }
-  // };
-  //UPLOAD CHANGE------------------------------------------------------------------------------------
-
-
 
   const onSubmit = async (event) => {
     // prevent redirect
@@ -216,88 +100,24 @@ const Write = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     const imgUrl = await upload();
-    //const imgUrl = await handUploadleImage();
-    //console.log('Handling click...');
 
     console.log('Title:', title);
     console.log('Value:', value);
     console.log('Selected categories:', selectedCategories);
-    console.log('File:', files);
-
-    //NOUVEAU CHANGEMENT
-    // if(!files){
-    //   setMsg("Aucun fichier sélectionné");
-    //   return;
-    // }
-    // // const formData = new FormData();
-    // // for (let i = 0; i < files.length; i++) {
-    // //   formData.append(`files${i+1}`, files);
-    // //   //formData.append(`file[${i}]`, files[i]);
-    // //   //const res = await axios.post('/api/upload', formData);
-    // //   //imgUrl.push(res.data);
-    // // }
-    // if (!files || files.length === 0) {
-    //   setMsg("Aucun fichier sélectionné");
-    //   return;
-    // }
-  
-    // console.log('Handling click...');
-    // console.log('Files:', files);
-    //   // Convertir FileList en tableau utilisable
-    // const fileListArray = Array.from(files);
-
-    // const formData = new FormData();
-    // fileListArray.forEach((files, index) => {
-    //   formData.append(`files${index + 1}`, files);
-    // });
-    // //const formData = new FormData();
-  
-    // // Ajoutez chaque fichier à formData avec des clés uniques
-    // // files.forEach((file, index) => {
-    // //   formData.append(`files${index + 1}`, file);
-    // // });
-
-    // setMsg("Chargement...");
-    // setProgress(prevState => {
-    //   return {...prevState, started: true}
-    // })
-    // axios.post('/api/upload', formData, {
-    //   //axios.post('/api/posts/uploads', formData, {
-    //   onUploadProgress: (progressEvent) => { setProgress(prevState => {
-    //     return { ...prevState, pc: progressEvent.progress*100 }
-    //   }) },
-    //   headers: {
-    //     "Custom-Header": "value",
-    //   }
-    // })
-    // .then(res => {
-    //   setMsg("Fichier téléchargé");
-    //   console.log(res.data);
-    // })
-    // .catch(err => {
-    //   setMsg("Échec téléchargement");
-    //   console.error(err)});
-    //NOUVEAU CHANGEMENT
-
-    //if (file && file.length > 0) {
-    //  imgUrl = await upload();
-    //}
-
-    //}
+    console.log('File:', file);
 
     try {
-      //const imgUrls = files.length > 0 ? await handleImageUpload() : [];
       let response;
       if (state) {
         response = await axios.put(`/api/posts/${state.id}`, {
           title,
           desc: value,
           category: selectedCategories,
-          //img: files ? imgUrl : "",
+          img: file ? imgUrl : "",
           //img: imgUrls,
           //img: imgUrl.join(','),
           //img: files.join(','),
-          img: files,
+          //img: file,
         });
       } else {
         response = await axios.post('/api/posts', {
@@ -306,12 +126,11 @@ const Write = () => {
           //category: selectedCategories,
           //category: selectedCategories,
           category: selectedCategories.map((category) => category.value),
-          //img: files ? imgUrl : "",
+          img: file ? imgUrl : "",
           //img: imgUrl,
           //img: imgUrl.join(','),
           //img: files.join(','),
-          img: files,
-          //img: imgPaths,
+          //img: file,
           date: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss'),
         });
       }
@@ -367,7 +186,7 @@ const Write = () => {
                             {/*<form action="/api/upload" method="post" encType="multipart/form-data" target="dummyframe"></form>*/}
                             
                             
-                            <input type="file" id="files" name="files" multiple onChange={(e) => setFiles(e.target.files[0])} />
+                            <input type="file" id="file" name="file" multiple onChange={(e) => setFile(e.target.files[0])} />
                             {/*<label htmlFor="file" className="iconsText">Ajouter une image<AiFillPlusCircle size={24} className="icons" /></label>*/}
                             <label style={{ display: "none" }} htmlFor="file" className="iconsText">Ajouter une image<AiFillPlusCircle size={24} className="icons" /></label>
                             {/*<input type="file" id="files" name="files" multiple onClick={(e) => setFiles(e.target.files)} />*/}
