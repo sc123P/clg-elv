@@ -3,31 +3,6 @@ import jwt from "jsonwebtoken";
 import multer from "multer";
 import express from "express";
 
-
-// const app = express();
-// app.use(express.json());
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     // Indiquez ici l'emplacement où vous souhaitez enregistrer les fichiers téléchargés
-//     //cb(null, './uploads/');
-//     cb(null, '../client/public/upload');
-//   },
-//   filename: function (req, file, cb) {
-//     cb(null, Date.now() + file.originalname);
-//   }
-// });
-
-// const upload = multer({ storage });
-// app.post('/api/upload', upload.array('files', 12), function (req, res, next) {
-//   const files = req.files; // Correction ici : Utilisez req.files au lieu de req.file
-//   if (!files) {
-//     // Le fichier n'a pas été correctement téléchargé
-//     res.status(400).json({ error: 'Aucun fichier n\'a été téléchargé.' });
-//     return;
-//   }
-//   return res.status(200).json(files);
-// });
-
 export function getCategories(req, res, next) {
   const q = "SELECT * FROM categories";
 
@@ -41,6 +16,8 @@ export function getCategories(req, res, next) {
 export function getPosts(req, res, next) {
   const category_id = req.query.category_id;
   //const category = req.query.category_id;
+
+  
   let q;
   let params;
 
@@ -70,15 +47,15 @@ export function getPost (req, res, next){
     const q ="SELECT p.id, `uid`, `title`, `desc`, p.img AS postsImg, `date` FROM user u JOIN posts p ON u.id=p.uid WHERE p.id = ? "
 
     db.query(q,[req.params.id], (err, data)=>{
-        if(err) return res.json(err);
+        if(err) return res.status(500).json(err);
 
-        if (data.length === 0){
-            return res.status(404).json({ message: "Publication inttrouvable." });
-        }
-        const post = data[0];
+        // if (data.length === 0){
+        //     return res.status(404).json({ message: "Publication inttrouvable." });
+        // }
+        // const post = data[0];
 
-        //return res.status(200).json(data[0]);
-        return res.status(200).json(post);
+        return res.status(200).json(data[0]);
+        //return res.status(200).json(post);
     });
 };
 
