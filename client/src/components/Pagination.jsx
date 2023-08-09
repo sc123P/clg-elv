@@ -6,13 +6,24 @@ import { IoIosArrowForward } from 'react-icons/io';
 import { useEffect, useState } from 'react';
 import Post from './Post';
 
+import ReactDOM from 'react-dom';
+import { createRoutesFromElements } from 'react-router';
+
 const Pagination = () => {
     const [items, setItems] = useState([]);
     const [pageCount, setPageCount] = useState(0);
     //let limit = 5;
-    const [currentPage, setCurrentPage] = useState(0);
+    //const [currentPage, setCurrentPage] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
     const [limit, setLimit] = useState(5);
     const [totalItems, setTotalItems] = useState(0);
+
+    
+    //NOUVEAU CHANGEMENT-----------------------------------------------------------------------
+    // const startIndex = (currentPage - 1) * limit;
+    // const endIndex = startIndex + limit;
+    // const postsToDisplay = items.slice(startIndex, endIndex);
+     //NOUVEAU CHANGEMENT-----------------------------------------------------------------------
 
     useEffect(() =>{
         fetchTotalItems();
@@ -28,7 +39,8 @@ const Pagination = () => {
     };
     const fetchNews = async (currentPage) =>{
         const res = await fetch(
-            `http://localhost:5173/actualites?_page=1&_limit=${limit}`
+        {/*`http://localhost:5173/actualites?_page=1&_limit=${limit}`*/}
+        `http://localhost:5173/actualites?_page=${currentPage}&_limit=${limit}&_sort=date&_order=desc`
         );
         const data = await res.json();
         setItems(data);
@@ -57,22 +69,21 @@ const Pagination = () => {
         //let currentPage = data.selected + 1;
         const selectedPage = data.selected + 1;
 
-        if(selectedPage > pageCount){
+        setCurrentPage(selectedPage);
+        fetchNews(selectedPage);
+        {/*if(selectedPage > pageCount){
             setCurrentPage(pageCount);
             fetchNews(pageCount);
         }else{
             setCurrentPage(selectedPage);
             fetchNews(selectedPage);
-        }
-        //setCurrentPage(selectedPage);
-        //const newsFormServer = await fetchNews(selectedPage);
-
-        //setItems(newsFormServer);
+        }*/}
     };
 
 
     return (
         <div>
+            {/*{postsToDisplay.map((post) => (*/}
             {items.map((post) => (
                 <Post
                     key={post.id}
@@ -86,7 +97,7 @@ const Pagination = () => {
                 previousLabel={ <IoIosArrowBack /> }
                 nextLabel={ <IoIosArrowForward /> }
                 breakLabel={'...'}
-                pageCount={10}
+                pageCount={pageCount}
                 onPageChange={handlePageClick}
                 containerClassName={'pagination'}
                 pageClassName={'page-item'}

@@ -9,7 +9,6 @@ const News = () => {
         <div className="news">
             {/*<Navbar />*/}
             <div className="newsContainer">
-
                 <div className="newsTop">
                     <div className="newsTopText">
                         <h1>ACTUALITES</h1>
@@ -20,11 +19,6 @@ const News = () => {
                 </div>
 
                 <Post />
-                {/*<Post />
-                <Post />
-                <Post />
-                <Post />*/}
-
                 <Pagination />
 
             </div>    

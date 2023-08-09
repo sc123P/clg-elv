@@ -6,8 +6,12 @@
         height: 334px;
         min-height: 334px;
         background-color: $color-1;
+        //background: linear-gradient(-180deg, rgba(224,49,55,1) 0%, rgba(228,77,82,1) 75%, rgba(233,110,114,1) 85%, rgba(246,193,195,1) 95%, rgba(255,255,255,1) 100%);
         //display: flex;
         //justify-content: space-around;
+
+        //border-bottom-left-radius: 25%;
+        //border-bottom-right-radius: 25%;
 
         .homeTop{
             display: flex;

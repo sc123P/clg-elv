@@ -6,6 +6,8 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import moment from "moment";
 import axios from 'axios';
 import { AuthContext } from '../context/authContext';
+import parse from "html-react-parser";
+import DOMPurify from 'dompurify';
 
 const SinglePost = () => {
     const [post, setPost] = useState({});
@@ -41,13 +43,20 @@ const SinglePost = () => {
         }
     }
 
+    const getText = (html) =>{
+        const doc = new DOMParser().parseFromString(html, "text/html")
+        return doc.body.textContent
+      }
+
     return (
         <div className="singlePost">
                 {/*<Navbar />*/}
-                <div className="singlePostContent">
+                    <div className="singlePostContent">
+                
                     <div className="postTitle">
                         <h3>{post.title}</h3>
-                        <p>Posté {moment(post.date).fromNow()}</p>
+                        {/*<p>Posté {moment(post.date).fromNow()}</p>*/}
+                        <p>Posté le {moment(post.date).locale('fr').format('DD MMMM YYYY à HH[h]mm') }</p>
                     </div>
                         {currentUser?.id === post.uid && (<div className="edit">
                             <Link to={`/write?edit=2`} state={post}>
@@ -58,8 +67,8 @@ const SinglePost = () => {
                     {/*<img src={post?.postsImg} alt="" />*/}
                     <img src={`../upload/${post?.postsImg}`} alt="" />
                     <div className="postText">
-                        {post.desc}
-                    </div> 
+                        <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.desc),}}></p>
+                    </div>
                 </div>
             </div>
     );
