@@ -14,8 +14,11 @@ export function getCategories(req, res, next) {
 }
 
 export function getPosts(req, res, next) {
+  //const page = req.query.page || 1;
+  //const limit = req.query.limit || 5;
+
   const category_id = req.query.category_id;
-  //const category = req.query.category_id;
+  
 
   
   let q;
@@ -24,11 +27,12 @@ export function getPosts(req, res, next) {
   if (category_id) {
     //if (category) {
     q =
-      "SELECT * FROM posts JOIN post_categories ON posts.id = post_categories.post_id WHERE category_id=?";
+      //"SELECT * FROM posts JOIN post_categories ON posts.id = post_categories.post_id WHERE category_id=?";
+      "SELECT * FROM posts JOIN post_categories ON posts.id = post_categories.post_id WHERE category_id=? ORDER BY date DESC";
     params = [category_id];
     //params = [category];
   } else {
-    q = "SELECT * FROM posts";
+    q = "SELECT * FROM posts ORDER BY date DESC";
     params = [];
   }
 
@@ -38,6 +42,7 @@ export function getPosts(req, res, next) {
     return res.status(200).json(data);
   });
 }
+
 
 
 export function getPost (req, res, next){

@@ -7,17 +7,39 @@ import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import moment from 'moment';
 import { MultiSelect } from 'react-multi-select-component';
+import EditorToolbar, { modules, formats } from "../components/EditorToolbar";
 
 const Write = () => {
   const state = useLocation().state;
-  const [value, setValue] = useState(state?.title || '');
-  const [title, setTitle] = useState(state?.desc || '');
+  // const [value, setValue] = useState(state?.title || '');
+  // const [title, setTitle] = useState(state?.desc || '');
+
+  const [title, setTitle] = useState(state?.title || '');
+  const [value, setValue] = useState(state?.desc || '');
   //const [files, setFiles] = useState(null);
   const [file, setFile] = useState(null);
   const [progress, setProgress] = useState({ started: false, pc: 0 });
   const [msg, setMsg] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState(state?.category_id || []);
   const [categories, setCategories] = useState([]);
+
+
+  const toolbarOptions = [
+    { 'header': [1, 2, 3, false] },
+    'bold',
+    'italic',
+    'underline',
+    'blockquote',
+    { 'list': 'ordered' },
+    { 'list': 'bullet' },
+    { 'indent': '-1' },
+    { 'indent': '+1' },
+    { 'color': [] },
+    { 'background': [] },
+    'link',
+    'image',
+    'video'
+]
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -108,6 +130,10 @@ const Write = () => {
 
     try {
       let response;
+      // const maxLength = 15000;
+      // if (value.length > maxLength) {
+      //   setValue(value.substring(0, maxLength));
+      // }
       if (state) {
         response = await axios.put(`/api/posts/${state.id}`, {
           title,
@@ -131,7 +157,8 @@ const Write = () => {
           //img: imgUrl.join(','),
           //img: files.join(','),
           //img: file,
-          date: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss'),
+          //date: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss'),
+          date: moment(Date.now()).locale('fr').format('YYYY-MM-DD HH:mm:ss'),
         });
       }
       
@@ -160,9 +187,22 @@ const Write = () => {
 
                 <div className="writeMain">
                     <div className="mainContent">
+                        {/*<input type="text" value={title} placeholder="Titre" onChange={e=>setTitle(e.target.value)} />*/}
                         <input type="text" value={title} placeholder="Titre" onChange={e=>setTitle(e.target.value)} />
+                        {/*<input type="text" value={value} placeholder="Titre" onChange={setValue} />*/}
                         <div className="editorContainer">
-                            <ReactQuill className="editor" theme="snow" value={value} onChange={setValue} />
+                            {/*<EditorToolbar toolbarId={'t1'}/>*/}
+                            <ReactQuill className="editor" theme="snow" value={value} onChange={setValue}
+                            
+                            formats={formats}
+                            modules={{
+                              toolbar: toolbarOptions,
+                              clipboard: {
+                                  matchVisual: false
+                              }
+                          }}
+                            />
+                            {/*<ReactQuill className="editor" theme="snow" value={title} onChange={e=>setTitle(e.target.value)} />*/}
                         </div>
                     </div>
                     <div className="menu">

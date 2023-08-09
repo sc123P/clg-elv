@@ -1,38 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import parse from "html-react-parser";
+import moment from "moment";
+//import 'moment/locale/fr';
+//import 'moment/src/locale/fr';
+//import 'moment/min/locales';
+//import moment from 'moment/min/moment-with-locales';
+//import 'moment/min/moment-with-locales';
+import 'moment/locale/fr.js';
+
 
 //const Post = ({title, desc, img}) => {
-const Post = () => {
-    const [posts, setPosts] = useState([]);
-    //const category_id = useLocation().search;
-    const category_id = useLocation().search;
-    //const location = useLocation()
-    //console.log(location)
-
-    useEffect(() =>{
-        const fetchData = async ()=>{
-            try{
-                const res = await axios.get(`/api/posts${category_id}`);
-                //const res = await axios.get(`/api/posts`);
-                setPosts(res.data);
-            }catch(err){
-                console.log(err);
-            }
-        };
-        fetchData();
-    }, [category_id]);
-        //}, []);
-    //const posts = [
-    //    {
-    //        id: 1,
-    //        title: "Comment concevoir un jean pour limiter son impact sur l’environnement ?",
-    //        desc: "Réflexion et solutions proposées par des élèves de 3ème",
-    //        img: "imageTechno.jpg",
-    //    },
-    //];
-    return (
-        <div className="posts">
+    const Post = () => {
+        moment.updateLocale('fr', {
+            months : [
+                "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet",
+                "Août", "Septembre", "Octobre", "Novembre", "Décembre"
+            ]
+        });
+        const [posts, setPosts] = useState([]);
+        const category_id = useLocation().search;
+        
+        useEffect(() =>{
+            const fetchData = async ()=>{
+                try{
+                    const res = await axios.get(`/api/posts${category_id}`);
+                    //const res = await axios.get(`/api/posts`);
+                    setPosts(res.data);
+                }catch(err){
+                    console.log(err);
+                }
+            };
+            fetchData();
+        }, [category_id]);
+                return (
+                    <div className="posts">
         {posts.map(post => (
             <div className="post" key={post.id}>
                 <div className="postContent">
@@ -46,7 +49,11 @@ const Post = () => {
                             </div>
                             <div className="postText">
                                 <h3>{post.title}</h3>
-                                <p>{post.desc}</p>
+                                {/*<p>Posté {moment(post.date).fromNow()}</p>*/}
+                                {/*<p>Posté {moment.locale('fr')} {(post.date)}</p>*/}
+                                {/*<p>Posté {moment().fromNow()} {post.date} </p>*/}
+                                <p>Posté le {moment(post.date).locale('fr').format('DD MMMM YYYY à HH[h]mm') }</p>
+                                {/*{parse(post.desc)}*/}
                             </div>
                         </div>
                         
