@@ -15,7 +15,7 @@ const Projects = () => {
                     </div>
                 </div>
 
-                <Post />
+                {/* <Post /> */}
 
                 <Pagination />
             </div>

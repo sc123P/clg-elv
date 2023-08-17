@@ -6,6 +6,7 @@ import {
     deletePost,
     updatePost,
     getCategories,
+    //getCountPostsByCategory,
 
 } from "../controllers/posts.js";
 
@@ -44,6 +45,8 @@ const router = express.Router();
 //   // Répondez avec les noms de fichiers téléchargés
 //   return res.status(200).json({ files: fileNames });
 // });
+
+//router.get('/countPostsByCategory', getCountPostsByCategory);
 
 router.get('/categories', getCategories);
 router.get('/', getPosts);

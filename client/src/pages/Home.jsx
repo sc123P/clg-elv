@@ -2,6 +2,9 @@ import React from 'react';
 //import Navbar from '../components/Navbar';
 import { Link } from 'react-router-dom';
 
+// import { useEffect, useState, useRef } from 'react';
+// import axios from 'axios';
+
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 const Home = () => {

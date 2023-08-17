@@ -3,12 +3,14 @@ import jwt from "jsonwebtoken";
 import multer from "multer";
 import express from "express";
 
+
+
 export function getCategories(req, res, next) {
   const q = "SELECT * FROM categories";
-
+  
   db.query(q, (err, data) => {
     if (err) return res.status(500).json(err);
-
+    
     return res.status(200).json(data);
   });
 }
@@ -16,35 +18,47 @@ export function getCategories(req, res, next) {
 export function getPosts(req, res, next) {
   //const page = req.query.page || 1;
   //const limit = req.query.limit || 5;
-
+  
   const category_id = req.query.category_id;
   
-
+  
   
   let q;
   let params;
-
+  
   if (category_id) {
     //if (category) {
-    q =
+      q =
       //"SELECT * FROM posts JOIN post_categories ON posts.id = post_categories.post_id WHERE category_id=?";
       "SELECT * FROM posts JOIN post_categories ON posts.id = post_categories.post_id WHERE category_id=? ORDER BY date DESC";
-    params = [category_id];
-    //params = [category];
-  } else {
-    q = "SELECT * FROM posts ORDER BY date DESC";
-    params = [];
+      params = [category_id];
+      //params = [category];
+    } else {
+      q = "SELECT * FROM posts ORDER BY date DESC";
+      params = [];
+    }
+    
+    db.query(q, params, (err, data) => {
+      if (err) return res.status(500).send(err);
+      
+      return res.status(200).json(data);
+    });
   }
-
-  db.query(q, params, (err, data) => {
-    if (err) return res.status(500).send(err);
-
-    return res.status(200).json(data);
-  });
-}
-
-
-
+  
+  export function getCountPostsByCategory(category_id, callback) {
+    const q = "SELECT COUNT(*) AS count FROM posts JOIN post_categories ON posts.id = post_categories.post_id WHERE category_id=?";
+    const params = [category_id];
+    
+    db.query(q, params, (err, data) => {
+      if (err) {
+        return callback(err, null);
+      }
+      const count = data[0].count;
+      return callback(null, count);
+    });
+  }
+  
+  
 export function getPost (req, res, next){
     //const q ="SELECT `username`, `title`, `desc`, p.img, `category`, `date` FROM users u JOIN posts p ON u.id=p.uid WHERE p.id = ? "
     //const q ="SELECT p.id, `uid`, `title`, `desc`, p.img AS postsImg, `category_id`, `date` FROM user u JOIN posts p ON u.id=p.uid WHERE p.id = ? "
