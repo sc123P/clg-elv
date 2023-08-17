@@ -1,111 +1,97 @@
-import React from 'react';
-import ReactPaginate from 'react-paginate';
-import { IoIosArrowBack } from 'react-icons/io';
-import { IoIosArrowForward } from 'react-icons/io';
-
-import { useEffect, useState } from 'react';
+// Pagination.jsx
+import React, { useState, useEffect } from 'react';
 import Post from './Post';
 
-import ReactDOM from 'react-dom';
-import { createRoutesFromElements } from 'react-router';
+import { Link, useLocation } from 'react-router-dom';
+import axios from 'axios';
+import moment from "moment";
+import parse from "html-react-parser";
 
-const Pagination = () => {
-    const [items, setItems] = useState([]);
-    const [pageCount, setPageCount] = useState(0);
-    //let limit = 5;
-    //const [currentPage, setCurrentPage] = useState(0);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [limit, setLimit] = useState(5);
-    const [totalItems, setTotalItems] = useState(0);
-
-    
-    //NOUVEAU CHANGEMENT-----------------------------------------------------------------------
-    // const startIndex = (currentPage - 1) * limit;
-    // const endIndex = startIndex + limit;
-    // const postsToDisplay = items.slice(startIndex, endIndex);
-     //NOUVEAU CHANGEMENT-----------------------------------------------------------------------
-
-    useEffect(() =>{
-        fetchTotalItems();
-    }, []);
-    const fetchTotalItems = async () =>{
-        const res = await fetch('http://localhost:5173/actualites');
-        const data = await res.json();
-        const total = data.length;
-        setTotalItems(total);
-        const totalPages = Math.ceil(total / limit);
-        setPageCount(totalPages);
-        fetchNews(1);
+// const Pagination = ({ allPosts }) => {
+  const Pagination = () => {
+    moment.updateLocale('fr', {
+      months : [
+          "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet",
+          "Août", "Septembre", "Octobre", "Novembre", "Décembre"
+      ]
+  });
+  //CHANGEMENT----------------------------------------------------------------------
+  const [posts, setPosts] = useState([]);
+  const category_id = useLocation().search;
+  
+  useEffect(() =>{
+    const fetchData = async ()=>{
+      try{
+        const res = await axios.get(`/api/posts${category_id}`);
+        setPosts(res.data);
+      }catch(err){
+        console.log(err);
+      }
     };
-    const fetchNews = async (currentPage) =>{
-        const res = await fetch(
-        {/*`http://localhost:5173/actualites?_page=1&_limit=${limit}`*/}
-        `http://localhost:5173/actualites?_page=${currentPage}&_limit=${limit}&_sort=date&_order=desc`
-        );
-        const data = await res.json();
-        setItems(data);
-    };
+    fetchData();
+  }, [category_id]);
+  
+  //CHANGEMENT----------------------------------------------------------------------
+  const postsPerPage = 5;
+  const [currentPage, setCurrentPage] = useState(1);
+  // Utilisez la longueur des posts de la catégorie pour calculer le nombre total de pages
+  const totalPages = Math.ceil(posts.length / postsPerPage);
 
-{/*    useEffect(() =>{
-        const getNews = async () => {
-            const res = await fetch(`http://localhost:5173/actualites?_page=1&_limit=${limit}`);
-        
-        const data = await res.json();
-        const total = res.headers.get("x-total-count");
-        setPageCount(Math.ceil(total / limit));
-        setItems(data);
-        };
-        getNews();
-    }, [limit]);
-    const fetchNews = async (currentPage) =>{
-        const res = await fetch(
-            `http://localhost:5173/actualites?_page=1&_limit=${limit}`
-        );
-        const data = await res.json();
-        return data;
-    };*/}
+  // Calculez l'index du premier et du dernier post à afficher sur la page actuelle
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  // const indexOfFirstPost = indexOfLastPost - 4;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
-    const handlePageClick = async (data) =>{
-        //let currentPage = data.selected + 1;
-        const selectedPage = data.selected + 1;
+  // Change la page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  // Change page
+  // const paginate = (pageNumber) => {
+  //   if (pageNumber > 0) {
+  //     setCurrentPage(pageNumber);
+  //   }
+  // }
 
-        setCurrentPage(selectedPage);
-        fetchNews(selectedPage);
-        {/*if(selectedPage > pageCount){
-            setCurrentPage(pageCount);
-            fetchNews(pageCount);
-        }else{
-            setCurrentPage(selectedPage);
-            fetchNews(selectedPage);
-        }*/}
-    };
+  return (
+    <div className="posts">
+      {/* {currentPosts.map((posts) => ( */}
+      {/* {currentPosts.map((post, index) => (
+        <Post key={index} title={post.title} content={post.content} />
+      ))} */}
 
+{currentPosts.map((post, index) => (
+        // {posts.map(post => (
+          <div className="post" key={post.id}>
+              <div className="postContent">
+                  <Link to={`/actualites/${post.id}`} className="postContentMain">
+                      <div className="hr">
+                          <div className="image">
+                              <img src={`../upload/${post.img}`} alt="" />
+                          </div>
+                          <div className="postText">
+                              <h3>{post.title}</h3>
+                              <p>Posté le {moment(post.date).locale('fr').format('DD MMMM YYYY à HH[h]mm') }</p>
+                          </div>
+                      </div>
+                      
+                      <hr/>
+                  </Link>
+              </div>
+          </div>
+      ))}
+      {/* ))} */}
 
-    return (
-        <div>
-            {/*{postsToDisplay.map((post) => (*/}
-            {items.map((post) => (
-                <Post
-                    key={post.id}
-                    title={post.title}
-                    desc={post.desc}
-                    img={post.img}
-                 />
-            ))}
-            <ReactPaginate
-                className="paginationMain"
-                previousLabel={ <IoIosArrowBack /> }
-                nextLabel={ <IoIosArrowForward /> }
-                breakLabel={'...'}
-                pageCount={pageCount}
-                onPageChange={handlePageClick}
-                containerClassName={'pagination'}
-                pageClassName={'page-item'}
-                pageLinkClassName={'page-link'}
-                activeLinkClassName={'active'}
-            />
-        </div>
-    );
+      {/* Affichez les liens de pagination */}
+      <div className="pagination">
+        {/* {Array.from({ length: Math.ceil(posts.length / postsPerPage) }).map((_, index) => ( */}
+          {Array.from({ length: totalPages }).map((_, index) => (
+          <button key={index} onClick={() => paginate(index + 1)}>
+            {index + 1}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default Pagination;

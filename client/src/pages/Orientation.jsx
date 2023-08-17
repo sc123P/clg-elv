@@ -15,7 +15,7 @@ const Orientation = () => {
                     </div>
                 </div>
 
-                <Post />
+                {/* <Post /> */}
 
                 <Pagination />
             </div>
