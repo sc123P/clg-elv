@@ -1,13 +1,14 @@
 // Pagination.jsx
 import React, { useState, useEffect } from 'react';
 import Post from './Post';
-
 import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import moment from "moment";
 import parse from "html-react-parser";
+import ReactPaginate from 'react-paginate';
+import { IoIosArrowBack } from 'react-icons/io';
+import { IoIosArrowForward } from 'react-icons/io';
 
-// const Pagination = ({ allPosts }) => {
   const Pagination = () => {
     moment.updateLocale('fr', {
       months : [
@@ -34,6 +35,10 @@ import parse from "html-react-parser";
   //CHANGEMENT----------------------------------------------------------------------
   const postsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
+
+  const handlePageChange = (selectedPage) => {
+    setCurrentPage(selectedPage.selected + 1);
+  };
   // Utilisez la longueur des posts de la catégorie pour calculer le nombre total de pages
   const totalPages = Math.ceil(posts.length / postsPerPage);
 
@@ -60,7 +65,6 @@ import parse from "html-react-parser";
       ))} */}
 
 {currentPosts.map((post, index) => (
-        // {posts.map(post => (
           <div className="post" key={post.id}>
               <div className="postContent">
                   <Link to={`/actualites/${post.id}`} className="postContentMain">
@@ -79,16 +83,28 @@ import parse from "html-react-parser";
               </div>
           </div>
       ))}
-      {/* ))} */}
 
-      {/* Affichez les liens de pagination */}
       <div className="pagination">
-        {/* {Array.from({ length: Math.ceil(posts.length / postsPerPage) }).map((_, index) => ( */}
-          {Array.from({ length: totalPages }).map((_, index) => (
+          {/* {Array.from({ length: totalPages }).map((_, index) => (
           <button key={index} onClick={() => paginate(index + 1)}>
             {index + 1}
           </button>
-        ))}
+        ))} */}
+
+      <ReactPaginate
+        className="paginationMain"
+        pageCount={totalPages}
+        onPageChange={handlePageChange}
+        containerClassName="pagination"
+        activeClassName="active"
+
+        previousLabel={ <IoIosArrowBack /> }
+        nextLabel={ <IoIosArrowForward /> }
+        pageClassName={'page-item'}
+        breakLabel={'...'}
+        pageLinkClassName={'page-link'}
+        activeLinkClassName={'active'}
+      />
       </div>
     </div>
   );

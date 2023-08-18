@@ -30,9 +30,20 @@ export function getPosts(req, res, next) {
     //if (category) {
       q =
       //"SELECT * FROM posts JOIN post_categories ON posts.id = post_categories.post_id WHERE category_id=?";
-      "SELECT * FROM posts JOIN post_categories ON posts.id = post_categories.post_id WHERE category_id=? ORDER BY date DESC";
-      params = [category_id];
-      //params = [category];
+
+      // "SELECT * FROM posts JOIN post_categories ON posts.id = post_categories.post_id WHERE category_id=? ORDER BY date DESC";
+
+      `
+      SELECT p.*
+      FROM posts p
+      JOIN post_categories pc ON p.id = pc.post_id
+      JOIN categories c ON pc.category_id = c.id
+      WHERE c.id = ? OR c.parent_category_id = ?
+      ORDER BY p.date DESC
+    `;
+
+      // params = [category_id];
+      params = [category_id, category_id];
     } else {
       q = "SELECT * FROM posts ORDER BY date DESC";
       params = [];
