@@ -89,6 +89,23 @@ const Write = () => {
     setSelectedCategories(selectedOptions);
   };
 
+//CHANGEMENT-------------------------------------------------------------------------------------
+const selectedCategoryIds = [];
+selectedCategories.forEach((category) => {
+  if (category.value === "Projets") {
+    selectedCategoryIds.push(category.value); // Ajoute la catégorie parente
+    ["Projets établissements", "Projets pédagogiques", "Projets éducatifs"].forEach((subCategory) => {
+      if (selectedCategories.some((c) => c.value === subCategory)) {
+        selectedCategoryIds.push(subCategory); // Ajoute les sous-catégories sélectionnées
+      }
+    });
+  } else {
+    selectedCategoryIds.push(category.value); // Ajoute les autres catégories
+  }
+});
+
+//CHANGEMENT-------------------------------------------------------------------------------------
+
   const addCategory = (categoryId) => {
     setSelectedCategories((prevCategories) => {
       if (!prevCategories.includes(categoryId)) {
@@ -149,9 +166,9 @@ const Write = () => {
         response = await axios.post('/api/posts', {
           title,
           desc: value,
-          //category: selectedCategories,
-          //category: selectedCategories,
-          category: selectedCategories.map((category) => category.value),
+
+          category: selectedCategoryIds,
+          // category: selectedCategories.map((category) => category.value),
           img: file ? imgUrl : "",
           //img: imgUrl,
           //img: imgUrl.join(','),
