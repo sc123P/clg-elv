@@ -55,6 +55,28 @@ export function getPosts(req, res, next) {
       return res.status(200).json(data);
     });
   }
+
+export function getPostsBySubcategory(req, res, next) {
+  const subcategory = req.query.subcategory;
+
+  // Utilisez la valeur de la sous-catégorie pour récupérer les articles
+  const q = `
+    SELECT p.*
+    FROM posts p
+    JOIN post_categories pc ON p.id = pc.post_id
+    JOIN categories c ON pc.category_id = c.id
+    WHERE c.category = ?
+    ORDER BY date DESC`;
+
+    console.log('Subcategory:', subcategory);
+
+  db.query(q, [subcategory], (err, data) => {
+    if (err) {
+      return res.status(500).json(err);
+    }
+    return res.status(200).json(data);
+  });
+}
   
   export function getCountPostsByCategory(category_id, callback) {
     const q = "SELECT COUNT(*) AS count FROM posts JOIN post_categories ON posts.id = post_categories.post_id WHERE category_id=?";

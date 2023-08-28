@@ -6,6 +6,7 @@ import {
     deletePost,
     updatePost,
     getCategories,
+    getPostsBySubcategory,
     //getCountPostsByCategory,
 
 } from "../controllers/posts.js";
@@ -50,6 +51,7 @@ const router = express.Router();
 
 router.get('/categories', getCategories);
 router.get('/', getPosts);
+router.get('/subcat', getPostsBySubcategory);
 router.get('/:id', getPost);
 router.post('/', addPost);
 router.delete('/:id', deletePost);

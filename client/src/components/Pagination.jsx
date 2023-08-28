@@ -1,7 +1,7 @@
 // Pagination.jsx
 import React, { useState, useEffect } from 'react';
 import Post from './Post';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import axios from 'axios';
 import moment from "moment";
 import parse from "html-react-parser";
@@ -16,9 +16,27 @@ import { IoIosArrowForward } from 'react-icons/io';
           "Août", "Septembre", "Octobre", "Novembre", "Décembre"
       ]
   });
-  //CHANGEMENT----------------------------------------------------------------------
   const [posts, setPosts] = useState([]);
   const category_id = useLocation().search;
+  //CHANGEMENT----------------------------------------------------------------------
+  const { subcategory } = useParams(); // Récupère le paramètre de la sous-catégorie depuis l'URL
+  // const [posts, setPosts] = useState([]); // État pour stocker les articles récupérés
+
+  useEffect(() => {
+    // Fonction pour récupérer les articles associés à la sous-catégorie depuis le backend
+    const fetchPostsBySubcategory = async () => {
+      try {
+        const response = await axios.get(`/api/posts/subcat?subcategory=${subcategory}`);
+        console.log('Response from API:', response.data);
+        setPosts(response.data);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des articles :', error);
+      }
+    };
+
+    fetchPostsBySubcategory();
+  }, [subcategory]);
+  //CHANGEMENT----------------------------------------------------------------------
   
   useEffect(() =>{
     const fetchData = async ()=>{
@@ -32,7 +50,6 @@ import { IoIosArrowForward } from 'react-icons/io';
     fetchData();
   }, [category_id]);
   
-  //CHANGEMENT----------------------------------------------------------------------
   const postsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
 
