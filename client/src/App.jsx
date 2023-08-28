@@ -13,6 +13,7 @@ import Orientation from './pages/Orientation';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Pagination from './components/Pagination';
+import SubCategoryPosts from './pages/SubCategoryPosts';
 
 function App() {
 
@@ -32,6 +33,8 @@ function App() {
         <Route exact path="/nous_connaitre" element={ <AboutUs /> } />
         <Route exact path="/contact" element={ <Contact /> } />
         <Route exact path="/projets" element={ <Projects /> } />
+        {/* <Route path="/subcategories/:subcategory" element={<SubCategoryPosts />} /> */}
+        <Route exact path="/projets/:subcategory" element={<SubCategoryPosts />} />
         <Route exact path="/evenements" element={ <Events /> } />
         <Route exact path="/orientation" element={ <Orientation /> } />
         <Route exact path="/enregistrement" element={ <Signup /> } />
