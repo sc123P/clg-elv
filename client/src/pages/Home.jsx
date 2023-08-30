@@ -1,13 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 //import Navbar from '../components/Navbar';
 import { Link } from 'react-router-dom';
+import moment from "moment";
 
 // import { useEffect, useState, useRef } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
+
 const Home = () => {
+    // const [posts, setPosts] = useState();
+    moment.updateLocale('fr', {
+        months : [
+            "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet",
+            "Août", "Septembre", "Octobre", "Novembre", "Décembre"
+        ]
+    });
+    const [latestPost, setLatestPost] = useState(null);
+    useEffect(() => {
+        // Fonction pour récupérer les articles associés à la sous-catégorie depuis le backend
+        // const fetchLatestPost = async () => {
+        const latestPost = async () => {
+          try {
+            const response = await axios.get(`/api/posts/latest`);
+            console.log('Response from API:', response.data);
+            setLatestPost(response.data);
+            // latestPost(response.data);
+          } catch (error) {
+            console.error('Erreur lors de la récupération du dernier article :', error);
+          }
+        };
+    
+        // fetchLatestPost();
+        latestPost();
+      }, []);
     return (
         <div className="home">
             {/*<Navbar />*/}
@@ -68,7 +95,7 @@ const Home = () => {
                         </div>
                         <div className="homeNewsBox">
                             <div className="homeNewsTop">
-                                <div className="homeNewsBoxLeft">
+                                {/* <div className="homeNewsBoxLeft">
                                     <img src="/Affiche-ecofashion-show-1-jan-2023 copie.jpg" />
                                     <p className="homeNewsDate">Janvier 06, 2023</p>
                                 </div>
@@ -80,7 +107,32 @@ const Home = () => {
                                         Ta création sera à présenter devant un jury, le jeudi 13 mars 2023 à 12h.
                                         Toutes celles qui seront...
                                     </p>
-                                </div>
+                                </div> */}
+                                
+                                {latestPost && (
+                                    <div className="post">
+                                        <div className="postContent">
+                                            {/* <Link to={`/actualites/${latestPost.id}`} className="postContentMain"> */}
+                                            <Link to={`/actualites`} className="postContentMain">
+                                                <div className="hr">
+                                                    <div className="image">
+                                                        <img src={`../upload/${latestPost.img}`} alt="" />
+                                                        {/* <img src={`../upload/${post.img}`} alt="" /> */}
+                                                    </div>
+                                                    <div className="postText">
+                                                        <h3>{latestPost.title}</h3>
+                                                        <p>Posté le {moment(latestPost.date).locale('fr').format('DD MMMM YYYY à HH[h]mm') }</p>
+                                                        {/* <h3>{post.title}</h3>
+                                                        <p>Posté le {moment(post.date).locale('fr').format('DD MMMM YYYY à HH[h]mm') }</p> */}
+                                                    </div>
+                                                </div>
+                                                
+                                                <hr/>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                )}
+
                             </div>
 
                             <div className="homeNewsBottom">
