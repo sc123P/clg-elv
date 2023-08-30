@@ -111,6 +111,33 @@ export function getPost (req, res, next){
     });
 };
 
+export function getLatestPost(req, res, next) {
+  // const q = `
+  //   SELECT p.*
+  //   FROM posts p
+  //   ORDER BY p.date DESC
+  //   LIMIT 1
+  // `;
+  let params;
+  const q = `
+    SELECT *
+    FROM posts
+    ORDER BY date DESC
+    LIMIT 1
+  `;
+  // params = [];
+
+  db.query(q, (err, data) => {
+    if (err) return res.status(500).json(err);
+    // if (data.length === 0) return res.status(404).json({ message: "No posts found." });
+    if (data === null) return res.status(404).json({ message: "No posts found." });
+
+    return res.status(200).json(data[0]);
+    // return res.status(200).json(data);
+  });
+}
+
+
 export function addPost(req, res, next) {
   // const app = express();
   // app.use(express.json());
