@@ -2,6 +2,8 @@
 @import "./components/navbar";
 @import "./components/pagination";
 @import "./components/post";
+@import "./components/dropDownMenu";
+@import "./components/footer";
 @import "./pages/home";
 @import "./pages/news";
 @import "./pages/singlePost";
@@ -14,4 +16,7 @@
 @import "./pages/signup";
 @import "./pages/login";
 @import "./pages/subCategoryPosts";
-@import "./components/dropDownMenu";
+
+// #root{
+//     height: 100%;
+// }

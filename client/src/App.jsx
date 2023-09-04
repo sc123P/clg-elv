@@ -14,6 +14,7 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Pagination from './components/Pagination';
 import SubCategoryPosts from './pages/SubCategoryPosts';
+import Footer from './components/Footer';
 
 function App() {
 
@@ -46,6 +47,7 @@ function App() {
         {/* Autres routes de votre application */}
         
       </Routes>
+      <Footer />
     </BrowserRouter>
   )
 }

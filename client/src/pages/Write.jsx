@@ -8,8 +8,19 @@ import { useLocation } from 'react-router-dom';
 import moment from 'moment';
 import { MultiSelect } from 'react-multi-select-component';
 import EditorToolbar, { modules, formats } from "../components/EditorToolbar";
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const Write = () => {
+  //CHANGEMENT-----------------------------------------------------
+  const { id } = useParams();
+  const [post, setPost] = useState({
+    title: "",
+    desc: "",
+    category_id: "",
+    img: "",
+    // category_id: "",
+  });
+  //CHANGEMENT-----------------------------------------------------
   const state = useLocation().state;
   // const [value, setValue] = useState(state?.title || '');
   // const [title, setTitle] = useState(state?.desc || '');
@@ -22,6 +33,8 @@ const Write = () => {
   const [msg, setMsg] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState(state?.category_id || []);
   const [categories, setCategories] = useState([]);
+
+  const navigate = useNavigate();
 
 
   const toolbarOptions = [
@@ -40,6 +53,80 @@ const Write = () => {
     'image',
     'video'
 ]
+
+//CHANGEMENT2-----------------------------------------------------
+useEffect(() => {
+  if (!state) {
+  // Récupérer les détails de l'article à partir de l'API
+  axios.get(`/api/posts/${state}`).then((response) => {
+    const postData = response.data;
+    setPost({
+      title: postData.title,
+      desc: postData.desc,
+      category_id: postData.category_id,
+      img: postData.img,
+    });
+  });
+}
+}, [id]);
+
+const handleChange = (e) => {
+  const { name, value } = e.target;
+  setPost({
+    ...post,
+    [name]: value,
+  });
+};
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  // console.log('ID de l\'article à mettre à jour :', state.id);
+
+  if (!state) {
+    // Gérer le cas où state est null ou non défini en créant un nouvel article
+    const articleData = {
+      title,
+      desc: value,
+      category_id: selectedCategoryIds,
+      img: file ? imgUrl : "",
+    };
+
+    try {
+      const response = await axios.post('/api/posts', {
+        title,
+        desc: value,
+        category: selectedCategoryIds,
+        img: file ? imgUrl : "",
+        date: moment(Date.now()).locale('fr').format('YYYY-MM-DD HH:mm:ss'),
+      });
+
+      console.log(response.data);
+      navigate('/');
+    } catch (error) {
+      console.error(error);
+    }
+  } else {
+    // Gérer le cas où state existe en mettant à jour l'article existant
+    const articleData = {
+      title,
+      desc: value,
+      category_id: selectedCategoryIds,
+      img: file ? imgUrl : "",
+    };
+
+    try {
+      const response = await axios.put(`/api/posts/${state.id}`, articleData);
+      console.log(response.data);
+      navigate(`/post/${state.id}`);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+};
+//CHANGEMENT2-----------------------------------------------------
+
+
+
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -89,7 +176,7 @@ const Write = () => {
     setSelectedCategories(selectedOptions);
   };
 
-//CHANGEMENT-------------------------------------------------------------------------------------
+
 const selectedCategoryIds = [];
 selectedCategories.forEach((category) => {
   if (category.value === "Projets") {
@@ -103,8 +190,6 @@ selectedCategories.forEach((category) => {
     selectedCategoryIds.push(category.value); // Ajoute les autres catégories
   }
 });
-
-//CHANGEMENT-------------------------------------------------------------------------------------
 
   const addCategory = (categoryId) => {
     setSelectedCategories((prevCategories) => {
@@ -153,6 +238,7 @@ selectedCategories.forEach((category) => {
       // }
       if (state) {
         response = await axios.put(`/api/posts/${state.id}`, {
+          // response = await axios.put(`/api/posts/${id}`, {
           title,
           desc: value,
           category: selectedCategories,
@@ -183,6 +269,7 @@ selectedCategories.forEach((category) => {
     } catch (err) {
       console.log(err);
     }
+    navigate('/');
   };
       
 
@@ -251,10 +338,12 @@ selectedCategories.forEach((category) => {
                             <div className="center">
                                 { progress.started && <progress max="100" value={progress.pc}></progress> }
                                 { msg && <span>{msg}</span> }
-                                {/*<button onClick={handleImageUpload}>Enregistrer</button>*/}
-                                {/*<button onClick={handleClick}>Publier</button>*/}
-                                {/*<button type="submit">Enregistrer</button>*/}
-                                <button onClick={handleClick}>Publier</button>
+                                  {/* <button onClick={handleClick}> */}
+                                  <button onClick={handleSubmit}>
+                                    {/* <Link to={`/`} className="button" onClick={handleClick}> */}
+                                      Publier
+                                    {/* </Link> */}
+                                  </button>
                             </div>
                             {/*</form>*/}
                         </div>

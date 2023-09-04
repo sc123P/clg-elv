@@ -146,10 +146,11 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-
                     <div className="compasHome">
+                    {/* <div> */}
                         <img className="bounce2" src="/illustrationcompasELV copie.png" />
                     </div>
+
 
 
 
