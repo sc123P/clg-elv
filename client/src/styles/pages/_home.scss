@@ -1,11 +1,21 @@
 .home{
-    height: 200vh;
+    // height: 300vh;
+    // position: relative;
+
+    // height: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     .homeContainer{
+        flex: 1;
+        // width: 100%;
+        // height: 100%;
+
         //margin-top: 80px;
-        width: 100%;
-        height: 334px;
-        min-height: 334px;
-        background-color: $color-1;
+        // position: absolute;
+        // height: 334px;
+        // min-height: 334px;
+        // background-color: $color-1;
         //background: linear-gradient(-180deg, rgba(224,49,55,1) 0%, rgba(228,77,82,1) 75%, rgba(233,110,114,1) 85%, rgba(246,193,195,1) 95%, rgba(255,255,255,1) 100%);
         //display: flex;
         //justify-content: space-around;
@@ -17,14 +27,17 @@
             display: flex;
             //width: 100%;
             max-width: 1440px;
+            height: 334px;
 
             position: relative;
             z-index: 1;
+            background-color: $color-1;
             .homeTopText{
                 position: absolute;
                 z-index: 5;
                 width: 100%;
-                height: 100%;
+                // height: 100%;
+                height: 334px;
                 font-size: 2rem;
                 text-transform: uppercase;
                 color: $white;
@@ -52,9 +65,10 @@
         }
 
         .homeMain{
-            position: absolute;
+            // position: absolute;
             //CHANGEMENT-------------------------
             width: 100%;
+            // height: 100%;
             //CHANGEMENT-------------------------
             a, button, span{
                 width: 250px;
@@ -359,12 +373,14 @@
             .compasHome{
                 position: relative;
                 width: 100%;
-                margin-bottom: 100px;
+                // margin-bottom: 100px;
                 //padding-right: 70px;
                 img{
                     //transform: translateY(-50%);
-                    position: absolute;
-                    right: 0;
+                    // position: absolute;
+                    // display: flex;
+                    // right: 0;
+                    float: right;
                     padding-right: 90px;
                 }
                 .bounce2 {

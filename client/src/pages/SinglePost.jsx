@@ -59,6 +59,7 @@ const SinglePost = () => {
                         <p>Posté le {moment(post.date).locale('fr').format('DD MMMM YYYY à HH[h]mm') }</p>
                     </div>
                         {currentUser?.id === post.uid && (<div className="edit">
+                            {/* <Link to={`/write?edit=2`} state={post}> */}
                             <Link to={`/write?edit=2`} state={post}>
                                 <MdEditNote size={24} className="icons" />
                             </Link>

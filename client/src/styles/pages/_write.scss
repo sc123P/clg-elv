@@ -126,11 +126,16 @@
                         button{
                             width: 50%;
                             height: 30px;
+                            // border-radius: $borderRadius;
+                            // color: $white;
+                            // font-size: 1.3rem;
+                            // font-family: $font-1;
+                            @include verticalCenter;
+
                             background-color: $black;
-                            //border: 1px solid $grey;
                             border: none;
                             border-radius: $borderRadius;
-                            color: $light-grey;
+                            color: $white;
                             margin-top: 10px;
             
                             &:hover{
@@ -139,6 +144,25 @@
                                 background-color: $light-grey;
                             }
                         }
+
+
+                        // button{
+                        //     // width: 50%;
+                        //     width: 60px;
+                        //     height: 30px;
+                        //     background-color: $black;
+                        //     //border: 1px solid $grey;
+                        //     border: none;
+                        //     border-radius: $borderRadius;
+                        //     color: $light-grey;
+                        //     margin-top: 10px;
+            
+                        //     &:hover{
+                        //         color: $black;
+                        //         border: 1px solid $black;
+                        //         background-color: $light-grey;
+                        //     }
+                        // }
                     }
 
                 }

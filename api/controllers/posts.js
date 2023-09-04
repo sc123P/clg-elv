@@ -290,26 +290,71 @@ export function deletePost (req, res, next){
     })
 };
 
-export function updatePost (req, res, next){
-  const token = req.cookies.access_token
-    if(!token) return res.status(401).json("Veuillez vous authentifier")
+// export function updatePost (req, res, next){
+//   const token = req.cookies.access_token
+//     if(!token) return res.status(401).json("Veuillez vous authentifier")
 
-    jwt.verify(token, "jwtkey", (err, userInfo)=>{
-        if(err) return res.status(403).json("Token invalide!")
+//     jwt.verify(token, "jwtkey", (err, userInfo)=>{
+//         if(err) return res.status(403).json("Token invalide!")
 
-        const postId = req.params.id
-        const q = "UPDATE posts SET `title`=?, `desc`=?, `img`=?, `category_id`=? WHERE `id` = ? AND `uid` = ? "
-        const values = [
-          req.body.title,
-          req.body.desc,
-          req.body.img,
-          userInfo.id,
-          req.body.category_id,
-        ]
+//         const postId = req.params.id
+//         // const q = "UPDATE posts SET `title`=?, `desc`=?, `img`=?, `category_id`=? WHERE `id` = ? AND `uid` = ? "
+//         const q = "UPDATE posts SET `title`=?, `desc`=?, `img`=?, `category_id`=? WHERE `id` = ? AND `uid` = ? "
+//         const values = [
+//           req.body.title,
+//           req.body.desc,
+//           req.body.img,
+//           userInfo.id,
+//           req.body.category_id,
+//         ]
 
-        db.query(q, [...values, postId, userInfo.id], (err, data)=>{
-          if(err) return res.status(500).json(err);
-          return res.json("Article modifié")
-        })
-    })
-};
+//         db.query(q, [...values, postId, userInfo.id], (err, data)=>{
+//           if(err) return res.status(500).json(err);
+//           return res.json("Article modifié")
+//         })
+//     })
+// };
+
+
+export function updatePost(req, res, next) {
+  const token = req.cookies.access_token;
+  if (!token) return res.status(401).json("Veuillez vous authentifier");
+
+  jwt.verify(token, "jwtkey", (err, userInfo) => {
+    if (err) return res.status(403).json("Token invalide!");
+
+    const postId = req.params.id;
+    const newCategoryId = req.body.category_id;
+    const newTitle = req.body.title;
+    const newDesc = req.body.desc;
+    const newImg = req.body.img;
+
+    // Vérification de l'uid
+    const checkPermissionQuery = "SELECT * FROM posts WHERE `id` = ? AND `uid` = ?";
+    db.query(checkPermissionQuery, [postId, userInfo.id], (err, permissionData) => {
+      if (err) return res.status(500).json(err);
+
+      if (permissionData.length === 0) {
+        return res.status(403).json("Vous ne pouvez pas modifier cet article.");
+      }
+
+      // Maj de la catégorie dans la table post_categories
+      const updateCategoryQuery =
+        "UPDATE post_categories SET `category_id` = ? WHERE `post_id` = ?";
+
+      db.query(updateCategoryQuery, [newCategoryId, postId], (err, updateCategoryData) => {
+        if (err) return res.status(500).json(err);
+
+        // Maj des autres champs de l'article dans la table posts
+        const updatePostQuery =
+          "UPDATE posts SET `title` = ?, `desc` = ?, `img` = ? WHERE `id` = ?";
+
+        db.query(updatePostQuery, [newTitle, newDesc, newImg, postId], (err, updatePostData) => {
+          if (err) return res.status(500).json(err);
+
+          return res.json("Article modifié avec succès.");
+        });
+      });
+    });
+  });
+}
