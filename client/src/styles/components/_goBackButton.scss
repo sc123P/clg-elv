@@ -1,0 +1,30 @@
+//GO BACK BUTTON
+.gbButton{
+    // margin-left: 20px;
+    margin-top: 20px;
+    left: 30px;
+    padding: 5px;
+    border-radius: 50%;
+    // border: 1px solid $light-grey;
+    border: 1px solid $grey;
+    background-color: $light-grey;
+    color: $black;
+
+    position: fixed;
+    // z-index: 9999;
+    z-index: 1;
+}
+.gbButton.scrolled {
+    // left: 10px;
+    // top: 10px;
+    left: 30px;
+    top: 130px;
+    // z-index: 9999;
+    z-index: 1;
+}
+
+svg{
+    width: 20px;
+    height: 20px;
+    @include verticalCenter;
+}

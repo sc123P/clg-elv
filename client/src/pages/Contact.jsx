@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 //import { FaLocationDot } from 'react-icons/fa';
 import { MdLocationPin } from 'react-icons/md';
 import { MdPhone } from 'react-icons/md';
 import { MdEmail } from 'react-icons/md';
 import { AiOutlineTwitter } from 'react-icons/ai';
+import GoBackButton from '../components/GoBackButton';
 
 const Contact = () => {
+    useEffect(() =>{
+        window.scrollTo(0,0);
+    }, []);
     return (
         <div className="contact">
             <div className="contactContainer">
@@ -18,6 +22,7 @@ const Contact = () => {
                     </div>
                 </div>
 
+                <GoBackButton />
                 <div className="contactMain">
                     <div className="left">
                         <div className="infos">

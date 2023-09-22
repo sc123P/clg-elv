@@ -10,6 +10,9 @@ const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 
 const Home = () => {
+    useEffect(() =>{
+        window.scrollTo(0,0);
+    }, []);
     // const [posts, setPosts] = useState();
     moment.updateLocale('fr', {
         months : [
@@ -57,8 +60,12 @@ const Home = () => {
                 <div className="homeMain">
                     <div className="homeButtons">
                         <div className="buttonTop">
-                            <a id="button1" href="https://colibri.ac-martinique.fr/auth/saml/wayf?callBack=https%3A%2F%2Fcolibri.ac-martinique.fr%2F#/">ENT</a>
-                            <a id="button2" href="https://www.pearltrees.com/">MON ORGANISATION</a>
+                            <button id="button1">
+                                <a href="https://colibri.ac-martinique.fr/auth/saml/wayf?callBack=https%3A%2F%2Fcolibri.ac-martinique.fr%2F#/">ENT</a>
+                            </button>
+                            <button id="button2">
+                                <a href="https://www.pearltrees.com/">MON ORGANISATION</a>
+                            </button>
                             <button id="button3">
                                 <Link to={`/projets/?category_id=2`} >
                                     PROJETS

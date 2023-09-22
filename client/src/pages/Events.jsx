@@ -1,31 +1,13 @@
 //import React, { useState } from 'react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Post from '../components/Post';
 import Pagination from '../components/Pagination';
+import GoBackButton from '../components/GoBackButton';
 
 const Events = () => {
-    // const Events = ({ posts }) => {
-    //     console.log(posts)
-    // //const PostList = ({ posts }) => {
-    //     const [currentPage, setCurrentPage] = useState(1);
-    //     const postsPerPage = 5;
-      
-    //     // Calcule l'index du premier et du dernier article de la page actuelle
-    //     const indexOfLastPost = currentPage * postsPerPage;
-    //     const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    //     //const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
-
-    //     //const currentPosts = posts;
-    //     // const postsLength = {
-    //     //     array.forEach(posts) => {
-    //     //         postsLength = postsLength + 1;
-    //     //     });
-    //     // }
-      
-    //     // Fonction pour changer de page
-    //     const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-
+    useEffect(() =>{
+        window.scrollTo(0,0);
+    }, []);
 
 
     return (
@@ -44,6 +26,7 @@ const Events = () => {
                 {/* <Post /> */}
         
                 {/* <Pagination posts={<Post />} /> */}
+                <GoBackButton />
                 <Pagination />
 
 

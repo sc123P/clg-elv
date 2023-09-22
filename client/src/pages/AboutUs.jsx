@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import GoBackButton from '../components/GoBackButton';
 
 const AboutUs = () => {
+    useEffect(() =>{
+        window.scrollTo(0,0);
+    }, []);
     return (
         <div className="aboutUs">
             <div className="aboutUsContainer">
@@ -13,6 +17,7 @@ const AboutUs = () => {
                     </div>
                 </div>
 
+                    <GoBackButton />
                 <div className="aboutUsMain">
                     <div className="aboutUsMainContainer">
                         <h2>LE COLLEGE ET SON ENVIRONNEMENT</h2>

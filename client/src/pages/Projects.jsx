@@ -1,37 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Post from '../components/Post';
 import Pagination from '../components/Pagination';
 import { IoIosArrowDown } from 'react-icons/io';
 // import DropdownMenu from '../components/DropdownMenu';
 import axios from 'axios';
+import GoBackButton from '../components/GoBackButton';
 
 const Projects = () => {
     const [open, setOpen] = useState(false);
-    // const { subcategory } = useParams(); // Récupère le paramètre de la sous-catégorie depuis l'URL
-    // const [posts, setPosts] = useState([]); // État pour stocker les articles récupérés
-  
-    // useEffect(() => {
-    //   // Fonction pour récupérer les articles associés à la sous-catégorie depuis le backend
-    //   const fetchPostsBySubcategory = async () => {
-    //     try {
-    //       const response = await axios.get(`/api/posts/subcat?subcategory=${subcategory}`);
-    //       console.log('Response from API:', response.data);
-    //       setPosts(response.data);
-    //     } catch (error) {
-    //       console.error('Erreur lors de la récupération des articles :', error);
-    //     }
-    //   };
-  
-    //   fetchPostsBySubcategory();
-    // }, [subcategory]);
-    // const handleMenuClick = (event) => {
-    //     const { target, currentTarget } = event;
-    //     const text = target.textContent;
-    //     const className = target.className;
-    //     console.log('Text:', text);
-    //     console.log('Class name:', className);
-    //   };
+    const dropdownMenuRef = useRef(null);
+    useEffect(() =>{
+        window.scrollTo(0,0);
+    }, []);
+
+    useEffect(() => {
+        // Ajouter un gestionnaire d'événements pour fermer le dropdown-menu lors du clic à l'extérieur
+        function handleClickOutside(event) {
+            if (dropdownMenuRef.current && !dropdownMenuRef.current.contains(event.target)) {
+                setOpen(false);
+            }
+        }
+
+        document.addEventListener('click', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, []);
     return (
         <div className="projects">
             <div className="projectsContainer">
@@ -43,6 +39,7 @@ const Projects = () => {
                         <img src="/trianglebgcopie2.png" alt="" />
                     </div>
                 </div>
+                <GoBackButton />
 
                 {/* <Post /> */}
                 {/* <div className="dropdown">
@@ -96,7 +93,7 @@ const Projects = () => {
                 {/* <DropdownMenu /> */}
 
         <div className="dropdownP">
-            <div className='menu-trigger' onClick={()=>{setOpen(!open)}}>
+            <div className='menu-trigger' onClick={()=>{setOpen(!open)}} ref={dropdownMenuRef}>
                 <p>Tous les projets</p>
                 <IoIosArrowDown />
             </div>

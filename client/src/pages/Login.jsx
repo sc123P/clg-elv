@@ -1,8 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/authContext';
+import GoBackButton from '../components/GoBackButton';
 
 const Login = () => {
     const [passwordVisible, setPasswordVisible] = useState(false);
@@ -28,8 +29,14 @@ const Login = () => {
             setError(err.response.data)
         }
     }
+    useEffect(() =>{
+        window.scrollTo(0,0);
+    }, []);
     return (
-    <div className="login">
+        <div className="login">
+            <div>
+                <GoBackButton />
+            </div>
         <div className="loginContent">
             <h1>Connexion</h1>
             <form className="form">

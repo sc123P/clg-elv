@@ -1,48 +1,130 @@
 .footer{
-    // position: relative;
-    // width: 100%;
-    // position: absolute;
-    // display: flex;
-    // flex-direction: column;
-    // display: block;
-    // overflow: hidden;
-    // clear: both;
-
-    // position: absolute;
-    // width: 100%;
-    // display: flex;
-    // flex-direction: column;
-    // align-self: flex-end;
-    // bottom: 0;
-
-    // margin-top: 50px;
-    // margin-top: 150px;
-
-    // background-color: #333;
-//   color: white;
-//   padding: 20px;
-margin-top: 50px;
+    margin-top: 50px;
     .footerContainer{
         width: 100%;
-        height: 275px;
+        // height: 275px;
+        height: 325px;
         background-color: $black;
+        @include verticalCenter;
 
         .list{
+            width: 56%;
+            // display: flex;
+            // justify-content: center;
+            // align-items: center;
+            // flex-direction: column;
+
+            // padding: 0 100px;
             ul{
                 display: flex;
-                flex-direction: column;
-                gap: 20px;
-                padding-top: 15px;
+                justify-content: space-between;
+
+                // display: flex;
+
+                // flex-direction: column;
+                // gap: 20px;
+
+                padding-top: 40px;
+                // .footerList{
+                //     // margin-right: 100px;
+                // }
                 li, a{
                     color: $white;
                     // @include verticalCenter;
                     cursor: pointer;
-
+                    
                     &:hover{
                         color: $light-grey;
                     }
                 }
+                li{
+                    padding: 12px;
+                }
+            }
+
+            .logoDiv{
+                // width: 100%;
+                height: 125px;
+                // padding-top: 20px;
+                display: flex;
+                align-items: center;
+                .info{
+                    // position: relative;
+                    height: 100%;
+                    width: 46px;
+                    // width: 32px;
+                    // height: 32px;
+                    display: flex;
+                    align-items: center;
+                    .icon{
+                        // position: absolute;
+                        // font-size: 32px;
+                        // min-width: 32px;
+                        // min-height: 32px;
+                        min-width: 46px;
+                        min-height: 46px;
+    
+                        // display: flex;
+                        // align-items: center;
+                    }
+                }
+                .partnerLogoContent{
+                    width: 100%;
+                    height: 125px;
+                    display: flex;
+                    align-items: center;
+                    // justify-content: right;
+                    justify-content: space-between;
+                    .partnerLogo{
+                        width: 125px;
+                        height: 75px;
+    
+                        margin: 10px;
+                    }
+                }
             }
         }
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .footer{
+        width: 100%;
+        // min-width: 800px;
+        .footerContainer{
+            width: 100%;
+        }
+    }
+}
+@media screen and (max-width: 540px) {
+    .footer{
+        width: 100%;
+        height: 825px;
+        // min-width: 540px;
+    }
+    .footer .footerContainer{
+        width: 100%;
+        height: 100%;
+        // height: 275px;
+        // height: 525px;
+        display: flex;
+        align-items: start;
+        // justify-content: start;
+    }
+
+    .footer .footerContainer .list ul{
+        padding-top: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+    .logoDiv{
+        padding-top: 80px;
+    }
+    .partnerLogoContent{
+        display: flex;
+        flex-direction: column;
+    }
+    .info{
+        margin-bottom: 30px;
     }
 }

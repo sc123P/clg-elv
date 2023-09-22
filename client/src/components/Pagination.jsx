@@ -8,6 +8,7 @@ import parse from "html-react-parser";
 import ReactPaginate from 'react-paginate';
 import { IoIosArrowBack } from 'react-icons/io';
 import { IoIosArrowForward } from 'react-icons/io';
+// import { MdKeyboardArrowLeft, MdKeyboardDoubleArrowLeft, MdKeyboardArrowRight, MdKeyboardDoubleArrowRight } from 'react-icons/md';
 
   const Pagination = () => {
     moment.updateLocale('fr', {
@@ -73,6 +74,25 @@ import { IoIosArrowForward } from 'react-icons/io';
   //     setCurrentPage(pageNumber);
   //   }
   // }
+  // const pagesToJump = 5; // Nombre de pages à sauter à chaque clic sur les flèches supplémentaires.
+
+  const [pageToJump, setPageToJump] = useState(1);
+  const jumpToPage = (pageNumber) => {
+    const newPage = currentPage + pageNumber;
+    console.log('currentPage:', currentPage);
+    console.log('pageNumber:', pageNumber);
+    console.log('newPage:', newPage);
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+      // setPageToJump(1);
+      console.log('setCurrentPage called with newPage:', newPage);
+    }
+  };
+  useEffect(() => {
+    // Mettez à jour la page actuelle avec pageToJump lorsque pageToJump change
+    setCurrentPage(pageToJump);
+  }, [pageToJump]);
+  const shouldJumpToLastPage = totalPages <= 5;
 
   return (
     <div className="posts">
@@ -115,12 +135,43 @@ import { IoIosArrowForward } from 'react-icons/io';
         containerClassName="pagination"
         activeClassName="active"
 
-        previousLabel={ <IoIosArrowBack /> }
-        nextLabel={ <IoIosArrowForward /> }
+        previousLabel={ 
+        // <>
+        // {shouldJumpToLastPage ? (
+        //   <MdKeyboardArrowLeft className="doubleArrow" onClick={() => setCurrentPage(totalPages)} />
+        //   ) : (
+        //     <>
+        //       <MdKeyboardDoubleArrowLeft className="doubleArrow" onClick={() => setPageToJump(1)} />
+        //       <MdKeyboardArrowLeft className="simpleArrow" />
+        //     </>
+        //   )}
+         <IoIosArrowBack />
+        //  <BiArrowToLeft />
+        // </>
+      }
+        nextLabel={
+        // <>
+        // {shouldJumpToLastPage ? (
+        //   <MdKeyboardArrowRight className="doubleArrow" onClick={() => setCurrentPage(totalPages)} />
+        // ) : (
+        //   <>
+        //     <MdKeyboardArrowRight className="simpleArrow" />
+        //     <MdKeyboardDoubleArrowRight className="doubleArrow" onClick={() => setPageToJump(5)} />
+        //   </>
+        // )}
+         <IoIosArrowForward />
+        // </>
+       }
         pageClassName={'page-item'}
         breakLabel={'...'}
         pageLinkClassName={'page-link'}
         activeLinkClassName={'active'}
+
+        marginPagesDisplayed={0}
+        pageRangeDisplayed={4}
+
+        // initialPage={currentPage - 1}
+        // forcePage={currentPage - 1}
       />
       </div>
     </div>

@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IoIosArrowDown } from 'react-icons/io';
 
 const DropdownMenu = () => {
     const [open, setOpen] = useState(false);
+
+    
     return (
         <div className="dropdownP">
             <div className='menu-trigger' onClick={()=>{setOpen(!open)}}>
