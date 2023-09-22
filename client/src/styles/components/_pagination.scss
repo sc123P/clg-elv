@@ -6,6 +6,7 @@
     gap: 10px;
     margin-top: 40px;
     .page-item, .previous, .next, .page-link{
+    // .page-item, .page-link{
         width: 30px;
         height: 30px;
         //border-radius: 50%;
@@ -13,6 +14,14 @@
         //display: flex;
         //justify-content: center;
         @include verticalCenter;
+        // a{
+        //     display: flex;
+        //     .simpleArrow{
+        //         &:hover{
+        //             background-color: lightgray;
+        //         }
+        //     }
+        // }
         svg{
             width: 20px;
             height: 20px;
@@ -21,10 +30,20 @@
         &:hover{
             background-color: lightgray;
         }
-
+        
         .active{
             background-color: lightgray;
         }
     }
-    
+        // a{
+        //     display: flex;
+        //     .simpleArrow, .doubleArrow{
+        //         width: 30px;
+        //         height: 30px;
+        //         border-radius: $borderRadius;
+        //         &:hover{
+        //             background-color: lightgray;
+        //         }
+        //     }
+        // }
 }

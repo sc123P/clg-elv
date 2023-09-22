@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Post from '../components/Post';
 import Pagination from '../components/Pagination';
+import GoBackButton from '../components/GoBackButton';
 
 const Orientation = () => {
+    useEffect(() =>{
+        window.scrollTo(0,0);
+    }, []);
     return (
         <div className="orientation">
             <div className="orientationContainer">
@@ -17,6 +21,7 @@ const Orientation = () => {
 
                 {/* <Post /> */}
 
+                <GoBackButton />
                 <Pagination />
             </div>
         </div>

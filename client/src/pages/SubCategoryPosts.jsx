@@ -1,14 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios'; // Vous pouvez utiliser Axios pour faire des requêtes HTTP
 import Post from '../components/Post';
 // import DropdownMenu from './DropdownMenu';
 import { IoIosArrowDown } from 'react-icons/io';
 import Pagination from '../components/Pagination';
+import GoBackButton from '../components/GoBackButton';
 
 
 const SubCategoryPosts = () => {
+    useEffect(() =>{
+        window.scrollTo(0,0);
+    }, []);
     const [open, setOpen] = useState(false);
+    const dropdownMenuRef = useRef(null);
     const { subcategory } = useParams(); // Récupère le paramètre de la sous-catégorie depuis l'URL
     // const [posts, setPosts] = useState([]); // État pour stocker les articles récupérés
   
@@ -26,6 +31,21 @@ const SubCategoryPosts = () => {
   
       fetchPostsBySubcategory();
     }, [subcategory]);
+
+    useEffect(() => {
+        // Ajouter un gestionnaire d'événements pour fermer le dropdown-menu lors du clic à l'extérieur
+        function handleClickOutside(event) {
+            if (dropdownMenuRef.current && !dropdownMenuRef.current.contains(event.target)) {
+                setOpen(false);
+            }
+        }
+
+        document.addEventListener('click', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, []);
   
     return (
       <div className="subcategory-posts">
@@ -38,10 +58,11 @@ const SubCategoryPosts = () => {
                         <img src="/trianglebgcopie2.png" alt="" />
                     </div>
                 </div>
+                <GoBackButton />
         {/* <h1>Articles de la sous-catégorie : {subcategory}</h1> */}
 
         <div className="dropdownP">
-            <div className='menu-trigger' onClick={()=>{setOpen(!open)}}>
+            <div className='menu-trigger' onClick={()=>{setOpen(!open)}} ref={dropdownMenuRef}>
                 {/* <p>Tous les projets</p> */}
                 <p> {subcategory} </p>
                 <IoIosArrowDown />

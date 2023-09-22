@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { AiOutlineTwitter } from 'react-icons/ai';
 
 const Footer = () => {
     return (
         <div className="footer">
             <div className="footerContainer">
                 <div className="list">
-                    {/* <ul>
+                    <ul>
                         <div className="footerList">
                             <li> <a href="https://colibri.ac-martinique.fr/auth/saml/wayf?callBack=https%3A%2F%2Fcolibri.ac-martinique.fr%2F#/">ENT</a></li>
                             <li> <a href="https://www.pearltrees.com/">Mon organisation</a></li>
@@ -36,7 +37,18 @@ const Footer = () => {
                                 <li>Orientation</li>
                             </Link>
                         </div>
-                    </ul> */}
+                    </ul>
+
+                    <div className="logoDiv">
+                        <div className="partnerLogoContent">
+                            <a href="https://twitter.com/edmondvalard" className="info">
+                                <AiOutlineTwitter className="icon" color={"#1D9BF0"} />
+                            </a>
+                            <img className="partnerLogo" src="logoctm.png" alt="" />
+                            <img className="partnerLogo" src="logounesco.png" alt="" />
+                            <img className="partnerLogo" src="logoE3D.png" alt="" />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

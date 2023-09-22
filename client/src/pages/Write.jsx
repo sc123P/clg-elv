@@ -9,8 +9,12 @@ import moment from 'moment';
 import { MultiSelect } from 'react-multi-select-component';
 import EditorToolbar, { modules, formats } from "../components/EditorToolbar";
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import GoBackButton from '../components/GoBackButton';
 
 const Write = () => {
+  useEffect(() =>{
+    window.scrollTo(0,0);
+}, []);
   //CHANGEMENT-----------------------------------------------------
   const { id } = useParams();
   const [post, setPost] = useState({
@@ -276,6 +280,7 @@ selectedCategories.forEach((category) => {
     //console.log(value)
     return (
         <div className="write">
+                    <GoBackButton />
             <div className="writeContent">
                 <div className="writeTop">
                     <div className="writeTopText">

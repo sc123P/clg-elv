@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { BsFillPersonFill } from 'react-icons/bs';
 import { SlLogout } from 'react-icons/sl';
@@ -10,6 +10,11 @@ const Navbar = () => {
     //const [currentUser, setCurrentUser] = useState(null);
     const { currentUser, setCurrentUser } = useContext(AuthContext);
     const [open, setOpen] = useState(false);
+    const dropdownMenuRef = useRef(null);
+    
+    const [burger_class, setBurgerClass] = useState("burger-bar unclicked");
+    const [menu_class, setMenuClass] = useState("menu hidden");
+    const [isMenuClicked, setIsMenuClicked] = useState(false);
 
     const handleMenuClick = (event) => {
         const { target, currentTarget } = event;
@@ -17,6 +22,8 @@ const Navbar = () => {
         const className = target.className;
         console.log('Text:', text);
         console.log('Class name:', className);
+
+        setOpen(false);
       };
     
       // Empêche la sérialisation JSON des données
@@ -27,15 +34,94 @@ const Navbar = () => {
     
       const handleLogout = async () => {
         await axios.post('/api/auth/logout', null);
-        setCurrentUser(null)
+        setCurrentUser(null);
+        setOpen(false); // Fermer le menu après la déconnexion
       };
+
+      useEffect(() => {
+        // Ajouter un gestionnaire d'événements pour fermer le dropdown-menu lors du clic à l'extérieur
+        function handleClickOutside(event) {
+            if (dropdownMenuRef.current && !dropdownMenuRef.current.contains(event.target)) {
+                setOpen(false);
+            }
+        }
+
+        document.addEventListener('click', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, []);
+
+
+
+
+    const updateMenu = () => {
+        // setOpen(!open);
+
+        // if(!isMenuClicked) {
+        if(isMenuClicked) {
+            setBurgerClass("burger-bar clicked")
+            setMenuClass("menu visible")
+        }
+        else {
+            setBurgerClass("burger-bar unclicked")
+            setMenuClass("menu hidden")
+        }
+        setIsMenuClicked(!isMenuClicked)
+    }
+    
+    const closeMobileMenu = () => setOpen(false);
 
     
     return (
-    //<div className={active ? "navbar active" : "navbar"}>
-
-    <div className="navbar">
+        //<div className={active ? "navbar active" : "navbar"}>
+        
+        <div className="navbar">
         <div className="navbarContainer">
+            {/* <div className="burgerM" onClick={() => {setOpen(!open);} } ref={dropdownMenuRef}> */}
+            <div className="burgerM">
+                <div className="burger-menu" onClick={updateMenu}>
+                    <div className={burger_class} ></div>
+                    <div className={burger_class} ></div>
+                    <div className={burger_class} ></div>
+                </div>
+            
+                {/* <div className={menu_class} onClick={() => {setOpen(!open);} } ref={dropdownMenuRef}> */}
+                <div className={menu_class}>
+                        <ul className="menuBurger-list">
+                            <li onClick={updateMenu}>
+                                <NavLink exact="true" to="/" className="isActive" >
+                                    <span>Acceuil</span>
+                                </NavLink>
+                            </li>
+
+                            <li onClick={updateMenu} >
+
+                                <NavLink exact="true" to="/actualites" className="isActive" >
+                                    <span>Actualités</span>
+                                </NavLink>
+                            </li>
+
+                            <li onClick={updateMenu}>
+                                <NavLink exact="true" to="/nous_connaitre" className="isActive" >
+                                    <span>Nous connaître</span>
+                                </NavLink>
+                            </li>
+
+                            <li onClick={updateMenu}>
+                                <NavLink exact="true" to="/contact" className="isActive" >
+                                    <span>Contact</span>
+                                </NavLink>
+                            </li>
+
+                        </ul>
+
+
+                </div>
+                
+            </div>
+
                 <div className="navbarLogo">
                     <NavLink to="/">
                         <img src="/V2logoELV26.png" />
@@ -78,7 +164,8 @@ const Navbar = () => {
                         ) : (
                             <>
                                 {/*<li>*/}
-                                    <div className='menu-trigger' onClick={()=>{setOpen(!open)}}>
+                                    {/* <div className='menu-trigger' onClick={()=>{setOpen(!open)}}> */}
+                                    <div className='menu-trigger' onClick={() => {setOpen(!open);} } ref={dropdownMenuRef}>
                                         <BsFillPersonFill />
                                     </div>
 {/*                                        <p className="center">
@@ -117,6 +204,10 @@ const Navbar = () => {
                         )
                         }
                     </div>
+
+
+
+                    
                 </div>
 
                 <div className="navOthersLogo">

@@ -8,6 +8,7 @@ import axios from 'axios';
 import { AuthContext } from '../context/authContext';
 import parse from "html-react-parser";
 import DOMPurify from 'dompurify';
+import GoBackButton from '../components/GoBackButton';
 
 const SinglePost = () => {
     const [post, setPost] = useState({});
@@ -18,6 +19,9 @@ const SinglePost = () => {
     const {currentUser} = useContext(AuthContext);
 
     //const username = currentUser?.username
+    useEffect(() =>{
+        window.scrollTo(0,0);
+    }, []);
 
     useEffect(() =>{
         const fetchData = async ()=>{
@@ -51,6 +55,7 @@ const SinglePost = () => {
     return (
         <div className="singlePost">
                 {/*<Navbar />*/}
+                    <GoBackButton />
                     <div className="singlePostContent">
                 
                     <div className="postTitle">

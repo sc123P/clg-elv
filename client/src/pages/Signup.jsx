@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import axios from 'axios';
@@ -26,6 +26,9 @@ const Signup = () => {
             setError(err.response.data)
         }
     }
+    useEffect(() =>{
+        window.scrollTo(0,0);
+    }, []);
     return (
         <div className="signup">
             <div className="signupContent">
