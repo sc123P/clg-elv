@@ -11,13 +11,6 @@
     color: $black;
 
     position: fixed;
-    // z-index: 9999;
-    z-index: 1;
-    svg{
-        width: 20px;
-        height: 20px;
-        @include verticalCenter;
-    }
 }
 .gbButton.scrolled {
     // left: 10px;
@@ -25,5 +18,9 @@
     left: 30px;
     top: 130px;
     // z-index: 9999;
-    z-index: 1;
+}
+svg{
+    width: 20px;
+    height: 20px;
+    @include verticalCenter;
 }
