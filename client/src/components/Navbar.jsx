@@ -89,7 +89,7 @@ const Navbar = () => {
             
                 {/* <div className={menu_class} onClick={() => {setOpen(!open);} } ref={dropdownMenuRef}> */}
                 <div className={menu_class}>
-                        <ul className="menuBurger-list">
+                    <ul className="menuBurger-list">
                             <li onClick={updateMenu}>
                                 <NavLink exact="true" to="/" className="isActive" >
                                     <span>Acceuil</span>
@@ -115,7 +115,42 @@ const Navbar = () => {
                                 </NavLink>
                             </li>
 
-                        </ul>
+                        {/* <div className='menu-trigger' onClick={() => {setOpen(!open);} } ref={dropdownMenuRef}>
+                            <BsFillPersonFill />
+                        </div>
+                        <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>
+                            <div className="dropdownList">
+                                <ul className="item">
+                                    <li className="itemContent">
+                                        Compte: {currentUser?.username}
+                                    </li>
+                                    
+                                    <li className="itemContent" onClick={handleMenuClick}>
+                                        {currentUser ? 
+                                            (<> <SlLogout /><span onClick={handleLogout}>Déconnexion</span> </>) 
+                                            : (<> <Link to="/connexion">Login</Link> </>)}
+                                    </li>
+
+                                    <li className="itemContent">
+                                        
+                                        <Link to={`/write`}>
+                                            <span className="span">
+                                                Rédiger un article
+                                            </span> 
+                                        </Link>
+                                    </li>
+                                    
+
+                                </ul>
+                            </div>
+                        </div> */}
+
+                    <div className="navOthersLogoBurger">
+                        <img src="acdemq 2.png" alt="" />
+                        <img src="/logo-eco-ecole.png" />
+                    </div>
+                    </ul>
+
 
 
                 </div>

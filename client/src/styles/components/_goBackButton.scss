@@ -27,3 +27,13 @@
     // z-index: 9999;
     z-index: 1;
 }
+
+
+@media screen and (max-width: 540px){
+    .gbButton{
+        left: 10px;
+    }
+    .gbButton.scrolled{
+        left: 10px;
+    }
+}

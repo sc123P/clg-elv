@@ -1,5 +1,5 @@
 .singlePost{
-    height: 100vh;
+    // height: 100vh;
     .singlePostContent{
         width: 100%;
         display: flex;
@@ -52,5 +52,15 @@
                 font-size: 1.1rem;
             }
         }
+    }
+}
+
+
+@media screen and (max-width: 540px){
+    .singlePost .singlePostContent .postTitle{
+        width: 75%;
+    }
+    .singlePost .singlePostContent .postText{
+        width: 75%;
     }
 }

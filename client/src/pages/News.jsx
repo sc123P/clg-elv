@@ -33,6 +33,7 @@ const News = () => {
                     </div>
                     <div className="newsTopBlack">
                         <img src="/trianglebgcopie2.png" />
+                        {/* <img src="/trianglebgcopie3.png" /> */}
                     </div>
                 </div>
 
