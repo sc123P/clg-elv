@@ -21,6 +21,7 @@
             width: 100%;
             height: 100%;
             @include verticalCenter;
+            padding-right: 10px;
         }
         svg{
             position: absolute;
@@ -28,8 +29,16 @@
             right: 0;
             transform: translateY(-100%);
             margin-right: 10px;
+            // margin-left: 10px;
+            // float: right;
+            // width: 36px;
+            // color: lightgray;
         }
     }
+    // .menu-trigger svg{
+    //     color: $black;
+    //     padding: 0;
+    // }
 
     .dropdown-menu{
         position: absolute;
@@ -116,3 +125,10 @@
         }
     }
 }
+
+// @media screen and (max-width: 900px){
+//     .menu-trigger svg{
+//         color: $black;
+//         padding: 0;
+//     }
+// }

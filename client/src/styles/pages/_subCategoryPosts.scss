@@ -27,10 +27,16 @@
     img{
         opacity: 50%;
         width: 100%;
-        height: 400px;
-        max-height: 400px;
+        // height: 400px;
+        // max-height: 400px;
         //width: 1440px;
         //height: 305px;
         //filter: brightness(50%);
+    }
+
+
+    .projectsTop img{
+        height: auto;
+        max-height: 375px;
     }
 }

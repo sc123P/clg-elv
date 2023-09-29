@@ -44,9 +44,11 @@
                         overflow: hidden;
                         h3{
                             font-size: 1.5rem;
-                            margin-bottom: 10px;
+                            // margin-bottom: 10px;
+                            padding-top: 10px;
+                            padding-bottom: 12px;
 
-                            line-height: 2;
+                            line-height: 1.3;
                             font-weight: bold;
                         }
                     }
@@ -55,6 +57,37 @@
                     border: 1px solid $light-grey;   
                 }
             }
+        }
+    }
+}
+
+
+
+
+@media screen and (max-width: 950px) {
+    .posts .post .postContent .postContentMain .hr .postText h3{
+        font-size: 1.3rem;
+    }
+}
+@media screen and (max-width: 900px) {
+    .posts .post .postContent .postContentMain .hr .postText h3{
+        font-size: 1rem;
+    }
+    .posts .post .postContent .postContentMain .hr .postText p{
+        font-size: .7rem;
+    }
+}
+@media screen and (max-width: 800px) {
+    .posts .post .postContent .postContentMain{
+        width: auto;
+    }
+    .posts .post .postContent .postContentMain .hr{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        max-height: none;
+        .postText{
+            margin-left: 0;
         }
     }
 }

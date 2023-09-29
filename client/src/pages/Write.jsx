@@ -280,13 +280,13 @@ selectedCategories.forEach((category) => {
     //console.log(value)
     return (
         <div className="write">
-                    <GoBackButton />
+                    {/* <GoBackButton /> */}
             <div className="writeContent">
                 <div className="writeTop">
                     <div className="writeTopText">
                         <h3>ESPACE ADMINISTRATEUR</h3>
                     </div>
-                    <div className="hr">
+                    <div className="hrAdmin">
                         <hr />
                     </div>
 {/*                    <div className="writeTopBlack">
@@ -314,7 +314,7 @@ selectedCategories.forEach((category) => {
                             {/*<ReactQuill className="editor" theme="snow" value={title} onChange={e=>setTitle(e.target.value)} />*/}
                         </div>
                     </div>
-                    <div className="menu">
+                    <div className="menuAdmin">
                         <div className="item">
                             <h3>Publier</h3>
                             <span>

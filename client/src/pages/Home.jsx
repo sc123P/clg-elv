@@ -111,7 +111,7 @@ return (
             {/* <div className={`hiddenSectionL ${isSectionVisible ? 'show' : ''}`}> */}
                     <div className="homeTopText">
                     {/* <section className={`hiddenSectionL ${isSectionVisible ? 'show' : ''}`}> */}
-                            <h1>Premier éco-college de martinique !</h1>
+                        <h1>Premier éco-college de martinique !</h1>
                     {/* </section> */}
                     </div>
                     {/* </div> */}
