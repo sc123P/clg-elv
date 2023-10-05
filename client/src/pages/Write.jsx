@@ -280,7 +280,7 @@ selectedCategories.forEach((category) => {
     //console.log(value)
     return (
         <div className="write">
-                    {/* <GoBackButton /> */}
+                    <GoBackButton />
             <div className="writeContent">
                 <div className="writeTop">
                     <div className="writeTopText">
