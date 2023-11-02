@@ -120,12 +120,18 @@
                                     //width: 100%;
 
                                     // min-width: 45%;
-                                    max-height: 200px;
-                                    min-height: 200px;
-                                    height: auto;
+
+                                    // max-height: 200px;
+                                    // min-height: 200px;
+                                    max-height: 240px;
+                                    min-height: 240px;
+                                    // height: auto;
                                     // height: 245px;
                                     // min-height: 245px;
                                     margin-top: 40px;
+
+                                    object-fit: cover;
+                                    object-position: center center;
                                 }
                                 .p{
                                     //position: absolute;
@@ -152,6 +158,9 @@
                                     max-height: 400px;
                                     min-height: 400px;
                                     height: auto;
+
+                                    object-fit: cover;
+                                    object-position: center center;
                                 }
 
                                 .p{
@@ -193,6 +202,9 @@
                                     max-height: 400px;
                                     min-height: 400px;
                                     height: auto;
+
+                                    object-fit: cover;
+                                    object-position: center center;
                                 }
 
                                 .p{
@@ -218,6 +230,9 @@
                                 max-height: 200px;
                                 min-height: 200px;
                                 height: auto;
+
+                                object-fit: cover;
+                                object-position: center center;
                             }
                             .right2{
                                 width: 97%;
@@ -233,6 +248,9 @@
                                 max-height: 200px;
                                 min-height: 200px;
                                 height: auto;
+
+                                object-fit: cover;
+                                object-position: center center;
 
                                 &:nth-child(2){
                                     // height: 500px;
@@ -262,6 +280,9 @@
                                 // max-height: 400px;
                                 // min-height: 400px;
                                 // height: auto;
+                                
+                                object-fit: cover;
+                                object-position: center center;
                             }
                             p{
                                 // width: 45%;

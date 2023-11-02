@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { BsFillPersonFill } from 'react-icons/bs';
+import { SlLogin } from 'react-icons/sl';
 import { SlLogout } from 'react-icons/sl';
 import { AuthContext } from '../context/authContext';
 import axios from 'axios';
@@ -193,11 +194,11 @@ const Navbar = () => {
                     </ul>
 
                     <div className="dropdown">
-                        {!currentUser ? (
+                        {/* {!currentUser ? (
                             <>
                             </>
                         ) : (
-                            <>
+                            <> */}
                                 {/*<li>*/}
                                     {/* <div className='menu-trigger' onClick={()=>{setOpen(!open)}}> */}
                                     <div className='menu-trigger' onClick={() => {setOpen(!open);} } ref={dropdownMenuRef}>
@@ -211,33 +212,41 @@ const Navbar = () => {
                                 <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>
                                     <div className="dropdownList">
                                         <ul className="item">
-                                            <li className="itemContent">
-                                                Compte: {currentUser?.username}
-                                            </li>
+                                            {currentUser ? 
+                                            (<>
+                                                {/* <li id="itemContentFirst" className="itemContent"> */}
+                                                <li id="itemContentFirst">
+                                                    Compte: {currentUser?.username}
+                                                </li>
+                                            </>) : (<></>)}
                                             
                                             <li className="itemContent" onClick={handleMenuClick}>
                                                 {/*{currentUser ? (<> <SlLogout /><span onClick={logout}>Déconnexion</span> </>) : (<> <Link to="/connexion">Login</Link> </>)}*/}
                                                 {currentUser ? 
                                                     (<> <SlLogout /><span onClick={handleLogout}>Déconnexion</span> </>) 
-                                                    : (<> <Link to="/connexion">Login</Link> </>)}
+                                                    : (<> <Link to="/connexion"><span className="span"><SlLogin />Connexion</span></Link> </>)}
                                             </li>
 
-                                            <li className="itemContent">
-                                                
-                                                <Link to={`/write`}>
-                                                    <span className="span">
-                                                        Rédiger un article
-                                                    </span> 
-                                                </Link>
-                                            </li>
+                                            {currentUser ?
+                                                (<>
+                                                    <li className="itemContent">
+                                                        
+                                                        <Link to={`/write`}>
+                                                            <span className="span">
+                                                                Rédiger un article
+                                                            </span> 
+                                                        </Link>
+                                                    </li>
+                                                </>) : (<></>)
+                                            }
                                             
 
                                         </ul>
                                     </div>
                                 </div>
-                            </>
-                        )
-                        }
+                            {/* </> */}
+                        {/* ) */}
+                        {/* } */}
                     </div>
 
 
