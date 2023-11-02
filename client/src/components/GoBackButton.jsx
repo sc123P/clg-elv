@@ -31,9 +31,11 @@ const GoBackButton = () => {
 
     return (
         // <button onClick={goBack} className="gbButton">
-        <button onClick={goBack} className={`gbButton ${isScrolled ? 'scrolled' : ''}`}>
-            <IoIosArrowBack />
-        </button>
+        // <div className="gbButtonDiv">
+            <button onClick={goBack} className={`gbButton ${isScrolled ? 'scrolled' : ''}`}>
+                <IoIosArrowBack />
+            </button>
+        // </div>
     );
 };
 

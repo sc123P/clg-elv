@@ -16,7 +16,11 @@ import Pagination from './components/Pagination';
 import SubCategoryPosts from './pages/SubCategoryPosts';
 import Footer from './components/Footer';
 
+import { AuthContext } from './context/authContext';
+import { useContext } from 'react';
+
 function App() {
+  const {currentUser, setCurrentUser} = useContext(AuthContext)
 
   //const location = useLocation();
   // const searchParams = new URLSearchParams(location.search);
@@ -30,7 +34,8 @@ function App() {
         {/* <Route exact path="/actualites" element={ <News /> } /> */}
         <Route exact path="/actualites" element={ <News /> } />
         <Route exact path="/actualites/:id" element={ <SinglePost /> } />
-        <Route exact path="/write" element={ <Write /> } />
+        {currentUser ? <> <Route exact path="/write" element={ <Write /> } /> </> : <></>}
+        {/* <Route exact path="/write" element={ <Write /> } /> */}
         <Route exact path="/nous_connaitre" element={ <AboutUs /> } />
         <Route exact path="/contact" element={ <Contact /> } />
         <Route exact path="/projets" element={ <Projects /> } />
