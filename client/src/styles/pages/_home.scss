@@ -98,169 +98,255 @@
                 font-family: $font-1;
                 @include verticalCenter;
             }
-            .homeButtons{
+            // .homeButtons{
                 width: 100%;
-                // height: 400px;
+                // width: 80%;
                 height: auto;
+                // height: 270px;
+                // height: 400px;
                 //@include verticalCenter;
-                display: flex;
-                align-items: center;
-                flex-direction: column;
+
+                // display: flex;
+                // align-items: center;
+                // flex-direction: column;
                 padding-top: 30px;
+
+                //Changement positionnement boutons------------------------
+                // display: grid;
+                // justify-content: space-around;
+                // grid-template-columns: 1fr 1fr 1fr;
+
+                // grid-template-columns: 1fr;
+                // grid-template-rows: 1fr 1fr;
+                // grid-area:
+                // "1",
+                // "2";
+
+                // .homeButtonsMain{
+                //     grid-area: 1;
+                    #button1, #button2, #button3, #button4, #button5, #button6{
+                        // grid-area: 1;
+                        background: $color-1;
+                        border: solid 2px $color-1;
+                        &:hover{
+                            background: $color-4;
+                            // a{
+                            //     color: $white;
+                            // }
+                        }
+                    }
+
+                // }
+                // #button4, #button5, #button6{
+                //     // grid-area: 2;
+                //     background: $color-1;
+                //     border: solid 2px $color-1;
+                // }
+
+                .card {
+                    // background-color: dodgerblue;
+                    // color: white;
+                    padding: 1rem;
+                    height: 4rem;
+                }
+                .cards {
+                    max-width: 1200px;
+                    // width: 70%;
+                    margin: 0 auto;
+                    display: grid;
+                    grid-gap: 1rem;
+                }
+                .bottomLine{
+                    width: 100%;
+                    hr{
+                        //width: 865px;
+    
+                        width: 55%;
+                        display: flex;
+                        justify-content: center;
+                        
+                        //height: 1px;
+                        margin-top: 10px;
+                        border: 1px solid $light-grey;
+                        //z-index: 2;
+                    }
+                }
+                  
+                  /* Screen larger than 600px? 2 column */
+                  @media (min-width: 600px) {
+                    .cards { grid-template-columns: repeat(2, 1fr); }
+                  }
+                  
+                  /* Screen larger than 900px? 3 columns */
+                  @media (min-width: 900px) {
+                    .cards { grid-template-columns: repeat(3, 1fr); }
+                  }
+                // .cards {
+                //     max-width: 1200px;
+                //     margin: 0 auto;
+                //     display: grid;
+                //     gap: 1rem;
+                //     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                //   }
+                //Changement positionnement boutons------------------------
 
 
                 // margin-bottom: 220px;
-                .buttonTop{
-                    margin-bottom: 20px;
-                    width: 70%;
-                    min-width: 250px;
-                    display: flex;
-                    justify-content: space-evenly;
-                    //button:nth-child(2){
-                    //    margin: 0 60px;
-                    //}
-                    // a:nth-child(2){
-                    button:nth-child(2){
-                        margin: 0 10px;
-                    }
-                    #button1{
-                        // background-color: $color2-2;
-                        // border: solid 2px $color-2;
-                        // background: $color-1;
-                        background: $color-1;
-                        border: solid 2px $color-1;
-                        // border: solid 2px $color-4;
-                        // opacity: .88;
-                        // background: linear-gradient(145deg, rgba(46,139,87,1) 0%, rgba(0,255,147,1) 100%);
-                        // &:hover{
-                        //     background-color: $color-2;
-                        // }
-                        // a{
-                        //     color: $color-1;
-                        // }
-                        &:hover{
-                            background: $color-4;
-                            // a{
-                            //     color: $white;
-                            // }
-                        }
-                    }
-                    #button2{
-                        // background-color: $color2-3;
-                        // border: solid 2px $color-3;
-                        background: $color-1;
-                        border: solid 2px $color-1;
-                        // background: linear-gradient(145deg, rgba(46,139,87,1) 0%, rgba(0,255,147,1) 100%);
-                        // a{
-                        //     color: $color-1;
-                        // }
-                        &:hover{
-                            // background-color: $color-3;
-                            background: $color-4;
-                            // a{
-                            //     color: $white;
-                            // }
-                        }
-                    }
-                    #button3{
-                        // background-color: $color2-4;
-                        // border: solid 2px $color-4;
-                        background: $color-1;
-                        border: solid 2px $color-1;
-                        // background: linear-gradient(145deg, rgba(46,139,87,1) 0%, rgba(0,255,147,1) 100%);
-                        // a{
-                        //     color: $color-1;
-                        // }
-                        &:hover{
-                            // background-color: $color-4;
-                            background: $color-4;
-                            // a{
-                            //     color: $white;
-                            // }
-                        }
-                    }
+
+                // .buttonTop{
+                //     grid-area: 1;
+                //     display: flex;
+                //     width: 65%;
+                //     justify-content: center;
+
+                //     margin: 7px;
+                //     // justify-content: space-around;
+
+                //     // margin-bottom: 20px;
+                //     // width: 70%;
+                //     // min-width: 250px;
+                //     // display: flex;
+                //     // justify-content: space-evenly;
+                //     // button:nth-child(2){
+                //     //     margin: 0 10px;
+                //     // }
                     
-                }
+                //     #button1{
+                //         // background-color: $color2-2;
+                //         // border: solid 2px $color-2;
+                //         // background: $color-1;
+                //         background: $color-1;
+                //         border: solid 2px $color-1;
+                //         // border: solid 2px $color-4;
+                //         // opacity: .88;
+                //         // background: linear-gradient(145deg, rgba(46,139,87,1) 0%, rgba(0,255,147,1) 100%);
+                //         // &:hover{
+                //         //     background-color: $color-2;
+                //         // }
+                //         // a{
+                //         //     color: $color-1;
+                //         // }
+                //         &:hover{
+                //             background: $color-4;
+                //             // a{
+                //             //     color: $white;
+                //             // }
+                //         }
+                //     }
+                //     #button2{
+                //         // background-color: $color2-3;
+                //         // border: solid 2px $color-3;
+                //         background: $color-1;
+                //         border: solid 2px $color-1;
+                //         // background: linear-gradient(145deg, rgba(46,139,87,1) 0%, rgba(0,255,147,1) 100%);
+                //         // a{
+                //         //     color: $color-1;
+                //         // }
+                //         margin: 0 10px;
+                //         &:hover{
+                //             // background-color: $color-3;
+                //             background: $color-4;
+                //             // a{
+                //             //     color: $white;
+                //             // }
+                //         }
+                //     }
+                //     #button3{
+                //         // background-color: $color2-4;
+                //         // border: solid 2px $color-4;
+                //         background: $color-1;
+                //         border: solid 2px $color-1;
+                //         // background: linear-gradient(145deg, rgba(46,139,87,1) 0%, rgba(0,255,147,1) 100%);
+                //         // a{
+                //         //     color: $color-1;
+                //         // }
+                //         &:hover{
+                //             // background-color: $color-4;
+                //             background: $color-4;
+                //             // a{
+                //             //     color: $white;
+                //             // }
+                //         }
+                //     }
+                    
+                // }
                 
-                .buttonBottom{
-                    width: 70%;
-                    min-width: 250px;
-                    display: flex;
-                    justify-content: space-evenly;
-                    a:nth-child(2){
-                        margin: 0 10px;
-                    }
-                    #button4{
-                        // background-color: $color2-5;
-                        // border: solid 2px $color-5;
-                        background: $color-1;
-                        // background: linear-gradient(145deg, rgba(46,139,87,1) 0%, rgba(0,255,147,1) 100%);
-                        // background: transparent;
-                        border: solid 2px $color-1;
-                        z-index: 1;
-                        // a{
-                        //     color: $color-1;
-                        // }
-                        &:hover{
-                            // background-color: $color-5;
-                            background: $color-4;
-                        }
-                    }
-                    #button5{
-                        // background-color: $color2-6;
-                        // border: solid 2px $color-6;
-                        // background: $color-1;
-                        // background: linear-gradient(145deg, rgba(46,139,87,1) 0%, rgba(0,255,147,1) 100%);
-                        background: $color-1;
-                        border: solid 2px $color-1;
-                        //z-index: 2;
-                        z-index: 1;
+                // .buttonBottom{
+                //     grid-area: 2;
+                //     display: flex;
+                //     width: 65%;
+                //     justify-content: center;
 
-                        margin: 0 10px;
-                        // a{
-                        //     color: $color-1;
-                        // }
-                        &:hover{
-                            // background-color: $color-6;
-                            background: $color-4;
-                            // a{
-                            //     color: $white;
-                            // }
-                        }
-                    }
-                    #button6{
-                        // background-color: $color2-7;
-                        // border: solid 2px $color-7;
-                        // background: $color-1;
-                        // background: linear-gradient(145deg, rgba(46,139,87,1) 0%, rgba(0,255,147,1) 100%);
-                        background: $color-1;
-                        border: solid 2px $color-1;
-                        //z-index: 3;
-                        z-index: 1;
-                        // a{
-                        //     color: $color-1;
-                        // }
-                        &:hover{
-                            // background-color: $color-7;
-                            background: $color-4;
-                            // a{
-                            //     color: $white;
-                            // }
-                        }
-                    }
-                }
-                hr{
-                    //width: 865px;
+                //     // justify-content: space-around;
+                //     // width: 70%;
+                //     // min-width: 250px;
+                //     // display: flex;
+                //     // justify-content: space-evenly;
+                //     // a:nth-child(2){
+                //     //     margin: 0 10px;
+                //     // }
+                //     #button4{
+                //         // background-color: $color2-5;
+                //         // border: solid 2px $color-5;
+                //         background: $color-1;
+                //         // background: linear-gradient(145deg, rgba(46,139,87,1) 0%, rgba(0,255,147,1) 100%);
+                //         // background: transparent;
+                //         border: solid 2px $color-1;
+                //         z-index: 1;
+                //         // a{
+                //         //     color: $color-1;
+                //         // }
+                //         &:hover{
+                //             // background-color: $color-5;
+                //             background: $color-4;
+                //         }
+                //     }
+                //     #button5{
+                //         // background-color: $color2-6;
+                //         // border: solid 2px $color-6;
+                //         // background: $color-1;
+                //         // background: linear-gradient(145deg, rgba(46,139,87,1) 0%, rgba(0,255,147,1) 100%);
+                //         background: $color-1;
+                //         border: solid 2px $color-1;
+                //         //z-index: 2;
+                //         z-index: 1;
 
-                    width: 60%;
-                    
-                    //height: 1px;
-                    margin-top: 10px;
-                    border: 1px solid $light-grey;
-                    //z-index: 2;
-                }
+                //         margin: 0 10px;
+                //         // a{
+                //         //     color: $color-1;
+                //         // }
+                //         &:hover{
+                //             // background-color: $color-6;
+                //             background: $color-4;
+                //             // a{
+                //             //     color: $white;
+                //             // }
+                //         }
+                //     }
+                //     #button6{
+                //         // background-color: $color2-7;
+                //         // border: solid 2px $color-7;
+                //         // background: $color-1;
+                //         // background: linear-gradient(145deg, rgba(46,139,87,1) 0%, rgba(0,255,147,1) 100%);
+                //         background: $color-1;
+                //         border: solid 2px $color-1;
+                //         //z-index: 3;
+                //         z-index: 1;
+                //         // a{
+                //         //     color: $color-1;
+                //         // }
+                //         &:hover{
+                //             // background-color: $color-7;
+                //             background: $color-4;
+                //             // a{
+                //             //     color: $white;
+                //             // }
+                //         }
+                //     }
+                // }
+                
 
-            }
+            // }
             .firstIllustration{
                 padding-left: 70px;
                 // transform: translateY(-35%);
@@ -666,10 +752,44 @@
             height: 60px;
         }
     }
-    .buttonTop, .buttonBottom{
-        display: flex;
-        flex-direction: column;
-    }
+    // .homeButtons{
+    //     display: grid;
+    //     grid-template-columns: 1fr;
+    //     grid-template-rows: 1fr 1fr 1fr;
+    //     grid-area:
+    //     "1",
+    //     "2",
+    //     "3";
+        // .buttonTop{
+        //     grid-area: 1;
+        //     display: flex;
+        //     // width: 65%;
+        //     justify-content: center;
+
+        //     // margin: 7px;
+        // }
+        
+        // .buttonTop, .buttonBottom{
+        //     display: none;
+        // }
+        // #button1, #button2{
+        //     grid-area: 1;
+        // }
+        // #button3, #button4{
+        //     grid-area: 2;
+        // }
+        // #button5, #button6{
+        //     grid-area: 3;
+        // }
+        
+    //     #button1, #button2, #button3, #button4, #button5, #button6{
+    //         width: 20%;
+    //     }
+    // }
+    // .buttonTop, .buttonBottom{
+    //     display: flex;
+    //     flex-direction: column;
+    // }
     .home .homeContainer .homeMain .homeButtons .buttonTop{
         margin-bottom: 0;
         width: auto;

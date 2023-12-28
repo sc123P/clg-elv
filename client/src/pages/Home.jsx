@@ -148,40 +148,45 @@ return (
                 {/* <div className="homeMain"> */}
                 {/* <section className={`hiddenSectionL ${isSectionVisible ? 'show' : ''}`}> */}
                     {/* <div className="homeButtons"> */}
-                    <div className={`homeButtons hiddenSectionL ${isSectionVisible ? 'show' : ''}`}>
-                        <div className="buttonTop">
-                            <button id="button1" className={`imgSection hiddenSectionL ${isSectionVisible ? 'show' : ''}`}>
+                    <div className={`cards homeButtons hiddenSectionL ${isSectionVisible ? 'show' : ''}`}>
+
+                        {/* <span className="buttonTop"> */}
+
+                            <button id="button1" className={`card imgSection hiddenSectionL ${isSectionVisible ? 'show' : ''}`}>
                                 <a href="https://colibri.ac-martinique.fr/auth/saml/wayf?callBack=https%3A%2F%2Fcolibri.ac-martinique.fr%2F#/">ENT</a>
                             </button>
-                            <button id="button2" className={`imgSection hiddenSectionL ${isSectionVisible ? 'show' : ''}`}>
+                            <button id="button2" className={`card imgSection hiddenSectionL ${isSectionVisible ? 'show' : ''}`}>
                                 <a href="https://www.pearltrees.com/">MON ORGANISATION</a>
                             </button>
-                            <button id="button3" className={`imgSection hiddenSectionL ${isSectionVisible ? 'show' : ''}`}>
+
+                            <button id="button3" className={`card imgSection hiddenSectionL ${isSectionVisible ? 'show' : ''}`}>
                                 <Link to={`/projets/?category_id=2`} >
                                     PROJETS
                                 </Link>
                             </button>
-                        </div>
-                        <div className="buttonBottom">
-                            <button id="button4" className={`imgSection2 hiddenSectionL ${isSectionVisible ? 'show' : ''}`}>
+                            
+                        {/* <span className="buttonBottom"> */}
+                            <button id="button4" className={`card imgSection2 hiddenSectionL ${isSectionVisible ? 'show' : ''}`}>
                                 <Link to={`/evenements/?category_id=6`} >
                                     EVENEMENTS
                                 </Link>
                             </button>
-                            <button id="button5" className={`imgSection2 hiddenSectionL ${isSectionVisible ? 'show' : ''}`}>
+                            <button id="button5" className={`card imgSection2 hiddenSectionL ${isSectionVisible ? 'show' : ''}`}>
                                 <Link to={`/actualites`} >
                                     ACTUALITES
                                 </Link>
                             </button>
-                            <button id="button6" className={`imgSection2 hiddenSectionL ${isSectionVisible ? 'show' : ''}`}>
+                            <button id="button6" className={`card imgSection2 hiddenSectionL ${isSectionVisible ? 'show' : ''}`}>
                                 <Link to={`/orientation/?category_id=7`} >
                                     ORIENTATION
                                 </Link>
                             </button>
-                        </div>
-                            <hr/>
+                        {/* </span> */}
 
                     </div>
+                    <span className='bottomLine'>
+                        <hr/>
+                    </span>
 
                 {/* </section> */}
                     {/* <div className="firstIllustration">
