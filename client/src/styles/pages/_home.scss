@@ -146,15 +146,20 @@
                 .card {
                     // background-color: dodgerblue;
                     // color: white;
+
                     padding: 1rem;
                     height: 4rem;
                 }
                 .cards {
-                    max-width: 1200px;
-                    // width: 70%;
+                    // max-width: 1200px;
+                    width: 55%;
                     margin: 0 auto;
                     display: grid;
-                    grid-gap: 1rem;
+                    // grid-gap: 1rem;
+
+                    grid-gap: 1.6rem;
+                    column-gap: 1.6rem;
+                    justify-content: center;
                 }
                 .bottomLine{
                     width: 100%;
@@ -797,9 +802,9 @@
     .home .homeContainer .homeMain .homeButtons .buttonBottom{
         width: auto;
     }
-    button{
-        margin-bottom: 20px;
-    }
+    // button{
+    //     margin-bottom: 20px;
+    // }
     .home .homeContainer .homeMain .homeButtons .buttonTop button:nth-child(2){
         margin: 0;
         margin-bottom: 20px;
