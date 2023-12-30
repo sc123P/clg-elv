@@ -178,12 +178,39 @@
                 }
                   
                   /* Screen larger than 600px? 2 column */
-                  @media (min-width: 600px) {
+                //   @media (min-width: 600px) {
+                //     .cards { grid-template-columns: repeat(2, 1fr); }
+                //   }
+                @media (min-width: 750px) {
                     .cards { grid-template-columns: repeat(2, 1fr); }
+                    // .card{ width: 250px; }
+                  }
+                @media (min-width: 600px) {
+                    .cards { grid-template-columns: repeat(2, 1fr); }
+                    .card{ width: 250px; }
+                  }
+                  @media (min-width: 550px) {
+                    .cards { grid-template-columns: repeat(2, 1fr); }
+                    // .card{ width: 100px; }
+                  }
+                //   @media (min-width: 290px) {
+                //     .cards { grid-template-columns: repeat(2, 1fr); }
+                //     .card{ width: 164px; }
+                //   }
+                @media (max-width: 760px) {
+                    .cards { grid-template-columns: repeat(2, 1fr); }
+                    .card{ width: 164px; }
+                  }
+                  @media (max-width: 290px) {
+                    .cards { grid-template-columns: repeat(1, 1fr); }
+                    // .card{ width: 164px; }
                   }
                   
                   /* Screen larger than 900px? 3 columns */
-                  @media (min-width: 900px) {
+                //   @media (min-width: 900px) {
+                //     .cards { grid-template-columns: repeat(3, 1fr); }
+                //   }
+                @media (min-width: 900px) {
                     .cards { grid-template-columns: repeat(3, 1fr); }
                   }
                 // .cards {
