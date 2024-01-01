@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-//import { FaLocationDot } from 'react-icons/fa';
 import { MdLocationPin } from 'react-icons/md';
 import { MdPhone } from 'react-icons/md';
 import { MdEmail } from 'react-icons/md';
