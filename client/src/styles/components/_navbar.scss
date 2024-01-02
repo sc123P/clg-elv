@@ -1,30 +1,19 @@
 .navbar{
-    //position: relative;
-    //position: fixed;
     position: sticky;
-    //height: auto;
-    //position: fixed;
     background-color: $color-1;
     color: $white;
     top: 0;
     width: 100%;
     z-index:2;
-    // z-index: 3;
 }
     .navbarContainer{
-        //position: absolute;
         display: flex;
         min-height: 87px;
-        
         .navbarLogo{
             min-height: 87px;
-            //width: 220px;
             max-width: 220px;
             img{
-                //width: 104px;
-                //width: 140px;
                 max-width: 140px;
-                //transform: translateY(50%);
                 transform: translateY(25%);
                 margin-left: 40px;
             }
@@ -34,19 +23,13 @@
             @include verticalCenter;
             width: 100%;
             ul{
-                //@include verticalCenter;
                 width: 100%;
                 display: flex;
                 justify-content: space-evenly;
                 li{
                     color: $white;
                     cursor: pointer;
-                    //padding-left: 70px;
-                    //&:hover{
-                    //    color: $black;
-                    //}
                     .isActive{
-                    // a{
                         color: $white;
                     }
                     .active{
@@ -58,59 +41,35 @@
         
         .dropdown{
             position: relative;
-            //margin-right: 20px;
-            //@include verticalCenter;
-            // width: 54px;
-            // height: 54px;
             width: 44px;
             height: 100%;
-            // @include verticalCenter;
-            //right: 20px;
             .menu-trigger{
                 width: 100%;
                 height: 100%;
                 @include verticalCenter;
             }
             .menu-trigger svg{
-                //display: flex;
-                // position: relative;
                 position: absolute;
-                //top: 20px;
                 right: 20px;
-                // height: 46px;
-                // width: 46px;
                 height: 36px;
                 width: 36px;
                 padding: 3px;
                 border-radius: 50%;
                 border: 1px solid $white;
-                // border-right: 1px solid $white;
-
                 overflow: hidden;
                 cursor: pointer;
                 color: $white;
                 opacity: .3;
                 @include verticalCenter;
-                //.center{
-                //    display: flex;
-                //    align-items: center;
-                //}
             }
             .dropdown-menu{
-                //position: absolute;
-                //width: 200px;
-                //height: 300px;
-
                 position: absolute;
                 top: 85px;
-                // right: 20px;
                 right: 10px;
                 background-color: $white;
-                //border-radius: var(--border-radius);
                 padding: 10px 20px;
                 width: 200px;
                 border-radius: $borderRadius;
-
                 &::before{
                     z-index: -1;
                     content: '';
@@ -119,11 +78,9 @@
                     right: 20px;
                     height: 20px;
                     width: 20px;
-                    //background: var(--secondary-bg);
                     background-color: $white;
                     transform: rotate(45deg);
                   }
-                  //.dropdown-menu.active{
                     &.active{
                     opacity: 1;
                     visibility: visible;
@@ -138,24 +95,17 @@
                     }
 
                 .dropdownList{
-                    //left: 0;
                     width: 100%;
                     height: 100%;
                     background-color: $white;
                     border-radius: $borderRadius;
-                    //margin-top: 30px;
-                    //margin-right: 10px;
-
                     .item{
                         display: flex;
                         flex-direction: column;
                         line-height: 1.7em;
                     }
-                        
                         .itemContent, #itemContentFirst{
-                        // span{
                             color: $black;
-
                             padding: 10px  0;
                             border-top: 1px solid rgba(0, 0, 0, 0.05);
                             svg{
@@ -165,18 +115,6 @@
                                 color: $grey;
                                 cursor: pointer;
                             }
-                            // &:nth-child(1){
-                            //     pointer-events: none;
-                            // }
-
-                            // #itemContentFirst{
-                            //     pointer-events: none;
-                            //     &:hover{
-                            //         color: $black;
-                            //         pointer-events: none;
-                            //     }
-                            // }
-
                             .span{
                                 width: 100%;
                                 height: 100%;
@@ -187,22 +125,15 @@
                                 }
                             }
                         }
-                    // }
                     #itemContentFirst{
                         pointer-events: none;
                         &:hover{
-                            // color: $black;
                             pointer-events: none;
                         }
                     }
-
                 }
             }
         }
-
-        
-        
-        
         .navOthersLogo{
             display: flex;
             align-items: center;
@@ -213,53 +144,21 @@
             }
         }
     }
-    //}
     .menuBurger-list{
         display: none;
-        // visibility: hidden;
     }
     
     @media screen and (max-width: 900px) {
         .navOthersLogoBurger{
             visibility: hidden;
-            // display: none;
         }
-
-        //A VERIFIER-----------------------------------------------------------------⬇︎
-        // .menu-trigger svg{
-        //     height: 36px;
-        //     width: 36px;
-        //     padding: 3px;
-        //     border-radius: 50%;
-        //     border: 1px solid $white;
-        //     overflow: hidden;
-        //     cursor: pointer;
-        //     color: $white;
-        //     opacity: .3;
-        //     @include verticalCenter;
-        // }
-        //A VERIFIER-----------------------------------------------------------------⬆︎
-
-
-        // .burgerM{
-        //     width: 50%;
-        //     height: 100%;
-        // }
             .burger-menu{
                 height: 35%;
                 width: 2.5em;
-                
-                // width: 3em;
                 display: flex;
                 flex-direction: column;
-                
-                // align-items: flex-start;
                 justify-content: space-between;
                 cursor: pointer;
-                
-                // background-color: blue;
-                // margin-right: 30px;
-                
                 position: absolute;
                 display: flex;
                 left: 0;
@@ -276,7 +175,6 @@
                 width: 50%;
                 height: 100vh;
                 margin-top: 87px;
-                // background-color: $color-1;
                 background: $color-1;
                 background: linear-gradient(145deg, rgba(46,139,87,1) 0%, rgba(0,255,147,1) 100%);
                 position: absolute;
@@ -301,153 +199,63 @@
                 }
             }
             .burger-bar.clicked:nth-child(1){
-                // transform: rotate(45deg) translate(0.75em, 1.25em);
                 transform: rotate(45deg) translate(8.5px, 8.5px);
                 transition: ease-out 0.5s ;
             }
             .burger-bar.clicked:nth-child(2){
-                // transform: scale(0.1);
                 transform: scale(0);
                 transition: ease-out 0.5s ;
             }
             .burger-bar.clicked:nth-child(3){
-                // transform: rotate(135deg) translate(-0.5em, 1em);
                 transform: rotate(-45deg) translate(8.5px, -8.5px);
                 transition: ease-out 0.5s ;
             }
             .burger-bar.unclicked{
                 transform: rotate(0) translate(0);
-                // transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s;
                 transition: transform 0.3s ease;
             }
-            
-            
-
             .burgerM{
-                // position: relative;
-                // height: 35%;
-                // width: 2.5em;
-                // width: 100%;
-
                 display: flex;
                 align-items: center;
-                // margin-left: 10px;
             }
             .menuBurger-list{
                 visibility: visible;
-
-                // height: 100vh;
                 display: flex;
                 flex-direction: column;
-                // justify-content: center;
                 padding-top: 90px;
                 padding-left: 10px;
-                // gap: 20px;
                 gap: 40px;
             }
-            
-            // .navbar{
-            //     @include verticalCenter;
-            // }
-            // .navbarContainer{
-            //     @include verticalCenter;
-            // }
-
-
-
-
-
-
-
             .navbarContainer{
-                // div:not(.burger-menu, .menu, .navbarLogo, .navigation){
                     width: 100%;
                     display: flex;
                     justify-content: center;
-                    // justify-content: space-around;
-                    // position: relative;
-                    // @include verticalCenter;
-                // div:not(.burger-menu, .menu, .navbarLogo, .navigation){
-                //     @include verticalCenter;
-                // }
-
-
-                
-                // .burger-menu{
-                //     position: absolute;
-                //     display: flex;
-                //     left: 0;
-                //     margin-left: 20px;
-                // }
             }
-
-            
             .navbarContainer .navigation{
                 width: auto;
                 height: 100%;
                 right: 0;
                 position: absolute;
-                // transform: translateY(50);
-                // width: 0;
-                // height: 0;
-                // width: 0px;
-                // height: 0px;
-                // width: none;
-                // display: none;
-
-                // ul{
-                //     width: 0;
-                //     height: 0;
-                //     display: none;
-                //     li{
-                //         display: none;
-                //         span{
-                //             display: none;
-                //         }
-                //     }
-                // }
-
-                // .dropdown{
-                //     display: flex;
-                // }
             }
             .navbarContainer .navigation ul{
                 display: none;
             }
-            
-
-
             .navbarContainer .navbarLogo img{
-                // width: 100%;
                 display: flex;
-                // justify-content: center;
                 justify-content: flex-end;
                 margin-left: 0;
-                
-
             }
             .navbarContainer .navOthersLogo img{
                 margin-right: 0;
                 margin-left: 16px;
-                // @include verticalCenter;
             }
-            // .menu-trigger{
-            //         visibility: hidden;
-            //     }
-                
-
-
-
             .dropdown-menu{
                 z-index: 1;
-                // position: absolute;
                 top: 50px;
                 background-color: white;
-                
                 width: 225px;
                 border: 1px solid $light-grey;
                 border-radius: $borderRadius;
-                  
                     &.active{
                     opacity: 1;
                     visibility: visible;
@@ -462,44 +270,29 @@
                     }
         
                 .dropdownList{
-                    //left: 0;
                     width: 100%;
                     height: 100%;
                     background-color: white;
                     border-radius: $borderRadius;
-                    //margin-top: 30px;
-                    //margin-right: 10px;
-        
                     .item{
                         display: flex;
                         flex-direction: column;
                         line-height: 1.7em;
-                        
                         .itemContent{
                             color: $black;
                             padding: 10px  10px;
                             border-top: 1px solid rgba(0, 0, 0, 0.05);
                             svg{
                                 margin-right: 2px;
-                                // display: flex;
                             }
                             &:hover{
-                                // color: $grey;
-
-                                // background-color: $light-grey;
                                 cursor: pointer;
                             }
-                            // &:nth-child(1){
-                            //     pointer-events: none;
-                            // }
-        
                             .span{
                                 width: 100%;
                                 height: 100%;
                                 color: $blue;
-                                // @include verticalCenter;
                                 &:hover{
-                                    // color: $grey;
                                     cursor: pointer;
                                 }
                             }
@@ -507,41 +300,23 @@
                     }
         
                 }
-            }
-                
-                
+            }        
         }
 
         @media screen and (max-width: 800px) {
             .navbar{
                 width: 100%;
-                // min-width: 800px;
                 .navbarContainer{
                     width: 100%;
                 }
             }
         }
-        // @media screen and (max-width: 768px) {
-        //     .navbar{
-        //         width: 768px;
-        //         // min-width: 800px;
-        //         .navbarContainer{
-        //             width: 100%;
-        //         }
-        //     }
-        // }
         @media screen and (max-width: 540px) {
             .menu{
                 width: 100%;
             }
             .navbar{
                 width: 100%;
-                // min-width: 540px;
-                // min-width: 800px;
-                // .navbarContainer{
-                //     // width: 100%;
-                //     min-width: 540px;
-                // }
             }
         }
 
@@ -551,16 +326,10 @@
             }
             .navOthersLogoBurger{
                 visibility: visible;
-
-                    // display: flex;
-                    // align-items: center;
                     img{
-                        // max-width: 84px;
-                        // max-height: 54px;
                         width: 64px;
                         height: 54px;
                         margin-right: 20px;
-                        // margin-right: 40px;
                     }
             }
         }

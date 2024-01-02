@@ -7,12 +7,9 @@ import { AuthContext } from '../context/authContext';
 import axios from 'axios';
 
 const Navbar = () => {
-    //const [active, setActive] = useState(false);
-    //const [currentUser, setCurrentUser] = useState(null);
     const { currentUser, setCurrentUser } = useContext(AuthContext);
     const [open, setOpen] = useState(false);
     const dropdownMenuRef = useRef(null);
-    
     const [burger_class, setBurgerClass] = useState("burger-bar unclicked");
     const [menu_class, setMenuClass] = useState("menu hidden");
     const [isMenuClicked, setIsMenuClicked] = useState(false);
@@ -23,20 +20,12 @@ const Navbar = () => {
         const className = target.className;
         console.log('Text:', text);
         console.log('Class name:', className);
-
         setOpen(false);
       };
-    
-      // Empêche la sérialisation JSON des données
-      //const transformRequest = [(data, headers) => {
-      //  delete headers.common['Content-Type'];
-      //  return data;
-      //}];
-    
       const handleLogout = async () => {
         await axios.post('/api/auth/logout', null);
         setCurrentUser(null);
-        setOpen(false); // Fermer le menu après la déconnexion
+        setOpen(false);
       };
 
       useEffect(() => {
@@ -58,9 +47,6 @@ const Navbar = () => {
 
 
     const updateMenu = () => {
-        // setOpen(!open);
-
-        // if(!isMenuClicked) {
         if(isMenuClicked) {
             setBurgerClass("burger-bar clicked")
             setMenuClass("menu visible")
@@ -76,19 +62,14 @@ const Navbar = () => {
 
     
     return (
-        //<div className={active ? "navbar active" : "navbar"}>
-        
         <div className="navbar">
         <div className="navbarContainer">
-            {/* <div className="burgerM" onClick={() => {setOpen(!open);} } ref={dropdownMenuRef}> */}
             <div className="burgerM">
                 <div className="burger-menu" onClick={updateMenu}>
                     <div className={burger_class} ></div>
                     <div className={burger_class} ></div>
                     <div className={burger_class} ></div>
                 </div>
-            
-                {/* <div className={menu_class} onClick={() => {setOpen(!open);} } ref={dropdownMenuRef}> */}
                 <div className={menu_class}>
                     <ul className="menuBurger-list">
                             <li onClick={updateMenu}>
@@ -116,44 +97,11 @@ const Navbar = () => {
                                 </NavLink>
                             </li>
 
-                        {/* <div className='menu-trigger' onClick={() => {setOpen(!open);} } ref={dropdownMenuRef}>
-                            <BsFillPersonFill />
-                        </div>
-                        <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>
-                            <div className="dropdownList">
-                                <ul className="item">
-                                    <li className="itemContent">
-                                        Compte: {currentUser?.username}
-                                    </li>
-                                    
-                                    <li className="itemContent" onClick={handleMenuClick}>
-                                        {currentUser ? 
-                                            (<> <SlLogout /><span onClick={handleLogout}>Déconnexion</span> </>) 
-                                            : (<> <Link to="/connexion">Login</Link> </>)}
-                                    </li>
-
-                                    <li className="itemContent">
-                                        
-                                        <Link to={`/write`}>
-                                            <span className="span">
-                                                Rédiger un article
-                                            </span> 
-                                        </Link>
-                                    </li>
-                                    
-
-                                </ul>
-                            </div>
-                        </div> */}
-
                     <div className="navOthersLogoBurger">
                         <img src="acdemq 2.png" alt="" />
                         <img src="/logo-eco-ecole.png" />
                     </div>
                     </ul>
-
-
-
                 </div>
                 
             </div>
@@ -194,34 +142,20 @@ const Navbar = () => {
                     </ul>
 
                     <div className="dropdown">
-                        {/* {!currentUser ? (
-                            <>
-                            </>
-                        ) : (
-                            <> */}
-                                {/*<li>*/}
-                                    {/* <div className='menu-trigger' onClick={()=>{setOpen(!open)}}> */}
-                                    <div className='menu-trigger' onClick={() => {setOpen(!open);} } ref={dropdownMenuRef}>
-                                        <BsFillPersonFill />
-                                    </div>
-{/*                                        <p className="center">
-                                            {currentUser?.username}
-                        </p>*/}
-                                {/*</li>*/}
-
+                        <div className='menu-trigger' onClick={() => {setOpen(!open);} } ref={dropdownMenuRef}>
+                            <BsFillPersonFill />
+                        </div>
                                 <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>
                                     <div className="dropdownList">
                                         <ul className="item">
                                             {currentUser ? 
                                             (<>
-                                                {/* <li id="itemContentFirst" className="itemContent"> */}
                                                 <li id="itemContentFirst">
                                                     Compte: {currentUser?.username}
                                                 </li>
                                             </>) : (<></>)}
                                             
                                             <li className="itemContent" onClick={handleMenuClick}>
-                                                {/*{currentUser ? (<> <SlLogout /><span onClick={logout}>Déconnexion</span> </>) : (<> <Link to="/connexion">Login</Link> </>)}*/}
                                                 {currentUser ? 
                                                     (<> <SlLogout /><span onClick={handleLogout}>Déconnexion</span> </>) 
                                                     : (<> <Link to="/connexion"><span className="span"><SlLogin />Connexion</span></Link> </>)}
@@ -244,19 +178,9 @@ const Navbar = () => {
                                         </ul>
                                     </div>
                                 </div>
-                            {/* </> */}
-                        {/* ) */}
-                        {/* } */}
-                    </div>
-
-
-
-                    
+                    </div>                    
                 </div>
-
                 <div className="navOthersLogo">
-                    {/*<img src="/LogoAC_MARTINIQUE - Fond transparent.png" />*/}
-                    {/*<img src="/Académie_de_Martinique.svg.png" />*/}
                     <img src="acdemq 2.png" alt="" />
                     <img src="/logo-eco-ecole.png" />
                 </div>

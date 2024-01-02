@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import Post from '../components/Post';
 import Pagination from '../components/Pagination';
 import GoBackButton from '../components/GoBackButton';
 
@@ -18,9 +17,6 @@ const Orientation = () => {
                         <img src="/trianglebgcopie2.png" alt="" />
                     </div>
                 </div>
-
-                {/* <Post /> */}
-
                 <GoBackButton />
                 <Pagination />
             </div>

@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-//import Navbar from '../components/Navbar';
 import { MdEditNote } from 'react-icons/md';
 import { MdOutlineDeleteOutline } from 'react-icons/md';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -12,13 +11,10 @@ import GoBackButton from '../components/GoBackButton';
 
 const SinglePost = () => {
     const [post, setPost] = useState({});
-    //const category_id = useLocation().search
     const location = useLocation();
     const navigate = useNavigate();
     const postId = location.pathname.split("/")[2];
     const {currentUser} = useContext(AuthContext);
-
-    //const username = currentUser?.username
     useEffect(() =>{
         window.scrollTo(0,0);
     }, []);
@@ -54,17 +50,13 @@ const SinglePost = () => {
 
     return (
         <div className="singlePost">
-                {/*<Navbar />*/}
                     <GoBackButton />
                     <div className="singlePostContent">
-                
                     <div className="postTitle">
                         <h3>{post.title}</h3>
-                        {/*<p>Posté {moment(post.date).fromNow()}</p>*/}
                         <p>Posté le {moment(post.date).locale('fr').format('DD MMMM YYYY à HH[h]mm') }</p>
                     </div>
                         {currentUser?.id === post.uid && (<div className="edit">
-                            {/* <Link to={`/write?edit=2`} state={post}> */}
                             <Link to={`/write?edit=2`} state={post}>
                                 <MdEditNote size={24} className="icons" />
                             </Link>

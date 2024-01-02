@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import axios from 'axios'; // Vous pouvez utiliser Axios pour faire des requêtes HTTP
+import axios from 'axios';
 import Post from '../components/Post';
-// import DropdownMenu from './DropdownMenu';
 import { IoIosArrowDown } from 'react-icons/io';
 import Pagination from '../components/Pagination';
 import GoBackButton from '../components/GoBackButton';
@@ -33,7 +32,7 @@ const SubCategoryPosts = () => {
     }, [subcategory]);
 
     useEffect(() => {
-        // Ajouter un gestionnaire d'événements pour fermer le dropdown-menu lors du clic à l'extérieur
+        // Ajout d'un gestionnaire d'événements pour fermer le dropdown-menu lors du clic à l'extérieur
         function handleClickOutside(event) {
             if (dropdownMenuRef.current && !dropdownMenuRef.current.contains(event.target)) {
                 setOpen(false);
@@ -49,7 +48,6 @@ const SubCategoryPosts = () => {
   
     return (
       <div className="subcategory-posts">
-
                 <div className="projectsTop">
                     <div className="projectsTopText">
                         <h1>{subcategory}</h1>
@@ -59,11 +57,8 @@ const SubCategoryPosts = () => {
                     </div>
                 </div>
                 <GoBackButton />
-        {/* <h1>Articles de la sous-catégorie : {subcategory}</h1> */}
-
         <div className="dropdownP">
             <div className='menu-trigger' onClick={()=>{setOpen(!open)}} ref={dropdownMenuRef}>
-                {/* <p>Tous les projets</p> */}
                 <p> {subcategory} </p>
                 <IoIosArrowDown />
             </div>
@@ -71,8 +66,6 @@ const SubCategoryPosts = () => {
             <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>
                 <div className="dropdownList">
                     <ul className="item">
-                        
-                        {/* <li className="itemContent" onClick={handleMenuClick}> */}
                         <li className="itemContent">
                             <Link to="/projets/projets établissements">
                                 <span className="span">

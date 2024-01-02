@@ -32,8 +32,6 @@ const Signup = () => {
     return (
         <div className="signup">
             <div className="signupContent">
-{/*                <div className="signupTitle">
-                </div>*/}
                 <h1>Créer un compte</h1>
                 <form className="form">
                     <input required type="text" placeholder="identifiant" name='username' onChange={handleChange} />

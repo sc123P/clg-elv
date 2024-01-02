@@ -3,7 +3,6 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import {AiFillPlusCircle} from 'react-icons/ai';
 import axios from 'axios';
-//import { useLocation } from 'react-router';
 import { useLocation } from 'react-router-dom';
 import moment from 'moment';
 import { MultiSelect } from 'react-multi-select-component';
@@ -22,16 +21,11 @@ const Write = () => {
     desc: "",
     category_id: "",
     img: "",
-    // category_id: "",
   });
   //CHANGEMENT-----------------------------------------------------
   const state = useLocation().state;
-  // const [value, setValue] = useState(state?.title || '');
-  // const [title, setTitle] = useState(state?.desc || '');
-
   const [title, setTitle] = useState(state?.title || '');
   const [value, setValue] = useState(state?.desc || '');
-  //const [files, setFiles] = useState(null);
   const [file, setFile] = useState(null);
   const [progress, setProgress] = useState({ started: false, pc: 0 });
   const [msg, setMsg] = useState(null);
@@ -55,7 +49,7 @@ const Write = () => {
     { 'background': [] },
     'link',
     'image',
-    'video'
+    // 'video'
 ]
 
 //CHANGEMENT2-----------------------------------------------------
@@ -264,7 +258,6 @@ selectedCategories.forEach((category) => {
           //img: imgUrl.join(','),
           //img: files.join(','),
           //img: file,
-          //date: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss'),
           date: moment(Date.now()).locale('fr').format('YYYY-MM-DD HH:mm:ss'),
         });
       }
@@ -275,9 +268,6 @@ selectedCategories.forEach((category) => {
     }
     navigate('/');
   };
-      
-
-    //console.log(value)
     return (
         <div className="write">
                     <GoBackButton />
@@ -320,20 +310,6 @@ selectedCategories.forEach((category) => {
                             <span>
                                 <b>Statut: </b> Brouillon
                             </span>
-
-                            {/*<input style={{display: "none"}} type="file" id="file" name="file" multiple={true} onChange={handleChange} />*/}
-                            {/*<input style={{display: "none"}} type="file" id="file" name="file" multiple={true} onChange={(e) => setFile(e.target.files[0])} />*/}
-                            {/*{images.map((imageUrl, index) => (
-                              <img key={index} src={imageUrl} alt={`Uploaded ${index}`} />
-                            ))}*/}
-                            {/*<input style={{display: "none"}} type="file" id="file" name="file" multiple={true} onChange={(e) => setFile(e.target.files[0])} />*/}
-                            {/*<input type="file" id="files" name="files" multiple onChange={(e) => setFiles(e.target.files)} />*/}
-
-                            {/*<iframe name="dummyframe" id="dummyframe" style={{display: "none"}}></iframe>*/}
-                            {/*<form action="/api/upload" method="post" encType="multipart/form-data" target="dummyframe">*/}
-                            {/*<form action="/api/upload" method="post" encType="multipart/form-data" onSubmit={handleClick} target="dummyframe">*/}
-                            {/*<form action="/api/upload" method="post" encType="multipart/form-data" target="dummyframe"></form>*/}
-                            
                             
                             <input type="file" id="file" name="file" multiple onChange={(e) => setFile(e.target.files[0])} />
                             {/*<label htmlFor="file" className="iconsText">Ajouter une image<AiFillPlusCircle size={24} className="icons" /></label>*/}
