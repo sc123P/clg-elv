@@ -3,7 +3,6 @@ import { useParams, Link } from 'react-router-dom';
 import Post from '../components/Post';
 import Pagination from '../components/Pagination';
 import { IoIosArrowDown } from 'react-icons/io';
-// import DropdownMenu from '../components/DropdownMenu';
 import axios from 'axios';
 import GoBackButton from '../components/GoBackButton';
 
@@ -15,7 +14,7 @@ const Projects = () => {
     }, []);
 
     useEffect(() => {
-        // Ajouter un gestionnaire d'événements pour fermer le dropdown-menu lors du clic à l'extérieur
+        // Ajout d'un gestionnaire d'événements pour fermer le dropdown-menu lors du clic à l'extérieur
         function handleClickOutside(event) {
             if (dropdownMenuRef.current && !dropdownMenuRef.current.contains(event.target)) {
                 setOpen(false);
@@ -40,58 +39,6 @@ const Projects = () => {
                     </div>
                 </div>
                 <GoBackButton />
-
-                {/* <Post /> */}
-                {/* <div className="dropdown">
-                    <div className='menu-trigger' onClick={()=>{setOpen(!open)}}>
-                        <p>Tous les projets</p>
-                        <IoIosArrowDown />
-                    </div>
-
-                    <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>
-                        <div className="dropdownList">
-                            <ul className="item">
-                                
-                                {/* <li className="itemContent" onClick={handleMenuClick}> */}
-                                {/* <li className="itemContent">
-                                    <Link to="/subcategories/projets-etablissements">
-                                        <span className="span">
-                                            projets établissements
-                                        </span>
-                                    </Link>
-                                </li>
-                                <li className="itemContent">
-                                    <Link to="/subcategories/projets-pedagogiques">
-                                        <span className="span">
-                                            projets pédagogiques
-                                        </span>
-                                    </Link>
-                                </li>
-                                <li className="itemContent">
-                                    <Link to="/subcategories/projets-educatifs">
-                                        <span className="span">
-                                            projets éducatifs
-                                        </span>
-                                    </Link>
-                                </li> */}
-
-                                {/* <li className="itemContent">
-                                    
-                                    <Link to={`/`}>
-                                        <span className="span">
-                                            Rédiger un article
-                                        </span> 
-                                    </Link>
-                                </li> */}
-                                
-
-                            {/* </ul>
-                        </div>
-                    </div>
-                </div>  */}
-
-                {/* <DropdownMenu /> */}
-
         <div className="dropdownP">
             <div className='menu-trigger' onClick={()=>{setOpen(!open)}} ref={dropdownMenuRef}>
                 <p>Tous les projets</p>
@@ -101,8 +48,6 @@ const Projects = () => {
             <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>
                 <div className="dropdownList">
                     <ul className="item">
-                        
-                        {/* <li className="itemContent" onClick={handleMenuClick}> */}
                         <li className="itemContent">
                             <Link to="/projets/projets etablissements">
                                 <span className="span">
@@ -128,7 +73,6 @@ const Projects = () => {
                 </div>
             </div>
         </div>
-
                 <Pagination />
             </div>
         </div>

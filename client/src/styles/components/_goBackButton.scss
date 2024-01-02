@@ -1,17 +1,13 @@
 //GO BACK BUTTON
 .gbButton{
-    // margin-left: 20px;
     margin-top: 20px;
     left: 30px;
     padding: 5px;
     border-radius: 50%;
-    // border: 1px solid $light-grey;
     border: 1px solid $grey;
     background-color: $light-grey;
     color: $black;
-
     position: fixed;
-    // z-index: 9999;
     z-index: 1;
     svg{
         width: 20px;
@@ -20,15 +16,10 @@
     }
 }
 .gbButton.scrolled {
-    // left: 10px;
-    // top: 10px;
     left: 30px;
     top: 130px;
-    // z-index: 9999;
     z-index: 1;
 }
-
-
 @media screen and (max-width: 540px){
     .gbButton{
         left: 10px;
@@ -37,15 +28,7 @@
         left: 10px;
     }
 }
-
 @media screen and (max-width: 500px){
-    // .gbButtonDiv{
-    //     position: relative;
-    //     // position: fixed;
-    //     bottom: 0;
-    //     width: 20px;
-    //     height: 20px;
-    // }
     .gbButton{
         position: fixed;
         bottom: 0;

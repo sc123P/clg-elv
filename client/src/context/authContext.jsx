@@ -1,24 +1,9 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
-//import { json } from "react-router";
-//import json from "json";
 
 export const AuthContext = createContext()
-
 export const AuthContextProvider = ({children}) =>{
-    //const storedUser = localStorage.getItem("user");
     const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem("user")) || null);
-    //let parsedUser = null;
-    //if (storedUser) {
-    //  parsedUser = JSON.parse(storedUser);
-    //  if (parsedUser && parsedUser.username) {
-    //    setCurrentUser(parsedUser);
-    //  }
-    //}
-
-    //const [currentUser, setCurrentUser] = useReducer(AuthReducer, INITIAL_STATE);
-    //const [currentUser, setCurrentUser] = useState(null);
-
     const login = async(inputs)=>{
         const res = await axios.post('/api/auth/login', inputs);
         setCurrentUser(res.data)

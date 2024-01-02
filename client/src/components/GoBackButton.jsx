@@ -14,7 +14,6 @@ const GoBackButton = () => {
     useEffect(() => {
         const handleScroll = () => {
             const scrollY = window.scrollY;
-            // if (scrollY > 400) {
             if (scrollY > 50) {
                 setIsScrolled(true);
             } else {
@@ -30,12 +29,9 @@ const GoBackButton = () => {
 
 
     return (
-        // <button onClick={goBack} className="gbButton">
-        // <div className="gbButtonDiv">
             <button onClick={goBack} className={`gbButton ${isScrolled ? 'scrolled' : ''}`}>
                 <IoIosArrowBack />
             </button>
-        // </div>
     );
 };
 

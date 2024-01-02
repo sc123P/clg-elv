@@ -12,12 +12,9 @@ const DropdownMenu = () => {
                 <p>Tous les projets</p>
                 <IoIosArrowDown />
             </div>
-
             <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>
                 <div className="dropdownList">
                     <ul className="item">
-                        
-                        {/* <li className="itemContent" onClick={handleMenuClick}> */}
                         <li className="itemContent">
                             <Link to="/subcategories/projets-etablissements">
                                 <span className="span">

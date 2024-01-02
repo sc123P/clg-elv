@@ -8,7 +8,6 @@ import parse from "html-react-parser";
 import ReactPaginate from 'react-paginate';
 import { IoIosArrowBack } from 'react-icons/io';
 import { IoIosArrowForward } from 'react-icons/io';
-// import { MdKeyboardArrowLeft, MdKeyboardDoubleArrowLeft, MdKeyboardArrowRight, MdKeyboardDoubleArrowRight } from 'react-icons/md';
 
   const Pagination = () => {
     moment.updateLocale('fr', {
@@ -57,13 +56,12 @@ import { IoIosArrowForward } from 'react-icons/io';
   const handlePageChange = (selectedPage) => {
     setCurrentPage(selectedPage.selected + 1);
   };
-  // Utilisez la longueur des posts de la catégorie pour calculer le nombre total de pages
+  // Utilise la longueur des posts de la catégorie pour calculer le nombre total de pages
   const totalPages = Math.ceil(posts.length / postsPerPage);
 
-  // Calculez l'index du premier et du dernier post à afficher sur la page actuelle
+  // Calcule l'index du premier et du dernier post à afficher sur la page actuelle
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  // const indexOfFirstPost = indexOfLastPost - 4;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
   // Change la page
@@ -89,18 +87,13 @@ import { IoIosArrowForward } from 'react-icons/io';
     }
   };
   useEffect(() => {
-    // Mettez à jour la page actuelle avec pageToJump lorsque pageToJump change
+    // Met à jour la page actuelle avec pageToJump lorsque pageToJump change
     setCurrentPage(pageToJump);
   }, [pageToJump]);
   const shouldJumpToLastPage = totalPages <= 5;
 
   return (
     <div className="posts">
-      {/* {currentPosts.map((posts) => ( */}
-      {/* {currentPosts.map((post, index) => (
-        <Post key={index} title={post.title} content={post.content} />
-      ))} */}
-
 {currentPosts.map((post, index) => (
           <div className="post" key={post.id}>
               <div className="postContent">
@@ -122,56 +115,24 @@ import { IoIosArrowForward } from 'react-icons/io';
       ))}
 
       <div className="pagination">
-          {/* {Array.from({ length: totalPages }).map((_, index) => (
-          <button key={index} onClick={() => paginate(index + 1)}>
-            {index + 1}
-          </button>
-        ))} */}
-
       <ReactPaginate
         className="paginationMain"
         pageCount={totalPages}
         onPageChange={handlePageChange}
         containerClassName="pagination"
         activeClassName="active"
-
         previousLabel={ 
-        // <>
-        // {shouldJumpToLastPage ? (
-        //   <MdKeyboardArrowLeft className="doubleArrow" onClick={() => setCurrentPage(totalPages)} />
-        //   ) : (
-        //     <>
-        //       <MdKeyboardDoubleArrowLeft className="doubleArrow" onClick={() => setPageToJump(1)} />
-        //       <MdKeyboardArrowLeft className="simpleArrow" />
-        //     </>
-        //   )}
          <IoIosArrowBack />
-        //  <BiArrowToLeft />
-        // </>
       }
         nextLabel={
-        // <>
-        // {shouldJumpToLastPage ? (
-        //   <MdKeyboardArrowRight className="doubleArrow" onClick={() => setCurrentPage(totalPages)} />
-        // ) : (
-        //   <>
-        //     <MdKeyboardArrowRight className="simpleArrow" />
-        //     <MdKeyboardDoubleArrowRight className="doubleArrow" onClick={() => setPageToJump(5)} />
-        //   </>
-        // )}
          <IoIosArrowForward />
-        // </>
        }
         pageClassName={'page-item'}
         breakLabel={'...'}
         pageLinkClassName={'page-link'}
         activeLinkClassName={'active'}
-
         marginPagesDisplayed={0}
         pageRangeDisplayed={4}
-
-        // initialPage={currentPage - 1}
-        // forcePage={currentPage - 1}
       />
       </div>
     </div>

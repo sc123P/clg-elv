@@ -1,12 +1,7 @@
 //POSTS
 .posts{
     .post{
-        //@include verticalCenter;
-        //display: flex;
         .postContent{
-            //display: flex;
-            //flex-direction: column;
-            //@include verticalCenter;
             display: flex;
             justify-content: center;
             .postContentMain{
@@ -14,27 +9,15 @@
                 flex-direction: column;
                 margin-top: 100px;
                 width: 70%;
-                
                 .hr{
                     display: flex;
                     margin-bottom: 25px;
                     max-height: 200px;
                     .image{
-                        //display: flex;
-                        //flex: 1;
-                        //margin-top: 100px;
-                        //padding-top: 100px;
-                        //@include verticalCenter;
-                        //width: 60%;
-                        //width: 20%;
                         img{
                             display: flex;
-                            //width: 45%;
-                            //width: 100%;
-                            //min-width: 660px;
                             width: 400px;
                             height: 200px;
-
                             object-fit: cover;
                             object-position: center center;
                         }
@@ -43,14 +26,11 @@
                         display: flex;
                         flex-direction: column;
                         margin-left: 30px;
-
                         overflow: hidden;
                         h3{
                             font-size: 1.5rem;
-                            // margin-bottom: 10px;
                             padding-top: 10px;
                             padding-bottom: 12px;
-
                             line-height: 1.3;
                             font-weight: bold;
                         }
@@ -63,10 +43,6 @@
         }
     }
 }
-
-
-
-
 @media screen and (max-width: 950px) {
     .posts .post .postContent .postContentMain .hr .postText h3{
         font-size: 1.3rem;

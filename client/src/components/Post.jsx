@@ -5,7 +5,6 @@ import parse from "html-react-parser";
 import moment from "moment";
 import 'moment/locale/fr.js';
 
-//const Post = ({title, desc, img}) => {
     const Post = () => {
         moment.updateLocale('fr', {
             months : [
