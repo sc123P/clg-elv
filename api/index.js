@@ -1,5 +1,4 @@
 import app from "./app.js";
-//const http = require('http');
 import http from "http";
 
 const normalizePort = val => {

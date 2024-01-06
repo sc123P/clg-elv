@@ -6,6 +6,5 @@ import {
 const router = express.Router();
 
 router.get('/', getPage);
-//router.get('/?page=${page}&limit=${limit}', getPage);
 
 export default router

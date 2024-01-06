@@ -1,10 +1,7 @@
-//const { db } = require("../db");
-//const bcrypt = require('bcryptjs');
 import { db } from "../db.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-//exports.signup = (req, res, next) =>{
 export function signup (req, res, next){
 
     //CHECK EXISTING USER

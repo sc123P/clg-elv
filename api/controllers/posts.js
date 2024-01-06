@@ -16,23 +16,12 @@ export function getCategories(req, res, next) {
 }
 
 export function getPosts(req, res, next) {
-  //const page = req.query.page || 1;
-  //const limit = req.query.limit || 5;
-  
   const category_id = req.query.category_id;
-  
-  
-  
   let q;
   let params;
   
   if (category_id) {
-    //if (category) {
       q =
-      //"SELECT * FROM posts JOIN post_categories ON posts.id = post_categories.post_id WHERE category_id=?";
-
-      // "SELECT * FROM posts JOIN post_categories ON posts.id = post_categories.post_id WHERE category_id=? ORDER BY date DESC";
-
       `
       SELECT p.*
       FROM posts p
@@ -59,7 +48,7 @@ export function getPosts(req, res, next) {
 export function getPostsBySubcategory(req, res, next) {
   const subcategory = req.query.subcategory;
 
-  // Utilisez la valeur de la sous-catégorie pour récupérer les articles
+  // Utilise la valeur de la sous-catégorie pour récupérer les articles
   const q = `
     SELECT p.*
     FROM posts p
@@ -93,31 +82,15 @@ export function getPostsBySubcategory(req, res, next) {
   
   
 export function getPost (req, res, next){
-    //const q ="SELECT `username`, `title`, `desc`, p.img, `category`, `date` FROM users u JOIN posts p ON u.id=p.uid WHERE p.id = ? "
-    //const q ="SELECT p.id, `uid`, `title`, `desc`, p.img AS postsImg, `category_id`, `date` FROM user u JOIN posts p ON u.id=p.uid WHERE p.id = ? "
-
     const q ="SELECT p.id, `uid`, `title`, `desc`, p.img AS postsImg, `date` FROM user u JOIN posts p ON u.id=p.uid WHERE p.id = ? "
 
     db.query(q,[req.params.id], (err, data)=>{
         if(err) return res.status(500).json(err);
-
-        // if (data.length === 0){
-        //     return res.status(404).json({ message: "Publication inttrouvable." });
-        // }
-        // const post = data[0];
-
         return res.status(200).json(data[0]);
-        //return res.status(200).json(post);
     });
 };
 
 export function getLatestPost(req, res, next) {
-  // const q = `
-  //   SELECT p.*
-  //   FROM posts p
-  //   ORDER BY p.date DESC
-  //   LIMIT 1
-  // `;
   let params;
   const q = `
     SELECT *
@@ -125,83 +98,47 @@ export function getLatestPost(req, res, next) {
     ORDER BY date DESC
     LIMIT 1
   `;
-  // params = [];
 
   db.query(q, (err, data) => {
     if (err) return res.status(500).json(err);
-    // if (data.length === 0) return res.status(404).json({ message: "No posts found." });
     if (data === null) return res.status(404).json({ message: "No posts found." });
 
     return res.status(200).json(data[0]);
-    // return res.status(200).json(data);
   });
 }
 
 
 export function addPost(req, res, next) {
-  // const app = express();
-  // app.use(express.json());
-  // const storage = multer.diskStorage({
-  //   destination: function (req, file, cb) {
-  //     // Indiquez ici l'emplacement où vous souhaitez enregistrer les fichiers téléchargés
-  //     cb(null, './uploads/');
-
-  //     //cb(null, '../client/public/upload');
-  //   },
-  //   filename: function (req, file, cb) {
-  //     cb(null, Date.now() + file.originalname);
-  //   }
-  // });
-
-
   const token = req.cookies.access_token;
   if (!token) return res.status(401).json("Veuillez vous authentifier");
 
   jwt.verify(token, "jwtkey", (err, userInfo) => {
     if (err) return res.status(403).json("Token invalide!");
 
-    //const imgPaths = files.map((file) => `../client/public/upload/${file.filename}`);
-    //const imgPaths = files.map((file) => `./uploads/${file.filename}`);
     const postValues = [
       req.body.title,
       req.body.desc,
-      //req.body.img,
       req.body.img,
-      //JSON.stringify(imgPaths),
       req.body.date,
       userInfo.id,
     ];
 
     console.log("postValues:", postValues);
 
-    //const catIds = req.body.cat_ids;
-    //const catIds = req.body.cat_id;
-    //const selectedCategories = req.body.cat_id;
     const selectedCategories = req.body.category;
     console.log("selectedCategories:", selectedCategories);
     const insertPostQuery =
       "INSERT INTO `elv`.`posts`(`title`, `desc`, `img`, `date`, `uid`) VALUES (?) ";
-      //"INSERT INTO `elv`.`posts`(`title`, `desc`, `date`, `uid`) VALUES (?) ";
 
     db.query(insertPostQuery, [postValues], (err, result) => {
       if (err) return res.status(500).json(err);
 
       const postId = result.insertId; // Récupérer l'ID de l'article inséré
 
-      //if (catIds && catIds.length > 0) {
         if (selectedCategories && selectedCategories.length > 0) {
         // S'il y a des catégories sélectionnées
         const insertPostCategoriesQuery =
         "INSERT INTO `elv`.`post_categories`(`post_id`, `category_id`) VALUES (?, ?) ";
-        //"INSERT INTO `elv`.`post_categories`(`post_id`, `category_id`) VALUES ? ";
-
-        //for (const category of selectedCategories) {
-        //  db.query(insertPostCategoriesQuery, [postId, category.value], (err, data) => {
-        //    if (err) return res.status(500).json(err);
-        //  });
-        //}
-
-        // ...
 
 let counter = 0;
   for (const category of selectedCategories) {
@@ -229,23 +166,11 @@ let counter = 0;
 
       
 
-        // Créer un tableau de tuples pour insérer les associations post_id et category_id dans un seul INSERT
-        //const postCategoriesValues = catIds.map((catId) => [postId, catId]);
-        //const postCategoriesValues = selectedCategories.map((catId) => [postId, catId]);
-
-        //const postCategoriesValues = selectedCategories.map((category_id) => [postId, category_id.value]);
-
-        //const postCategoriesValues = selectedCategories.map((category) => [postId, category.value]);
+        
         const postCategoriesValues = selectedCategories.map((category) => [postId, category]);
 
 
         console.log("postCategoriesValues:", postCategoriesValues); // Ajoutez cette ligne pour afficher les valeurs de postCategoriesValues
-
-        //db.query(insertPostCategoriesQuery, [postCategoriesValues], (err, data) => {
-          //db.query(insertPostCategoriesQuery, postCategoriesValues, (err, data) => {
-          //if (err) return res.status(500).json(err);
-          //return res.json("Article créé");
-        //});
         let responseSent = false; // Ajoutez cette variable en haut de votre fonction
 
 db.query(insertPostCategoriesQuery, [postCategoriesValues], (err, data) => {
