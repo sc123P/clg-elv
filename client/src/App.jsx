@@ -1,4 +1,3 @@
-//import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
@@ -22,34 +21,24 @@ import { useContext } from 'react';
 function App() {
   const {currentUser, setCurrentUser} = useContext(AuthContext)
 
-  //const location = useLocation();
-  // const searchParams = new URLSearchParams(location.search);
-  // const category = searchParams.get('category_id');
-
   return (
     <BrowserRouter>
       <Navbar />
       <Routes>
         <Route exact path="/" element={ <Home /> } />
-        {/* <Route exact path="/actualites" element={ <News /> } /> */}
         <Route exact path="/actualites" element={ <News /> } />
         <Route exact path="/actualites/:id" element={ <SinglePost /> } />
         {currentUser ? <> <Route exact path="/write" element={ <Write /> } /> </> : <></>}
-        {/* <Route exact path="/write" element={ <Write /> } /> */}
         <Route exact path="/nous_connaitre" element={ <AboutUs /> } />
         <Route exact path="/contact" element={ <Contact /> } />
         <Route exact path="/projets" element={ <Projects /> } />
-        {/* <Route path="/subcategories/:subcategory" element={<SubCategoryPosts />} /> */}
         <Route exact path="/projets/:subcategory" element={<SubCategoryPosts />} />
         <Route exact path="/evenements" element={ <Events /> } />
         <Route exact path="/orientation" element={ <Orientation /> } />
         <Route exact path="/enregistrement" element={ <Signup /> } />
         <Route exact path="/connexion" element={ <Login /> } />
-
-        {/* Définissez ici vos routes pour les différentes pages */}
         {/*<Route path="/page/:pageNumber" component={<Pagination />} />*/}
         {/* <Route path="/?category_id/page/:pageNumber" element={<Pagination category={category} /> } /> */}
-        {/* Autres routes de votre application */}
         
       </Routes>
       <Footer />
