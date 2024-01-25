@@ -4,7 +4,6 @@ export async function getPage(req, res, data, next) {
   const page = parseInt(req.query.page);
   const limit = parseInt(req.query.limit);
   const category_id = req.query.category_id;
-
   const startIndex = (page - 1) * limit;
   const lastIndex = page * limit;
 
