@@ -123,17 +123,17 @@ return (
                                     PROJETS
                                 </Link>
                             </button>
-                            <button id="button4" className={`card imgSection2 hiddenSectionL ${isSectionVisible ? 'show' : ''}`}>
+                            <button id="button4" className={`card imgSection hiddenSectionL ${isSectionVisible ? 'show' : ''}`}>
                                 <Link to={`/evenements/?category_id=6`} >
                                     EVENEMENTS
                                 </Link>
                             </button>
-                            <button id="button5" className={`card imgSection2 hiddenSectionL ${isSectionVisible ? 'show' : ''}`}>
+                            <button id="button5" className={`card imgSection hiddenSectionL ${isSectionVisible ? 'show' : ''}`}>
                                 <Link to={`/actualites`} >
                                     ACTUALITES
                                 </Link>
                             </button>
-                            <button id="button6" className={`card imgSection2 hiddenSectionL ${isSectionVisible ? 'show' : ''}`}>
+                            <button id="button6" className={`card imgSection hiddenSectionL ${isSectionVisible ? 'show' : ''}`}>
                                 <Link to={`/orientation/?category_id=7`} >
                                     ORIENTATION
                                 </Link>
