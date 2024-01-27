@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { MdLocationPin } from 'react-icons/md';
 import { MdPhone } from 'react-icons/md';
 import { MdEmail } from 'react-icons/md';
-import { AiOutlineTwitter } from 'react-icons/ai';
+import { FaXTwitter } from "react-icons/fa6";
 import GoBackButton from '../components/GoBackButton';
 
 const Contact = () => {
@@ -57,9 +57,9 @@ const Contact = () => {
 
                             <div className="info">
                                 <a href="https://twitter.com/edmondvalard" className="info">
-                                    <AiOutlineTwitter className="icon" color={"#1D9BF0"} />
+                                    <FaXTwitter className="icon" />
                                     <div className="text">
-                                        <h3>Twitter</h3>
+                                        <h3>X (ex-Twitter)</h3>
                                     </div>
                                 </a>
                             </div>

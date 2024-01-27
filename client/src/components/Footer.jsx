@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { AiOutlineTwitter } from 'react-icons/ai';
+import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
     return (
@@ -42,7 +42,7 @@ const Footer = () => {
                     <div className="logoDiv">
                         <div className="partnerLogoContent">
                             <a href="https://twitter.com/edmondvalard" className="info">
-                                <AiOutlineTwitter className="icon" color={"#1D9BF0"} />
+                                <FaXTwitter className="icon" color={"#FCF6F4"} />
                             </a>
                             <img className="partnerLogo" src="logoctm.png" alt="" />
                             <img className="partnerLogo" src="logounesco.png" alt="" />
