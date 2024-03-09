@@ -30,8 +30,9 @@ const AboutUs = () => {
                                 <img src="/mairie.png" alt="" />
                                 <p className="p">La mairie</p>
                             </div>
-                            <div className="imgContainer1">
-                                <img className="right" src="/campagneSE 1.png" alt="" />
+                            <div className="imgContainer2">
+                                {/* <img className="right" src="/campagneSE 1.png" alt="" /> */}
+                                <img src="/campagneSE 1.png" alt="" />
                                 <p className="p">Une campagne verdoyante</p>
                             </div>
                         </div>
@@ -47,13 +48,21 @@ const AboutUs = () => {
 
                         <div className="img3">
                             <div className="imgContainer3">
+                                {/* <img className="long" src="imgpisteELV 1.png" alt="" /> */}
                                 <img className="long" src="imgpisteELV 1.png" alt="" />
-                                <img className="longB" src="/imgfacadeclgELV 1.png" alt="" />
+                            </div>
+                            <div className='imgContainer4'>
+                                {/* <img className="longB" src="/imgfacadeclgELV 1.png" alt="" /> */}
+                                <img className="court" src="/imgfacadeclgELV 1.png" alt="" />
                             </div>
 
-                            <div className="imgContainer1">
-                                <img className="right2" src="/imgcollege 4.png" alt="" />
-                                <img className="right2" src="/imgtr2ELV 1.png" alt="" />
+                            <div className="imgContainer5">
+                                {/* <img className="right2" src="/imgcollege 4.png" alt="" /> */}
+                                <img className="court" src="/imgcollege 4.png" alt="" />
+                            </div>
+                            <div className="imgContainer6">
+                                {/* <img className="right2" src="/imgtr2ELV 1.png" alt="" /> */}
+                                <img className="long" src="/imgtr2ELV 1.png" alt="" />
                             </div>
 
                         </div>
@@ -91,7 +100,8 @@ const AboutUs = () => {
                             <div className="imgContainer1">
                                 <img src="/imgsportELV 1.png" alt="" />
                             </div>
-                            <div className="imgContainer1">
+                            <div className="imgContainer2">
+                                {/* <img className="right" src="/imgyoleELV 1.png" alt="" /> */}
                                 <img className="right" src="/imgyoleELV 1.png" alt="" />
                             </div>
                         </div>
