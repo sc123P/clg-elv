@@ -7,6 +7,9 @@ import { AuthContext } from '../context/authContext';
 import axios from 'axios';
 
 const Navbar = () => {
+    const axiosInstance = axios.create({
+        baseURL: process.env.REACT_APP_API_URL,
+    });
     const { currentUser, setCurrentUser } = useContext(AuthContext);
     const [open, setOpen] = useState(false);
     const dropdownMenuRef = useRef(null);
@@ -23,7 +26,7 @@ const Navbar = () => {
         setOpen(false);
       };
       const handleLogout = async () => {
-        await axios.post('/api/auth/logout', null);
+        await axiosInstance.post('/api/auth/logout', null);
         setCurrentUser(null);
         setOpen(false);
       };

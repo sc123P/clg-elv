@@ -8,6 +8,9 @@ import GoBackButton from '../components/GoBackButton';
 
 
 const SubCategoryPosts = () => {
+    const axiosInstance = axios.create({
+        baseURL: process.env.REACT_APP_API_URL,
+    });
     useEffect(() =>{
         window.scrollTo(0,0);
     }, []);
@@ -20,7 +23,7 @@ const SubCategoryPosts = () => {
       // Fonction pour récupérer les articles associés à la sous-catégorie depuis le backend
       const fetchPostsBySubcategory = async () => {
         try {
-          const response = await axios.get(`/api/posts/subcat?subcategory=${subcategory}`);
+          const response = await axiosInstance.get(`/api/posts/subcat?subcategory=${subcategory}`);
           console.log('Response from API:', response.data);
           setPosts(response.data);
         } catch (error) {

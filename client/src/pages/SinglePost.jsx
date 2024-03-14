@@ -10,6 +10,9 @@ import DOMPurify from 'dompurify';
 import GoBackButton from '../components/GoBackButton';
 
 const SinglePost = () => {
+    const axiosInstance = axios.create({
+        baseURL: process.env.REACT_APP_API_URL,
+    });
     const [post, setPost] = useState({});
     const location = useLocation();
     const navigate = useNavigate();
@@ -23,7 +26,7 @@ const SinglePost = () => {
         const fetchData = async ()=>{
             try{
                 //const res = await axios.get(`/api/posts${category_id}`);
-                const res = await axios.get(`/api/posts/${postId}`);
+                const res = await axiosInstance.get(`/api/posts/${postId}`);
                 console.log(res.data);
                 setPost(res.data);
             }catch(err){
@@ -36,7 +39,7 @@ const SinglePost = () => {
     const handleDelete = async()=>{
         try{
             //const res = await axios.get(`/api/posts${category_id}`);
-            const res = await axios.delete(`/api/posts/${postId}`);
+            const res = await axiosInstance.delete(`/api/posts/${postId}`);
             navigate("/");
         }catch(err){
             console.log(err);

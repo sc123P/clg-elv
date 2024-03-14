@@ -3,13 +3,16 @@ import axios from "axios";
 
 export const AuthContext = createContext()
 export const AuthContextProvider = ({children}) =>{
+    const axiosInstance = axios.create({
+        baseURL: process.env.REACT_APP_API_URL,
+    });
     const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem("user")) || null);
     const login = async(inputs)=>{
-        const res = await axios.post('/api/auth/login', inputs);
+        const res = await axiosInstance.post('/api/auth/login', inputs);
         setCurrentUser(res.data)
     };
     const logout = async(inputs)=>{
-        await axios.post('/api/auth/logout', inputs);
+        await axiosInstance.post('/api/auth/logout', inputs);
         setCurrentUser(null)
     };
 

@@ -5,6 +5,10 @@ import axios from 'axios';
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 const Home = () => {
+    const axiosInstance = axios.create({
+        baseURL: process.env.REACT_APP_API_URL,
+    });
+
     useEffect(() =>{
         window.scrollTo(0,0);
     }, []);
@@ -19,7 +23,7 @@ const Home = () => {
         // Fonction pour récupérer les articles associés à la sous-catégorie depuis le backend
         const latestPost = async () => {
           try {
-            const response = await axios.get(`/api/posts/latest`);
+            const response = await axiosInstance.get(`/api/posts/latest`);
             console.log('Response from API:', response.data);
             setLatestPost(response.data);
           } catch (error) {

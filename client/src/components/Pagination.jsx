@@ -10,6 +10,9 @@ import { IoIosArrowBack } from 'react-icons/io';
 import { IoIosArrowForward } from 'react-icons/io';
 
   const Pagination = () => {
+    const axiosInstance = axios.create({
+      baseURL: process.env.REACT_APP_API_URL,
+  });
     moment.updateLocale('fr', {
       months : [
           "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet",
@@ -26,7 +29,7 @@ import { IoIosArrowForward } from 'react-icons/io';
     // Fonction pour récupérer les articles associés à la sous-catégorie depuis le backend
     const fetchPostsBySubcategory = async () => {
       try {
-        const response = await axios.get(`/api/posts/subcat?subcategory=${subcategory}`);
+        const response = await axiosInstance.get(`/api/posts/subcat?subcategory=${subcategory}`);
         console.log('Response from API:', response.data);
         setPosts(response.data);
       } catch (error) {
@@ -41,7 +44,7 @@ import { IoIosArrowForward } from 'react-icons/io';
   useEffect(() =>{
     const fetchData = async ()=>{
       try{
-        const res = await axios.get(`/api/posts${category_id}`);
+        const res = await axiosInstance.get(`/api/posts${category_id}`);
         setPosts(res.data);
       }catch(err){
         console.log(err);

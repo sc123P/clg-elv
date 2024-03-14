@@ -1,20 +1,19 @@
 import express from "express";
 import authRoutes from "./routes/auth.js";
 import postsRoutes from "./routes/posts.js";
-
 import paginationRoutes from "./routes/pagination.js";
-
 import cookieParser from "cookie-parser";
 import multer from "multer";
-
 import path from "path";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import cors from "cors";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 app.use((req, res, next) => {

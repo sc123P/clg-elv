@@ -1,5 +1,6 @@
 import app from "./app.js";
 import http from "http";
+// import cors from "cors";
 
 const normalizePort = val => {
   const port = parseInt(val, 10);

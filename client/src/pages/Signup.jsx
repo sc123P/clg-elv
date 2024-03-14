@@ -4,6 +4,9 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import axios from 'axios';
 
 const Signup = () => {
+    const axiosInstance = axios.create({
+        baseURL: process.env.REACT_APP_API_URL,
+    });
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [inputs, setInputs] = useState({
         username:"",
@@ -20,7 +23,7 @@ const Signup = () => {
     const handleSubmit = async e =>{
         e.preventDefault()
         try{
-            await axios.post('/api/auth/signup', inputs);
+            await axiosInstance.post('/api/auth/signup', inputs);
             navigate("/connexion");
         }catch(err) {
             setError(err.response.data)

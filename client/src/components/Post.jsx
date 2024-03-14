@@ -6,6 +6,9 @@ import moment from "moment";
 import 'moment/locale/fr.js';
 
     const Post = () => {
+        const axiosInstance = axios.create({
+            baseURL: process.env.REACT_APP_API_URL,
+        });
         moment.updateLocale('fr', {
             months : [
                 "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet",
@@ -18,7 +21,7 @@ import 'moment/locale/fr.js';
         useEffect(() =>{
             const fetchData = async ()=>{
                 try{
-                    const res = await axios.get(`/api/posts${category_id}`);
+                    const res = await axiosInstance.get(`/api/posts${category_id}`);
                     setPosts(res.data);
                 }catch(err){
                     console.log(err);

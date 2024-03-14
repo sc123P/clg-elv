@@ -11,6 +11,9 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import GoBackButton from '../components/GoBackButton';
 
 const Write = () => {
+  const axiosInstance = axios.create({
+    baseURL: process.env.REACT_APP_API_URL,
+});
   useEffect(() =>{
     window.scrollTo(0,0);
 }, []);
@@ -56,7 +59,7 @@ const Write = () => {
 useEffect(() => {
   if (!state) {
   // Récupérer les détails de l'article à partir de l'API
-  axios.get(`/api/posts/${state}`).then((response) => {
+  axiosInstance.get(`/api/posts/${state}`).then((response) => {
     const postData = response.data;
     setPost({
       title: postData.title,
@@ -90,7 +93,7 @@ const handleSubmit = async (e) => {
     };
 
     try {
-      const response = await axios.post('/api/posts', {
+      const response = await axiosInstance.post('/api/posts', {
         title,
         desc: value,
         category: selectedCategoryIds,
@@ -113,7 +116,7 @@ const handleSubmit = async (e) => {
     };
 
     try {
-      const response = await axios.put(`/api/posts/${state.id}`, articleData);
+      const response = await axiosInstance.put(`/api/posts/${state.id}`, articleData);
       console.log(response.data);
       navigate(`/post/${state.id}`);
     } catch (error) {
@@ -129,7 +132,7 @@ const handleSubmit = async (e) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('/api/posts/categories');
+        const response = await axiosInstance.get('/api/posts/categories');
         const categoriesData = response.data;
         setCategories(categoriesData);
         console.log('Categories:', categoriesData);
@@ -208,7 +211,7 @@ selectedCategories.forEach((category) => {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const res = await axios.post("/api/upload", formData);
+      const res = await axiosInstance.post("/api/upload", formData);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -235,7 +238,7 @@ selectedCategories.forEach((category) => {
       //   setValue(value.substring(0, maxLength));
       // }
       if (state) {
-        response = await axios.put(`/api/posts/${state.id}`, {
+        response = await axiosInstance.put(`/api/posts/${state.id}`, {
           // response = await axios.put(`/api/posts/${id}`, {
           title,
           desc: value,
@@ -247,7 +250,7 @@ selectedCategories.forEach((category) => {
           //img: file,
         });
       } else {
-        response = await axios.post('/api/posts', {
+        response = await axiosInstance.post('/api/posts', {
           title,
           desc: value,
 
